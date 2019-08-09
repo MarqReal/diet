@@ -14,14 +14,20 @@
     </head>
 
     <body>
-      <header>
+      <!-- <header>
 		    <nav>
 			    <div class="nav-wrapper deep-orange">
 			      <a href="#!" class="brand-logo">Curso Laravel</a>
 			      <a href="#" data-activates="mobile" class="button-collapse"><i class="material-icons">menu</i></a>
 			      <ul class="right hide-on-med-and-down">
 			        <li><a href="/">Home</a></li>
+			        @if(Auth::guest())
+			        <li><a href="{{ route('login')}}">Login</a></li>
+			        @else
 			        <li><a href="{{ route('admin.cursos')}}">Cursos</a></li>
+			        <li><a href="#">{{Auth::user()->name}}</a></li>
+			        <li><a href="{{route('site.login.sair')}}">Sair</a></li>
+			        @endif
 			      </ul>
 			      <ul class="side-nav" id="mobile">
 			        <li><a href="/">Home</a></li>
@@ -29,4 +35,4 @@
 			      </ul>
 			    </div>
 		  </nav>
-      </header>
+      </header> -->
