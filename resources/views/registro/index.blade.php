@@ -1,7 +1,7 @@
 <body background="/img/login/alimentos-background.jpg">
 	@extends('layout.site')
 
-	@section('titulo', 'Login')
+	@section('titulo', 'Registrar')
 
 	@section('conteudo')
 		<div class="container">
@@ -10,17 +10,24 @@
 				<form class="" action="{{route('site.login.entrar')}}" method="post" enctype="multipart/form-data">
 					{{csrf_field()}}
 
+					<div class="input-field container-nome">
+						<input type="text" id="nome" name="nome">
+						<label>Nome</label>
+					</div>
 					<div class="input-field container-email">
 						<input type="text" id="email" name="email">
-						<label>E-mail</label>
+						<label>Email</label>
 					</div>
 					<div class="input-field container-senha">
 						<input type="password" id="senha" name="senha">
 						<label>Senha</label>
-					</div>			
-					<button class="btn light-green darken-1" id="btnEntrar">Entrar</button>
+					</div>	
+					<div class="input-field container-dataNascimento">
+						  <input type="text" class="datepicker" id="dataNascimento" name="dataNascimento">
+						<label>Data de Nascimento</label>
+					</div>		
+					<button class="btn light-green darken-1" id="btnCadastrar">Cadastrar</button>
 				</form>
-				<label class="no-register">Ainda não tem cadastro? <a href="{{route('registro')}}">Clique aqui</a></label>
 			</div>
 			<!-- <div class="row">
 				<form class="" action="{{route('site.login.entrar')}}" method="post" enctype="multipart/form-data">
@@ -45,7 +52,7 @@
 		.background-login {
 			border: solid white 1px;
 			width: 90%;
-			height: 350px;
+			height: 750px;
 			margin-left: 5% !important;
 			margin-top: 35%;
 			background-color: white;
@@ -58,9 +65,6 @@
 			margin-left: 10%;
 		}
 
-		.container-email {
-			margin-top: 20% !important;
-		}
 
 		#btnEntrar {
 			margin-left: 30%;
