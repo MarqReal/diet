@@ -21,9 +21,19 @@ class LoginController extends Controller
     	}
     	return redirect()->route("login.index");
     }
+    public function sair() 
+    {
+        Auth::logout();
+        return redirect()->route("site.home");  
+    }
+    
+    public function registro() 
+    {
+        return view("registro.index");
+    }
 
-    public function sair() {
-    	Auth::logout();
-    	return redirect()->route("site.home");	
+    public function criar() 
+    {
+        
     }
 }
