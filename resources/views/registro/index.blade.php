@@ -8,8 +8,8 @@
 			<!-- <h3 class="center">D!ET</h3> -->
 			<div class="row background-login">
 				<i class="material-icons blue-text" id="back"><a href="{{route('site.home')}}">arrow_back</a></i>
-				<form class="" action="{{route('site.login.entrar')}}" method="post" enctype="multipart/form-data">
-					{{csrf_field()}}
+				<!-- <form class="" action="{{route('site.login.entrar')}}" method="post" enctype="multipart/form-data"> -->
+					<!-- {{csrf_field()}} -->
 					<div class="row">
 						<div class="col s10">
 							<div class="input-field container-nome">
@@ -59,7 +59,7 @@
 					<div class="row">
 						<div class="col s5">
 							<div class="input-field">
-					    		<select>
+					    		<select id="objetivo">
 					      			<option value="" disabled selected>Objetivo</option>
 					      			<option value="perder">Perder peso</option>
 					      			<option value="manter">Manter peso</option>
@@ -70,7 +70,7 @@
 					    </div>
 					    <div class="col s5">
 							<div class="input-field">
-					    		<select>
+					    		<select id="atividade">
 					      			<option value="" disabled selected>Nivel</option>
 					      			<option value="leve">Leve</option>
 					      			<option value="moderada">Moderada</option>
@@ -83,7 +83,7 @@
 					<div class="row">
 						<div class="col s10">
 							<div class="input-field">
-					    		<select>
+					    		<select id="nutricionistas">
 					      			<option value="" disabled selected>Escolha seu(s) nutricinista(s)</option>
 					      			<option value="1">Weber Lucas</option>
 					      			<option value="2">Leandro Thomas</option>
@@ -94,7 +94,7 @@
 					    </div>
 					</div>		
 					 <button class="btn light-green darken-1" id="btnCadastrar">Cadastrar</button>
-				</form>
+				<!-- </form> -->
 			</div>
 			<!-- <div class="row">
 				<form class="" action="{{route('site.login.entrar')}}" method="post" enctype="multipart/form-data">
@@ -170,5 +170,32 @@
 			    closeOnSelect: false, // Close upon selecting a date,
 			    container: undefined, // ex. 'body' will append picker to body
   			});
+
+      		$("#btnCadastrar").click(function() {
+      			var data = {
+      				'_token': '{{csrf_token()}}',
+      				'nome_usuario' : $("#nome").val(),
+      				'email' : $("#email").val(),
+      				'senha' : $("#senha").val(),
+      				'dt_nascimento' : $("#dataNascimento").val(),
+      				'peso' : $("#peso").val(),
+      				'altura' : $("#altura").val(),
+      				'objetivo' : $("#objetivo option:selected").val(),
+      				'nivel_atividade' : $("#atividade option:selected").val(),
+      				'nutricionistas' : $("#nutricionistas option:selected").val()
+      			};
+      			$.ajax({
+    				method: 'POST', // Type of response and matches what we said in the route
+    				url: '/registrar', // This is the url we gave in the route
+    				data: data, // a JSON object to send back
+			    	success: function(response){ // What to do if we succeed
+			        	console.log(response); 
+			    	},
+			    	error: function(jqXHR, textStatus, errorThrown) { // What to do if we fail
+			        	//console.log(JSON.stringify(jqXHR));
+			        	console.log("AJAX error: " + textStatus + ' : ' + errorThrown);
+			    	}
+			});
+      		});
       	});
 	</script>

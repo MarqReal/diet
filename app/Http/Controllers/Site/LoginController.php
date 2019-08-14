@@ -32,8 +32,9 @@ class LoginController extends Controller
         return view("registro.index");
     }
 
-    public function criar() 
-    {
-        
+    public function registrarLogin(Request $req) 
+    {   
+        $requisicao = $req->all();
+        return "aqui: ".$requisicao['email'];
     }
 }
