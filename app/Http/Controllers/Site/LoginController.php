@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Site;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Auth;
+use App\User;
 
 class LoginController extends Controller
 {
@@ -35,6 +36,8 @@ class LoginController extends Controller
     public function registrarLogin(Request $req) 
     {   
         $requisicao = $req->all();
-        return "aqui: ".$requisicao['email'];
+        $user = new User();
+        
+        return $user->registrarLogin($requisicao);
     }
 }

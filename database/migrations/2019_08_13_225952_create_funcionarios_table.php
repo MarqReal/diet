@@ -14,6 +14,7 @@ class CreateFuncionariosTable extends Migration
     public function up()
     {
         Schema::create('funcionarios', function (Blueprint $table) {
+            $table->increments('id');
             $table->integer('registro_funcionario');   
             $table->timestamps();
         });
