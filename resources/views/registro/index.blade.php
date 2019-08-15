@@ -159,19 +159,50 @@
 	<script type="application/javascript" src="/js/materialize.min.js"></script>
 	<script type="text/javascript">
 		$(document).ready(function () {
+			var startDateYear = new Date().getFullYear() - 60;
+      		var endDateYear = new Date().getFullYear() - 18;
+      		var DateMonth = new Date().getMonth();
+      		var DateDay = new Date().getMonth();
+      		alert(DateDay);
       		Materialize.updateTextFields();
       		$('select').material_select();
       		  $('.datepicker').pickadate({
+      		  	format: 'dd/mm/yyyy',
+      		  	min: new Date(startDateYear,DateMonth,DateDay),
+  				max: new Date(endDateYear,DateMonth,DateDay),
+      		  	monthsFull: ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"],
+      		  	monthsShort: ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"],
+      		  	weekdays: ["Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta"],
+      		  	weekdaysShort: ["Dom","Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
+      		  	weekdaysAbbrev: ["D","S", "T", "Q", "Q", "S", "S"],
     			selectMonths: true, // Creates a dropdown to control month
-			    selectYears: 15, // Creates a dropdown of 15 years to control year,
-			    today: 'Today',
-			    clear: 'Clear',
+			    selectYears: 60, // Creates a dropdown of 15 years to control year,
+			    clear: 'Limpar',
 			    close: 'Ok',
+			    today: "hoje",
 			    closeOnSelect: false, // Close upon selecting a date,
 			    container: undefined, // ex. 'body' will append picker to body
   			});
 
       		$("#btnCadastrar").click(function() {
+      			var letters = /[a-zA-Z\u00C0-\u00FF ]+/i;
+      			if($("#nome").val() == "" || $("#nome").val().length < 8 || !$("#nome").val().match(letters)) {
+					alert("Preencha o campo NOME corretamente!");
+					$("#nome").focus();
+					return false;
+				}
+				if($("#email").val()=="" || $("#email").val().indexOf('@')== -1 || $("#email").val().indexOf('.')== -1) {
+	  				alert("Preencha o campo EMAIL corretamente!");
+	  				$("#email").focus();
+	  				return false;
+				}
+				if($("#senha").val() == "" || $("#senha").val().length < 8 || $("#senha").val().length > 8) {
+					alert("Preencha o campo SENHA corretamente! A senha deve conter 8 caracteres");
+					$("#senha").focus();
+					return false;
+				}
+
+				return false;
       			var data = {
       				'_token': '{{csrf_token()}}',
       				'nome_usuario' : $("#nome").val(),
