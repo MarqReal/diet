@@ -249,11 +249,12 @@
     				url: '/registrar', // This is the url we gave in the route
     				data: data, // a JSON object to send back
 			    	success: function(response){ // What to do if we succeed
-			        	console.log(response); 
+						Swal.fire('Sucesso!', "Usuario cadastrado com sucesso",'success');
 			    	},
 			    	error: function(jqXHR, textStatus, errorThrown) { // What to do if we fail
 			        	//console.log(JSON.stringify(jqXHR));
-			        	console.log("AJAX error: " + textStatus + ' : ' + errorThrown);
+						Swal.fire('Erro!', "Não foi possivel realizar o cadastro, tente novamente",'error');
+			        	//console.log("AJAX error: " + textStatus + ' : ' + errorThrown);
 			    	}
 				});
       		});
