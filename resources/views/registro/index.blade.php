@@ -204,7 +204,6 @@
 				}
 				if($("#dataNascimento").val() == "") {
 					Swal.fire('Preenchimento incorreto!', "Preencha o campo Data de nascimento corretamente",'error');
-					$("#dataNascimento").focus();
 					return false;
 				}
 				if ($("#peso").val() == "" || isNaN($("#peso").val())) {
@@ -232,6 +231,7 @@
 					$("#nutricionistas").focus();
 					return false;
 				}
+				return false;
       			var data = {
       				'_token': '{{csrf_token()}}',
       				'nome_usuario' : $("#nome").val(),
@@ -250,6 +250,7 @@
     				data: data, // a JSON object to send back
 			    	success: function(response){ // What to do if we succeed
 						Swal.fire('Sucesso!', "Usuario cadastrado com sucesso",'success');
+						//window.location.href = "/";
 			    	},
 			    	error: function(jqXHR, textStatus, errorThrown) { // What to do if we fail
 			        	//console.log(JSON.stringify(jqXHR));
