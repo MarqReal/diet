@@ -22,6 +22,7 @@ Route::get('/registro', ['as' => 'registro', 'uses' => 'Site\LoginController@reg
 
 Route::post('/registrar', ['as' => 'registrar', 'uses' => 'Site\LoginController@registrarLogin']);
 
+Route::get('/feed', ['as' => 'site.feed', 'uses' => 'Site\DicaController@index']);
 
 Route::post('/login/entrar', ['as' => 'site.login.entrar', 'uses' => 'Site\LoginController@entrar']);
 

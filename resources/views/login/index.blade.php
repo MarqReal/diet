@@ -98,7 +98,7 @@
 			    	success: function(response){ // What to do if we succeed
 						var resposta = JSON.parse(response);
 						if (!resposta.error) {
-							window.location.href = "/registro";
+							window.location.href = "/feed";
 						} else {
 							Swal.fire('Erro!', "E-mail ou senha invalidos, tente novamente",'error');
 						} 
