@@ -14,7 +14,7 @@
 						<div class="col s10">
 							<div class="input-field container-nome">
 								<input type="text" id="nome" name="nome">
-								<label>Nome</label>
+								<label>Nome (Ex: Ana Silva)</label>
 							</div>
 						</div>
 					</div>
@@ -22,7 +22,7 @@
 						<div class="col s10">
 							<div class="input-field container-email">
 								<input type="text" id="email" name="email">
-								<label>Email</label>
+								<label>Email (Ex: ana@gmail.com)</label>
 							</div>
 						</div>
 					</div>
@@ -30,7 +30,7 @@
 						<div class="col s10">
 							<div class="input-field container-senha">
 								<input type="password" id="senha" name="senha">
-								<label>Senha</label>
+								<label>Senha (Deve conter 8 caracteres)</label>
 							</div>
 						</div>
 					</div>
@@ -38,28 +38,28 @@
 						<div class="col s10">	
 							<div class="input-field container-dataNascimento">
 								  <input type="text" class="datepicker" id="dataNascimento" name="dataNascimento">
-								<label>Data de Nascimento</label>
+								<label>Data de Nascimento (Ex: 28/03/1996)</label>
 							</div>
 						</div>
 					</div>
 					<div class="row">
 						<div class="col s5">
 							<div class="input-field container-peso">
-							  	<input type="text" id="peso" name="peso">
-								<label>Peso</label>
+							  	<input type="number" id="peso" name="peso" min="30" max="300" step="any">
+								<label>Peso (Ex: 40,50)</label>
 							</div>
 						</div>
 						<div class="col s5">
 							<div class="input-field container-altura">
-							  	<input type="text" id="altura" name="altura">
-								<label>Altura</label>
+							  	<input type="number" id="altura" name="altura" min="1" max="3" step="any">
+								<label>Altura (Ex: 1,67)</label>
 							</div>
 						</div>
 					</div>
 					<div class="row">
 						<div class="col s5">
 							<div class="input-field">
-					    		<select id="objetivo">
+					    		<select id="objetivo">0
 					      			<option value="" disabled selected>Objetivo</option>
 					      			<option value="perder">Perder peso</option>
 					      			<option value="manter">Manter peso</option>
@@ -83,8 +83,8 @@
 					<div class="row">
 						<div class="col s10">
 							<div class="input-field">
-					    		<select id="nutricionistas">
-					      			<option value="" disabled selected>Escolha seu(s) nutricinista(s)</option>
+					    		<select multiple id="nutricionistas">
+					      			<option value="" disabled selected>Nutricionistas</option>
 					      			<option value="1">Weber Lucas</option>
 					      			<option value="2">Leandro Thomas</option>
 					      			<option value="3">Carlos Alberto</option>
@@ -163,7 +163,6 @@
       		var endDateYear = new Date().getFullYear() - 18;
       		var DateMonth = new Date().getMonth();
       		var DateDay = new Date().getMonth();
-      		alert(DateDay);
       		Materialize.updateTextFields();
       		$('select').material_select();
       		  $('.datepicker').pickadate({
@@ -201,19 +200,47 @@
 					$("#senha").focus();
 					return false;
 				}
-
-				return false;
+				if($("#dataNascimento").val() == "") {
+					alert("Preencha o campo Data de nascimento corretamente!");
+					$("#dataNascimento").focus();
+					return false;
+				}
+				if ($("#peso").val() == "" || isNaN($("#peso").val())) {
+					alert("Preencha o campo peso corretamente!");
+					$("#peso").focus();
+					return false;
+				}
+				if ($("#altura").val() == "" || isNaN($("#altura").val())) {
+					alert("Preencha o campo altura corretamente!");
+					$("#altura").focus();
+					return false;
+				}
+				if($("#objetivo option:selected").val() == "") {
+					alert("Selecione o seu objetivo!");
+					$("#objetivo").focus();
+					return false;
+				}
+				if($("#atividade option:selected").val() == "") {
+					alert("Selecione o seu nivel de atividade fisica!");
+					$("#nivel_atividade").focus();
+					return false;
+				}
+				if(!$("#nutricionistas").val().length > 0) {
+					alert("Selecione o(s) seu(s) nutricionista(s)!");
+					$("#nutricionistas").focus();
+					return false;
+				}
       			var data = {
       				'_token': '{{csrf_token()}}',
       				'nome_usuario' : $("#nome").val(),
       				'email' : $("#email").val(),
       				'senha' : $("#senha").val(),
       				'dt_nascimento' : $("#dataNascimento").val(),
-      				'peso' : $("#peso").val(),
-      				'altura' : $("#altura").val(),
+      				'peso' : parseFloat($("#peso").val()),
+      				'altura' : parseFloat($("#altura").val()),
       				'objetivo' : $("#objetivo option:selected").val(),
       				'nivel_atividade' : $("#atividade option:selected").val(),
-      				'nutricionistas' : $("#nutricionistas option:selected").val()
+      				'nutricionistas' : $("#nutricionistas").val()
       			};
       			$.ajax({
     				method: 'POST', // Type of response and matches what we said in the route
@@ -226,7 +253,20 @@
 			        	//console.log(JSON.stringify(jqXHR));
 			        	console.log("AJAX error: " + textStatus + ' : ' + errorThrown);
 			    	}
-			});
+				});
+      		});
+
+      		$("#peso, #altura").change( function() {
+      			if (isNaN($(this).val())) {
+      				$(this).val($(this).attr("min"));
+      				return false;
+      			}
+      			var min = parseFloat($(this).attr("min"));
+      			var max = parseFloat($(this).attr("max"));
+      			var current = parseFloat($(this).val());
+      			if(current < min || current > max) {
+      				$(this).val(min);
+      			}
       		});
       	});
 	</script>
