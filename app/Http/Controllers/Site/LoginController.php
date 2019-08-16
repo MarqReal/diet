@@ -18,9 +18,10 @@ class LoginController extends Controller
     {
     	$dados = $req->all();
     	if(Auth::attempt(['email' => $dados['email'], 'password' => $dados["senha"]])) {
-    		return redirect()->route("admin.cursos");
-    	}
-    	return redirect()->route("login.index");
+    		return json_encode(['error' => false, 'message' => "Login com sucesso", "code" => 1]);
+    	} else {
+            return json_encode(['error' => true, 'message' => "Login sem sucesso", 'code' => 0]);
+        }
     }
     public function sair() 
     {
@@ -35,9 +36,15 @@ class LoginController extends Controller
 
     public function registrarLogin(Request $req) 
     {   
-        $requisicao = $req->all();
-        $user = new User();
-        
-        return $user->registrarLogin($requisicao);
+        try { 
+            
+            $requisicao = $req->all();
+            $user = new User();
+            $user->registrarLogin($requisicao);
+            return json_encode(['error' => false, 'message' => "Cadastrado com sucesso", "code" => 1]);
+
+        } catch(Exception $e) {
+            return json_encode(['error' => true, 'message' =>    $e->getMessage(), 'code' => $e->getCode()]);
+        }
     }
 }
