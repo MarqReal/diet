@@ -157,6 +157,8 @@
 	</style>
 	<script type="application/javascript" src="/js/jquery-3.4.1.min.js"></script>
 	<script type="application/javascript" src="/js/materialize.min.js"></script>
+	<script type="application/javascript" src="/js/sweetalert2.min.js"></script>
+
 	<script type="text/javascript">
 		$(document).ready(function () {
 			var startDateYear = new Date().getFullYear() - 60;
@@ -186,47 +188,47 @@
       		$("#btnCadastrar").click(function() {
       			var letters = /[a-zA-Z\u00C0-\u00FF ]+/i;
       			if($("#nome").val() == "" || $("#nome").val().length < 8 || !$("#nome").val().match(letters)) {
-					alert("Preencha o campo NOME corretamente!");
+      				Swal.fire('Preenchimento incorreto!', 'Preencha o campo NOME corretamente','error');
 					$("#nome").focus();
 					return false;
 				}
 				if($("#email").val()=="" || $("#email").val().indexOf('@')== -1 || $("#email").val().indexOf('.')== -1) {
-	  				alert("Preencha o campo EMAIL corretamente!");
+      				Swal.fire('Preenchimento incorreto!', "Preencha o campo EMAIL corretamente",'error');
 	  				$("#email").focus();
 	  				return false;
 				}
 				if($("#senha").val() == "" || $("#senha").val().length < 8 || $("#senha").val().length > 8) {
-					alert("Preencha o campo SENHA corretamente! A senha deve conter 8 caracteres");
+					Swal.fire('Preenchimento incorreto!', "Preencha o campo SENHA corretamente, a senha deve conter 8 caracteres",'error');
 					$("#senha").focus();
 					return false;
 				}
 				if($("#dataNascimento").val() == "") {
-					alert("Preencha o campo Data de nascimento corretamente!");
+					Swal.fire('Preenchimento incorreto!', "Preencha o campo Data de nascimento corretamente",'error');
 					$("#dataNascimento").focus();
 					return false;
 				}
 				if ($("#peso").val() == "" || isNaN($("#peso").val())) {
-					alert("Preencha o campo peso corretamente!");
+					Swal.fire('Preenchimento incorreto!', "Preencha o campo peso corretamente",'error');
 					$("#peso").focus();
 					return false;
 				}
 				if ($("#altura").val() == "" || isNaN($("#altura").val())) {
-					alert("Preencha o campo altura corretamente!");
+					Swal.fire('Preenchimento incorreto!', "Preencha o campo altura corretamente",'error');
 					$("#altura").focus();
 					return false;
 				}
 				if($("#objetivo option:selected").val() == "") {
-					alert("Selecione o seu objetivo!");
+					Swal.fire('Preenchimento incorreto!', "Selecione o seu objetivo",'error');
 					$("#objetivo").focus();
 					return false;
 				}
 				if($("#atividade option:selected").val() == "") {
-					alert("Selecione o seu nivel de atividade fisica!");
+					Swal.fire('Preenchimento incorreto!', "Selecione o seu nivel de atividade fisica",'error');
 					$("#nivel_atividade").focus();
 					return false;
 				}
 				if(!$("#nutricionistas").val().length > 0) {
-					alert("Selecione o(s) seu(s) nutricionista(s)!");
+					Swal.fire('Preenchimento incorreto!', "Selecione o(s) seu(s) nutricionista(s)",'error');
 					$("#nutricionistas").focus();
 					return false;
 				}
