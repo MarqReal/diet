@@ -20,12 +20,13 @@ class LoginController extends Controller
         $img = "/img/login/constelacao.jpg";
         return view("login.index", compact("img"));
     }
-        
+
     public function entrar(Request $req) 
     {
     	$dados = $req->all();
     	if(Auth::attempt(['email' => $dados['email'], 'password' => $dados["senha"]])) {
-    		return json_encode(['error' => false, 'message' => "Login com sucesso", "code" => 1]);
+            $usuario = User::where("email", $dados['email'])->first();
+    		return json_encode(['error' => false, 'message' => "Login com sucesso", "code" => 1, "typeUser" => $usuario->relacao_type]);
     	} else {
             return json_encode(['error' => true, 'message' => "Login sem sucesso", 'code' => 0]);
         }
