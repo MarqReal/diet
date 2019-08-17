@@ -11,9 +11,16 @@ class LoginController extends Controller
 {
     public function index() 
     {
-    	return view("login.index");
+        $img = "/img/login/alimentos-background.jpg";
+    	return view("login.index", compact("img"));
     }
     
+    public function indexAdmin() 
+    {
+        $img = "/img/login/constelacao.jpg";
+        return view("login.index", compact("img"));
+    }
+        
     public function entrar(Request $req) 
     {
     	$dados = $req->all();

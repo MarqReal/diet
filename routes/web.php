@@ -16,6 +16,8 @@ Route::get('/', ['as' => 'site.home', 'uses' => 'Site\LoginController@index']);
 
 Route::get('/login', ['as' => 'login', 'uses' => 'Site\LoginController@index']);
 
+Route::get('/cms/login', ['as' => 'cms.login', 'uses' => 'Site\LoginController@indexAdmin']);
+
 Route::get('/login/sair', ['as' => 'site.login.sair', 'uses' => 'Site\LoginController@sair']);
 
 Route::get('/registro', ['as' => 'registro', 'uses' => 'Site\LoginController@registro']);

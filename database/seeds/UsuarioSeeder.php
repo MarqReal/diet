@@ -2,6 +2,8 @@
 
 use Illuminate\Database\Seeder;
 use App\User;
+use App\Funcionario;
+
 class UsuarioSeeder extends Seeder
 {
     /**
@@ -11,18 +13,20 @@ class UsuarioSeeder extends Seeder
      */
     public function run()
     {
-        $dados = [
-        	"name" => "Guilherme",
-        	"email" => "admin@mail.com",
-        	"password" => bcrypt("123456")
-        ];
-        if (User::where("email", $dados["email"])->count()) {
-        	$usuario = User::where("email", $dados["email"])->first(); 
-        	$usuario->update($dados);
-        	echo "Usuario Alterado!";
-        }else{
-        	User::create($dados);
-        	echo "Usuario Criado!";
+
+        $faker = Faker\Factory::create();
+        $funcionario = new Funcionario();
+
+        if (!User::where("email", $faker->email)->count()) {
+            $funcionario->registro_funcionario = rand(5, 15);
+            $funcionario->save();
+            $usuario = new User();
+            $usuario->nome_usuario  = $faker->name;
+            $usuario->email         = $faker->email;
+            $usuario->password      = bcrypt("admin123");
+            $usuario->dt_nascimento = '1111-11-11';
+            $funcionario->user()->save($usuario);
+            echo "e-mail: ".$usuario->email." password: admin123";            
         }
     }
 }

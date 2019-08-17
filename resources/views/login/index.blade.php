@@ -1,4 +1,4 @@
-<body background="/img/login/alimentos-background.jpg">
+<body background="{{$img}}">
 	@extends('layout.site')
 
 	@section('titulo', 'Login')
