@@ -28,8 +28,8 @@ Route::post('/login/entrar', ['as' => 'site.login.entrar', 'uses' => 'Site\Login
 
 
 /* Administrativo */
-Route::get('/cms/login', ['as' => 'cms.login', 'uses' => 'Site\LoginController@indexAdmin']);
-Route::get('/cms/home', ['as' => 'cms.home', 'uses' => 'Site\AdminController@index']);
+Route::get('/cms/login', ['as' => 'cms.login', 'uses' => 'Site\LoginController@index']);
+Route::get('/cms/home', ['as' => 'cms.home', 'uses' => 'Site\AdminController@home']);
 
 /* Fim Administrativo */
 Route::get('/contato/{id?}', ['uses' => 'ContatoController@index']);

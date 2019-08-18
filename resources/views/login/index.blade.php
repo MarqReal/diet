@@ -98,7 +98,7 @@
 			    	success: function(response){ // What to do if we succeed
 						var resposta = JSON.parse(response);
 						if (!resposta.error) {
-							window.location.href = (resposta.typeUser.indexOf("User") > 0) ? "/feed" : "/cms/home";
+							window.location.href = (resposta.typeUser.indexOf("Participante") > 0) ? "/feed" : "/cms/home";
 						} else {
 							Swal.fire('Erro!', "E-mail ou senha invalidos, tente novamente",'error');
 						} 
