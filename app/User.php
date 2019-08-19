@@ -34,10 +34,12 @@ class User extends Authenticatable
     // private $dt_nascimento;
 
     public function registrarLogin($req) {
+            $date = str_replace("/", "-", $req['dt_nascimento']);
+            $date = date("Y/m/d", strtotime($date));
             $this->nome_usuario = $req["nome_usuario"];
             $this->email = $req["email"];
             $this->password = bcrypt($req["senha"]);
-            $this->dt_nascimento = "2018-09-01";
+            $this->dt_nascimento = $date;
             $participante = new Participante();
             $participante->peso = $req['peso'];
             $participante->altura = $req['altura'];
