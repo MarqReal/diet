@@ -26,9 +26,14 @@ class LoginController extends Controller
         }
     }
     public function sair() 
-    {
-        Auth::logout();
-        return redirect()->route("site.home");  
+    {   
+        try {
+            Auth::logout();
+            return json_encode(['error' => false, 'message' => "Logout com sucesso", 'code' => 0]);
+        } catch(Exception $e) {
+            return json_encode(['error' => true, 'message' => "Logout sem sucesso", 'code' => 0]);
+        }
+        //return redirect()->route("site.home");  
     }
     
     public function registro() 

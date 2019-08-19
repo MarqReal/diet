@@ -6,6 +6,7 @@
 			<a href="#!" class="brand-logo"></a>
 			<a href="#" id="perfil" data-activates="mobile" class="button-collapse"><i class="material-icons icons-top">person</i></a>
 			<a href="#" id="sair" data-activates="mobile" class="button-collapse"><i class="material-icons icons-top">exit_to_app</i></a>
+			{{Auth::user()->nome_usuario}}
 		</div>
 	</nav>
 </header>
@@ -76,14 +77,14 @@
 			    			success: function(response){ // What to do if we succeed
 								var resposta = JSON.parse(response);
 								if (!resposta.error) {
-									window.location.href = "/registro";
+									window.location.href = "/";
 								} else {
-									Swal.fire('Erro!', "E-mail ou senha invalidos, tente novamente",'error');
+									Swal.fire('Erro!', "Não foi possivel realizar o logout, tente novamente",'error');
 								} 
 			    			},
 			    			error: function(jqXHR, textStatus, errorThrown) { // What to do if we fail
 			        		//console.log(JSON.stringify(jqXHR));
-							Swal.fire('Erro!', "Não foi possivel realizar o cadastro, tente novamente",'error');
+							Swal.fire('Erro!', "Não foi possivel realizar o logout, tente novamente",'error');
 			        	//console.log("AJAX error: " + textStatus + ' : ' + errorThrown);
 			    			}
 				});
