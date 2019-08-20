@@ -20,7 +20,7 @@
 			    <div class="nav-wrapper deep-orange">
 			      <a href="#!" class="brand-logo">Painel administrativo</a>
 			      <a href="#" data-activates="mobile" class="button-collapse"><i class="material-icons">menu</i></a>
-			      <a href="#" id="sair" data-activates="mobile" class="button-collapse"><i class="material-icons icons-top">exit_to_app</i></a>
+			      <a href="#" id="sair" data-activates="mobile"><i class="material-icons icons-top">exit_to_app</i></a>
 <!-- 			      <ul class="right hide-on-med-and-down">
 			        <li><a href="/">Home</a></li>
 			        @if(Auth::guest())
@@ -32,7 +32,7 @@
 			        @endif
 			      </ul> -->
 			      <ul class="side-nav" id="mobile">
-			        <li><a href="/">Home</a></li>
+			        <li><a href="/cms/home">Home</a></li>
 			        <li><a href="/">Nutricionistas</a></li>
 			        <li><a href="/">Alimentos</a></li>
 			        <li><a href="/">Dietas</a></li>

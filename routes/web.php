@@ -16,22 +16,27 @@ Route::get('/', ['as' => 'site.home', 'uses' => 'Site\LoginController@index']);
 
 Route::get('/login', ['as' => 'login', 'uses' => 'Site\LoginController@index']);
 
+Route::post('/login/entrar', ['as' => 'site.login.entrar', 'uses' => 'Site\LoginController@entrar']);
+
 Route::get('/login/sair', ['as' => 'site.login.sair', 'uses' => 'Site\LoginController@sair']);
 
 Route::get('/registro', ['as' => 'registro', 'uses' => 'Site\LoginController@registro']);
 
 Route::post('/registrar', ['as' => 'registrar', 'uses' => 'Site\LoginController@registrarLogin']);
 
-Route::get('/feed', ['as' => 'site.feed', 'uses' => 'Site\DicaController@index']);
-
-Route::post('/login/entrar', ['as' => 'site.login.entrar', 'uses' => 'Site\LoginController@entrar']);
-
+Route::group(['middleware' => "auth"], function () {
+	Route::get('/feed', ['as' => 'site.feed', 'uses' => 'Site\DicaController@index']);	
+});
 
 /* Administrativo */
-Route::get('/cms/login', ['as' => 'cms.login', 'uses' => 'Site\LoginController@index']);
-Route::get('/cms/home', ['as' => 'cms.home', 'uses' => 'Site\AdminController@home']);
+Route::get('/cms/login', ['as' => 'cms.login', 'uses' => 'Site\AdminController@index']);
+Route::group(['middleware' => "authAdmin"], function () {
+	Route::get('/cms/home', ['as' => 'cms.home', 'uses' => 'Site\AdminController@home']);	
+});
 
 /* Fim Administrativo */
+
+
 Route::get('/contato/{id?}', ['uses' => 'ContatoController@index']);
 
 Route::post('/contato', ['uses' => 'ContatoController@criar']);
