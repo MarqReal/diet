@@ -30,7 +30,7 @@ class LoginController extends Controller
         try {
             Auth::logout();
             return json_encode(['error' => false, 'message' => "Logout com sucesso", 'code' => 0]);
-        } catch(Exception $e) {
+        } catch(\Exception $e) {
             return json_encode(['error' => true, 'message' => "Logout sem sucesso", 'code' => 0]);
         }
         //return redirect()->route("site.home");  
@@ -50,7 +50,29 @@ class LoginController extends Controller
             $user->registrarLogin($requisicao);
             return json_encode(['error' => false, 'message' => "Cadastrado com sucesso", "code" => 1]);
 
-        } catch(Exception $e) {
+        } catch(\Exception $e) {
+            return json_encode(['error' => true, 'message' =>    $e->getMessage(), 'code' => $e->getCode()]);
+        }
+    }
+
+    public function editar (Request $req)
+    {
+        try {
+            $requisicao = $req->all();    
+            $usuario = Auth::user();
+            $usuario->editar($requisicao);
+            return json_encode(['error' => false, 'message' => "Edição com sucesso", "code" => 1]);
+        } catch(\Exception $e) {
+            return json_encode(['error' => true, 'message' =>    $e->getMessage(), 'code' => $e->getCode()]);
+        }        
+    }
+    public function excluir() 
+    {   
+        try {    
+            $usuario = Auth::user();
+            $usuario->excluir();
+            return json_encode(['error' => false, 'message' => "Remoção com sucesso", "code" => 1]);
+        } catch(\Exception $e) {
             return json_encode(['error' => true, 'message' =>    $e->getMessage(), 'code' => $e->getCode()]);
         }
     }

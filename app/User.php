@@ -51,8 +51,34 @@ class User extends Authenticatable
         // $this->save();
         // $this->relacao()->associate($participante);
     }
+
+    public function editar($req) {
+            $date = str_replace("/", "-", $req['dt_nascimento']);
+            $date = date("Y/m/d", strtotime($date));
+            $this->nome_usuario = $req["nome_usuario"];
+            $this->email = $req["email"];
+            $this->password = bcrypt($req["senha"]);
+            $this->dt_nascimento = $date;
+            //$participante = new Participante();
+            $this->relacao->peso = $req['peso'];
+            $this->relacao->altura = $req['altura'];
+            $this->relacao->situacao = $req['objetivo'];;
+            $this->relacao->nivel_atividade = $req['nivel_atividade'];
+            $this->relacao->update();
+            $this->update();
+            //$participante->user()->save($this);
+        //dd($participante->user);
+        // $this->save();
+        // $this->relacao()->associate($participante);
+    }
+
+    public function excluir () {
+        $this->relacao->delete();
+        $this->delete();
+    }
+
     public function relacao()
     {
         return $this->morphTo();
-    }
+    } 
 }
