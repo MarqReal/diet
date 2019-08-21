@@ -10,7 +10,8 @@ class AdminController extends Controller
     public function index() 
     {
         $img = "/img/login/constelacao.jpg";
-        return view("login.index", compact("img"));
+        $hidden = true;
+        return view("login.index", compact("img", "hidden"));
     }
     public function home() 
     {

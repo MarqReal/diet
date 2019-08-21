@@ -26,7 +26,7 @@ class UsuarioSeeder extends Seeder
             $usuario->password      = bcrypt("admin123");
             $usuario->dt_nascimento = $faker->date($format = 'Y-m-d', $max = 'now');
             $funcionario->user()->save($usuario);
-            echo "e-mail: ".$usuario->email." password: admin123";            
+            echo "E-mail: ".$usuario->email." Password: admin123";            
         }
     }
 }

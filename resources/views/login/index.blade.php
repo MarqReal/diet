@@ -16,9 +16,11 @@
 						<label>Senha</label>
 					</div>			
 					<button class="btn light-green darken-1" id="btnEntrar">Entrar</button><br><br>
-				<label class="no-register">Ainda não tem cadastro? 
-					<a href="{{route('registro')}}">Clique aqui</a>
-				</label>
+				@if(!isset($hidden))
+					<label class="no-register">Ainda não tem cadastro? 
+						<a href="{{route('registro')}}">Clique aqui</a>
+					</label>
+				@endif
 			</div>
 			<!-- <div class="row">
 				<form class="" action="{{route('site.login.entrar')}}" method="post" enctype="multipart/form-data">

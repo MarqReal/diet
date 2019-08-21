@@ -26,6 +26,7 @@ Route::post('/registrar', ['as' => 'registrar', 'uses' => 'Site\LoginController@
 
 Route::group(['middleware' => "auth"], function () {
 	Route::get('/feed', ['as' => 'site.feed', 'uses' => 'Site\DicaController@index']);	
+	Route::get('/alimento', ['as' => 'site.alimento', 'uses' => 'Site\AlimentoController@index']);	
 	Route::delete('login/excluir', ['as' => 'excluir', 'uses' => 'Site\LoginController@excluir']);
 	Route::put('login/editar', ['as' => 'editar', 'uses' => 'Site\LoginController@editar']);
 
