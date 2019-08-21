@@ -14,7 +14,7 @@ class UsuarioSeeder extends Seeder
     public function run()
     {
 
-        $faker = Faker\Factory::create();
+        $faker = Faker\Factory::create("pt_BR");
         $funcionario = new Funcionario();
 
         if (!User::where("email", $faker->email)->count()) {
@@ -24,7 +24,7 @@ class UsuarioSeeder extends Seeder
             $usuario->nome_usuario  = $faker->name;
             $usuario->email         = $faker->email;
             $usuario->password      = bcrypt("admin123");
-            $usuario->dt_nascimento = '1111-11-11';
+            $usuario->dt_nascimento = $faker->date($format = 'Y-m-d', $max = 'now');
             $funcionario->user()->save($usuario);
             echo "e-mail: ".$usuario->email." password: admin123";            
         }

@@ -7,9 +7,11 @@
 		<div class="container">
 			<!-- <h3 class="center">D!ET</h3> -->
 			<div class="row background-login">
-				<i class="material-icons blue-text" id="back"><a href="{{route('site.home')}}">arrow_back</a></i>
 				@if(Auth::user())
+					<i class="material-icons blue-text" id="back"><a href="{{route('site.feed')}}">arrow_back</a></i>
 					<i class="material-icons red-text" id="remove">delete</i>
+				@else
+					<i class="material-icons blue-text" id="back"><a href="{{route('site.home')}}">arrow_back</a></i>
 				@endif
 				<!-- <form class="" action="{{route('site.login.entrar')}}" method="post" enctype="multipart/form-data"> -->
 					<!-- {{csrf_field()}} -->
@@ -99,7 +101,7 @@
 					@if(Auth::guest())		
 					 <button class="btn light-green darken-1" id="btnCadastrar">Cadastrar</button>
 					@else
-					 <button class="btn light-green darken-1" id="btnCadastrar">Editar</button>
+					 <button class="btn light-green darken-1" id="btnEditar">Editar</button>
 					@endif
 				<!-- </form> -->
 			</div>
@@ -141,7 +143,7 @@
 		}
 
 
-		#btnCadastrar {
+		#btnCadastrar, #btnEditar {
 			margin-left: 25%;
 		}
 
@@ -163,7 +165,8 @@
 		}
 
 		#remove {
-			padding-left: 70% !important;
+			position: absolute;
+    		margin-left: 70% !important;
 		}
 	</style>
 	<script type="application/javascript" src="/js/jquery-3.4.1.min.js"></script>
@@ -288,6 +291,88 @@
 				});
       		});
 
+      		$("#btnEditar").click(function() {
+      			var letters = /[a-zA-Z\u00C0-\u00FF ]+/i;
+      			if($("#nome").val() == "" || $("#nome").val().length < 8 || !$("#nome").val().match(letters)) {
+      				Swal.fire('Preenchimento incorreto!', 'Preencha o campo NOME corretamente','error');
+					$("#nome").focus();
+					return false;
+				}
+				if($("#email").val()=="" || $("#email").val().indexOf('@')== -1 || $("#email").val().indexOf('.')== -1) {
+      				Swal.fire('Preenchimento incorreto!', "Preencha o campo EMAIL corretamente",'error');
+	  				$("#email").focus();
+	  				return false;
+				}
+				if($("#senha").val() == "" || $("#senha").val().length < 8 || $("#senha").val().length > 8) {
+					Swal.fire('Preenchimento incorreto!', "Preencha o campo SENHA corretamente, a senha deve conter 8 caracteres",'error');
+					$("#senha").focus();
+					return false;
+				}
+				if($("#dataNascimento").val() == "") {
+					Swal.fire('Preenchimento incorreto!', "Preencha o campo Data de nascimento corretamente",'error');
+					return false;
+				}
+				if ($("#peso").val() == "" || isNaN($("#peso").val())) {
+					Swal.fire('Preenchimento incorreto!', "Preencha o campo peso corretamente",'error');
+					$("#peso").focus();
+					return false;
+				}
+				if ($("#altura").val() == "" || isNaN($("#altura").val())) {
+					Swal.fire('Preenchimento incorreto!', "Preencha o campo altura corretamente",'error');
+					$("#altura").focus();
+					return false;
+				}
+				if($("#objetivo option:selected").val() == "") {
+					Swal.fire('Preenchimento incorreto!', "Selecione o seu objetivo",'error');
+					$("#objetivo").focus();
+					return false;
+				}
+				if($("#atividade option:selected").val() == "") {
+					Swal.fire('Preenchimento incorreto!', "Selecione o seu nivel de atividade fisica",'error');
+					$("#nivel_atividade").focus();
+					return false;
+				}
+				if(!$("#nutricionistas").val().length > 0) {
+					Swal.fire('Preenchimento incorreto!', "Selecione o(s) seu(s) nutricionista(s)",'error');
+					$("#nutricionistas").focus();
+					return false;
+				}
+      			var data = {
+      				'_token': '{{csrf_token()}}',
+      				'_method': 'put',
+      				'nome_usuario' : $("#nome").val(),
+      				'email' : $("#email").val(),
+      				'senha' : $("#senha").val(),
+      				'dt_nascimento' : $("#dataNascimento").val(),
+      				'peso' : parseFloat($("#peso").val()),
+      				'altura' : parseFloat($("#altura").val()),
+      				'objetivo' : $("#objetivo option:selected").val(),
+      				'nivel_atividade' : $("#atividade option:selected").val(),
+      				'nutricionistas' : $("#nutricionistas").val()
+      			};
+      			$.ajax({
+    				method: 'POST', // Type of response and matches what we said in the route
+    				url: 'login/editar', // This is the url we gave in the route
+    				data: data, // a JSON object to send back
+			    	success: function(response){ // What to do if we succeed
+						var resposta = JSON.parse(response);
+						if (resposta.code == 1) {
+							Swal.fire({
+  								title: 'Sucesso!',
+  								text: "Atualizações realizada com sucesso",
+  								type: 'success',
+  								confirmButtonText: 'Ok'
+							});
+						}
+			    	},
+			    	error: function(jqXHR, textStatus, errorThrown) { // What to do if we fail
+			        	//console.log(JSON.stringify(jqXHR));
+						Swal.fire('Erro!', "Não foi possivel realizar as atualizações, tente novamente",'error');
+			        	//console.log("AJAX error: " + textStatus + ' : ' + errorThrown);
+			    	}
+				});
+      		});
+
       		$("#remove").click( function () {
 
       			Swal.fire({
@@ -341,4 +426,6 @@
       			}
       		});
       	});
+	
+	
 	</script>
