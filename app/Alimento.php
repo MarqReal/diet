@@ -9,6 +9,7 @@ class Alimento extends Model
     public function cadastrar ($dados)
     {
     	$this->nome = $dados["nome"];
+    	$this->descricao = $dados["descricao"];
     	$this->unidade_medida = $dados["unidade_medida"];
     	$this->tipo_medida = $dados["tipo_medida"];
     	$this->mes = $dados["mes"];
@@ -23,6 +24,7 @@ class Alimento extends Model
     public function editar ($dados)
     {
     	$this->nome = $dados["nome"];
+    	$this->descricao = $dados["descricao"];
     	$this->unidade_medida = $dados["unidade_medida"];
     	$this->tipo_medida = $dados["tipo_medida"];
     	$this->mes = $dados["mes"];
@@ -37,5 +39,19 @@ class Alimento extends Model
     public function excluir ()
     {
     	$this->delete();
+    }
+
+    public static function consultar ($id)
+    {
+    	return self::find($id);
+    }
+
+    public static function exibirDestaqueMes()
+    {
+        return self::where("mes", date('m'))->get();
+    }
+    public static function exibirTodos()
+    {
+        return self::all();
     }
 }

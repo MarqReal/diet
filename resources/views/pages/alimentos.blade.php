@@ -10,33 +10,71 @@
 		</div>
 	</nav>
 </header>
-	@section('titulo', 'Feed de dicas')
+	@section('titulo', 'Alimentos')
 
 	@section('conteudo')
 		<div class="container">
-			<nav>
-		<div class="nav-wrapper darken-4" style="margin-top: 147% !important;">
-			<div class="row">
-				<div class="col s3"><a href="/feed" id="perfil" data-activates="mobile" class="button-collapse"><i class="material-icons icons-top">comment</i></a></div>
-				<div class="col s3"><a href="/alimentos" id="perfil" data-activates="mobile" class="button-collapse"><i class="material-icons icons-top">local_dining</i></a></div>
-				<div class="col s3"><a href="/dieta" id="perfil" data-activates="mobile" class="button-collapse"><i class="material-icons icons-top">receipt</i></a></div>
-				<div class="col s3"><a href="/grafico" id="perfil" data-activates="mobile" class="button-collapse"><i class="material-icons icons-top">pie_chart_outlined</i></a></div>
-			</div>
+		<div class="row">
+		    <div class="col s12">
+		      <ul class="tabs">
+		        <li class="tab col s3"><a class="active" href="#mes">Destaques do mês</a></li>
+		        <li class="tab col s3"><a  href="#todos">Todos alimentos</a></li>
+		        
+		      </ul>
+		    </div>
+		    <div id="mes" class="col s12">
+				<ul class="collapsible" data-collapsible="accordion">
+				    @foreach($destaques as $alimento)
+				    <li>
+				      <div class="collapsible-header"><i class="material-icons">room_service</i>{{$alimento->nome}}</div>
+				      <div class="collapsible-body">
+				      	<span>
+				      		<br>Descrição: {{$alimento->descricao}}</br>
+				      		<br>Carboidratos: {{$alimento->carboidrato}} (g)</br>
+        					<br>Proteínas: {{$alimento->proteina}} (g)</br>
+      						<br>Lipídios: {{$alimento->lipideos}} (g)</br>
+        					<br>Fibra alimentar: {{$alimento->fibra_alimentar}} (g)</br>
+							<br>Calorias (valor energético): {{$alimento->calorias}} (kcal)</br>	
+				      	</span>
+				      </div>
+				    </li>
+				    @endforeach
+				</ul>
+		    </div>
+		    <div id="todos" class="col s12">
+		    	Todos
+		    </div>
 		</div>
-	</nav>
+		<div class="row bottom-bar">
+				<div class="col s3"><a href="/feed" id="perfil" data-activates="mobile" class="button-collapse"><i class="material-icons icons-top icons-bottom">comment</i></a></div>
+				<div class="col s3"><a href="/alimentos" id="perfil" data-activates="mobile" class="button-collapse"><i class="material-icons icons-top icons-bottom">local_dining</i></a></div>
+				<div class="col s3"><a href="/dieta" id="perfil" data-activates="mobile" class="button-collapse"><i class="material-icons icons-top icons-bottom">receipt</i></a></div>
+				<div class="col s3"><a href="/grafico" id="perfil" data-activates="mobile" class="button-collapse"><i class="material-icons icons-top icons-bottom">pie_chart_outlined</i></a></div>
+			</div>
 		</div>	
 	@endsection
 
 	<style type="text/css">
-		body {
-			overflow:hidden !important;
+		body,html{
+		  overflow:hidden !important;
 		}
-		#menuBottom {
-			position: fixed;
-  			width: 70%;
-  			bottom: 15px;
-  			border: 3px solid #000;
-  			height: 60px;
+		.bottom-bar {
+  			overflow: hidden;
+  			background-color: #333;
+  			position: fixed;
+  			bottom: -3%;
+  			padding-bottom: 2%;
+  			width: 110%;
+  			background-color: #212121 !important;
+		}
+		.menu-bottom {
+			background-color: #212121;
+    		height: 7%;
+		}
+		.icons-bottom {
+			color: white !important;
+			padding-top: 15% !important;
+    		padding-left: 20% !important;
 		}
 		.nav-wrapper {
 			background: #212121;
@@ -77,6 +115,8 @@
 	<script type="text/javascript">
 		$(document).ready(function () {
       		Materialize.updateTextFields();
+      		$('ul.tabs').tabs('select_tab', 'tab_id');
+			$('.collapsible').collapsible();
       		$("#sair").click(function () {
       			Swal.fire({
   					title: 'Você tem certeza que quer sair?',

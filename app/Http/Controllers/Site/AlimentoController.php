@@ -16,6 +16,11 @@ class AlimentoController extends Controller
     {
     	return view("admin.alimentos.adicionar");
     }
+    public function atualizar ($id)
+    {
+    	$alimento = Alimento::consultar($id);
+    	return view("admin.alimentos.atualizar", compact("alimento"));
+    }
     public function cadastrar (Request $req)
     {
     	try {
@@ -49,6 +54,13 @@ class AlimentoController extends Controller
     	}catch(\Exception $e) {
             return json_encode(['error' => true, 'message' => "Exclusão sem sucesso", 'code' => 0]);
     	}
+    }
+
+    public function alimentos ()
+    {
+        $destaques = Alimento::exibirDestaqueMes();
+        $todos = Alimento::exibirTodos(); 
+        return view("pages.alimentos", compact("destaques", "todos"));
     }
 
 }

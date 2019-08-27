@@ -22,7 +22,7 @@
 					<tr id="line{{$alimento->id}}">
 						<td>{{$alimento->nome}}</td>
 						<td class="buttons-action">
-							<button class="waves-effect orange darken-1 btn">Editar</button>
+							<a  href="/alimento/atualizar/{{$alimento->id}}" class="waves-effect orange darken-1 btn">Editar</a>
 							<button class="waves-effect red darken-1 btn btn-excluir" id="{{$alimento->id}}">Excluir</button>
 						</td>
 					</tr>
@@ -136,7 +136,7 @@
   						$.ajax({
 		    				method: 'POST', // Type of response and matches what we said in the route
 		    				url: 'alimento/excluir', // This is the url we gave in the route
-		    				data: {'_method': 'delete', '_token': '{{csrf_token()}}', 'id': $(this).attr("id")}, // a JSON object to send back
+		    				data: {'_method': 'DELETE', '_token': '{{csrf_token()}}', 'id': $(this).attr("id")}, // a JSON object to send back
 					    	success: function(response){ // What to do if we succeed
 								var resposta = JSON.parse(response);
 								if (!resposta.error) {
@@ -145,6 +145,8 @@
 		  								text: "Exclusão realizada com sucesso",
 		  								type: 'success',
 		  								confirmButtonText: 'Ok'
+									}).then(() => {
+										location.reload();
 									});
 									$("#line"+$(this).attr("id")).remove();
 								}

@@ -6,7 +6,7 @@
 
 	@section('conteudo')
 	<div class="row">
-		<span class="title-page">Cadastro de alimentos</span>
+		<span class="title-page">Atualização de alimento</span>
 		@include('admin.alimentos._form')
 	</div>
 	<div class="row">
@@ -45,7 +45,6 @@
 			Materialize.updateTextFields();
       		$('select').material_select();
 			$(".button-collapse").sideNav();
-
       		$("#btnSalvar").click(function () {
       			if($("#nome").val()== "") {
       				Swal.fire('Preenchimento incorreto!', "Preencha o nome do alimento corretamente",'error');
@@ -100,9 +99,11 @@
 
       			var data = {
       				'_token': '{{csrf_token()}}',
+      				'_method': 'PUT',
+      				'id': '{{$alimento->id}}',
       				'nome' : $("#nome").val(),
-      				'unidade_medida' : parseFloat($("#unidade_medida").val()),
       				'descricao' : $("#descricao").val(),
+      				'unidade_medida' : parseFloat($("#unidade_medida").val()),
       				'tipo_medida' : $("#tipo_medida option:selected").val(),
       				'mes' : $("#mes option:selected").val(),
       				'carboidrato' : parseFloat($("#carboidrato").val()),
@@ -113,21 +114,21 @@
       			};
 				$.ajax({
     				method: 'POST', // Type of response and matches what we said in the route
-    				url: '/alimento/cadastrar', // This is the url we gave in the route
+    				url: '/alimento/editar', // This is the url we gave in the route
     				data: data, // a JSON object to send back
 			    	success: function(response){ // What to do if we succeed
 						var resposta = JSON.parse(response);
 						if (!resposta.error) {
 							Swal.fire({
   								title: 'Sucesso!',
-  								text: "Alimento cadastrado com sucesso",
+  								text: "Alimento atualizado com sucesso",
   								type: 'success',
   								confirmButtonText: 'Ok'
 							}).then((result) => {
 								window.location.href = "/alimento";
 							});
 						} else {
-							Swal.fire('Erro!', "Não foi possivel realizar o cadastro, tente novamente",'error');
+							Swal.fire('Erro!', "Não foi possivel realizar a atualização, tente novamente",'error');
 						} 
 			    	},
 			    	error: function(jqXHR, textStatus, errorThrown) { // What to do if we fail

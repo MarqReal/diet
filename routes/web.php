@@ -25,13 +25,15 @@ Route::get('/registro', ['as' => 'registro', 'uses' => 'Site\LoginController@reg
 Route::post('/registrar', ['as' => 'registrar', 'uses' => 'Site\LoginController@registrarLogin']);
 
 Route::group(['middleware' => "auth"], function () {
-	Route::get('/feed', ['as' => 'site.feed', 'uses' => 'Site\DicaController@index']);	
+	Route::get('/feed', ['as' => 'site.feeds', 'uses' => 'Site\DicaController@index']);	
+	Route::get('/alimentos', ['as' => 'site.alimentos', 'uses' => 'Site\AlimentoController@alimentos']);	
 	
 	/*ALIMENTO*/
 	Route::get('/alimento', ['as' => 'site.alimento', 'uses' => 'Site\AlimentoController@index']);	
 	Route::get('/alimento/adicionar', ['as' => 'site.alimento.adicionar', 'uses' => 'Site\AlimentoController@adicionar']);
-	Route::post('/alimento/cadastrar', ['as' => 'site.alimento.cadastrar', 'uses' => 'Site\AlimentoController@cadastrar']);	
-	Route::put('/alimento/editar', ['as' => 'site.alimento.editar', 'uses' => 'Site\AlimentoController@adicionar']);
+	Route::post('/alimento/cadastrar', ['as' => 'site.alimento.cadastrar', 'uses' => 'Site\AlimentoController@cadastrar']);
+	Route::get('/alimento/atualizar/{id}', ['as' => 'site.alimento.atualizar', 'uses' => 'Site\AlimentoController@atualizar']);	
+	Route::put('/alimento/editar', ['as' => 'site.alimento.editar', 'uses' => 'Site\AlimentoController@editar']);
 	Route::delete('/alimento/excluir', ['as' => 'site.alimento.excluir', 'uses' => 'Site\AlimentoController@excluir']);
 	/*FIM ALIMENTO*/
 	
