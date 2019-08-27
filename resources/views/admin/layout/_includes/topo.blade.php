@@ -9,6 +9,7 @@
       <!--Import materialize.css-->
       <link type="text/css" rel="stylesheet" href="/css/materialize.min.css"  media="screen,projection"/>
       <link type="text/css" rel="stylesheet" href="/css/sweetalert2.min.css"  media="screen,projection"/>
+      <link type="text/css" rel="stylesheet" href="/css/jquery.dataTables.min.css"  media="screen,projection"/>
 
       <!--Let browser know website is optimized for mobile-->
       <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -18,7 +19,7 @@
       <header>
 		    <nav>
 			    <div class="nav-wrapper deep-orange">
-			      <a href="#!" class="brand-logo">Painel administrativo</a>
+			      <a href="#!" class="brand-logo">@yield('painel')</a>
 			      <a href="#" data-activates="mobile" class="button-collapse"><i class="material-icons">menu</i></a>
 			      <a href="#" id="sair" data-activates="mobile"><i class="material-icons icons-top">exit_to_app</i></a>
 <!-- 			      <ul class="right hide-on-med-and-down">
@@ -34,7 +35,7 @@
 			      <ul class="side-nav" id="mobile">
 			        <li><a href="/cms/home">Home</a></li>
 			        <li><a href="/">Nutricionistas</a></li>
-			        <li><a href="/">Alimentos</a></li>
+			        <li><a href="/cms/alimentos">Alimentos</a></li>
 			        <li><a href="/">Dietas</a></li>
 			      </ul>
 			    </div>

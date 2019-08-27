@@ -1,6 +1,8 @@
 @extends('admin.layout.site')
 
 	@section('titulo', 'Painel')
+	@section('painel', 'Painel Administrativo')
+
 
 	@section('conteudo')
 	@endsection
@@ -56,3 +58,4 @@
       		});
 		});
 	</script>
+	

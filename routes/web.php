@@ -27,6 +27,7 @@ Route::post('/registrar', ['as' => 'registrar', 'uses' => 'Site\LoginController@
 Route::group(['middleware' => "auth"], function () {
 	Route::get('/feed', ['as' => 'site.feed', 'uses' => 'Site\DicaController@index']);	
 	Route::get('/alimento', ['as' => 'site.alimento', 'uses' => 'Site\AlimentoController@index']);	
+	Route::get('/alimento/adicionar', ['as' => 'site.alimento.adicionar', 'uses' => 'Site\AlimentoController@adicionar']);	
 	Route::delete('login/excluir', ['as' => 'excluir', 'uses' => 'Site\LoginController@excluir']);
 	Route::put('login/editar', ['as' => 'editar', 'uses' => 'Site\LoginController@editar']);
 
@@ -35,7 +36,9 @@ Route::group(['middleware' => "auth"], function () {
 /* Administrativo */
 Route::get('/cms/login', ['as' => 'cms.login', 'uses' => 'Site\AdminController@index']);
 Route::group(['middleware' => "authAdmin"], function () {
-	Route::get('/cms/home', ['as' => 'cms.home', 'uses' => 'Site\AdminController@home']);	
+	Route::get('/cms/home', ['as' => 'cms.home', 'uses' => 'Site\AdminController@home']);
+	Route::get('/cms/alimentos', ['as' => 'cms.alimentos', 'uses' => 'Site\AlimentoController@index']);
+	Route::get('/cms/nutricionistas', ['as' => 'cms.nutricionistas', 'uses' => 'Site\AdminController@home']);	
 });
 
 /* Fim Administrativo */
