@@ -26,8 +26,15 @@ Route::post('/registrar', ['as' => 'registrar', 'uses' => 'Site\LoginController@
 
 Route::group(['middleware' => "auth"], function () {
 	Route::get('/feed', ['as' => 'site.feed', 'uses' => 'Site\DicaController@index']);	
+	
+	/*ALIMENTO*/
 	Route::get('/alimento', ['as' => 'site.alimento', 'uses' => 'Site\AlimentoController@index']);	
-	Route::get('/alimento/adicionar', ['as' => 'site.alimento.adicionar', 'uses' => 'Site\AlimentoController@adicionar']);	
+	Route::get('/alimento/adicionar', ['as' => 'site.alimento.adicionar', 'uses' => 'Site\AlimentoController@adicionar']);
+	Route::post('/alimento/cadastrar', ['as' => 'site.alimento.cadastrar', 'uses' => 'Site\AlimentoController@cadastrar']);	
+	Route::put('/alimento/editar', ['as' => 'site.alimento.editar', 'uses' => 'Site\AlimentoController@adicionar']);
+	Route::delete('/alimento/excluir', ['as' => 'site.alimento.excluir', 'uses' => 'Site\AlimentoController@excluir']);
+	/*FIM ALIMENTO*/
+	
 	Route::delete('login/excluir', ['as' => 'excluir', 'uses' => 'Site\LoginController@excluir']);
 	Route::put('login/editar', ['as' => 'editar', 'uses' => 'Site\LoginController@editar']);
 

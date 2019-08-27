@@ -17,48 +17,17 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr>
-				<td>Abacate</td>
-				<td class="buttons-action">
-					<a class="waves-effect orange darken-1 btn">Editar</a>
-					<a class="waves-effect red darken-1 btn">Excluir</a>
-				</td>
-			</tr>
-			<tr>
-				<td>Abacate</td>
-				<td class="buttons-action">
-					<a class="waves-effect orange darken-1 btn">Editar</a>
-					<a class="waves-effect red darken-1 btn">Excluir</a>
-				</td>
-			</tr>
-			<tr>
-				<td>Abobora</td>
-				<td class="buttons-action">
-					<a class="waves-effect orange darken-1 btn">Editar</a>
-					<a class="waves-effect red darken-1 btn">Excluir</a>
-				</td>
-			</tr>
-			<tr>
-				<td>Melao</td>
-				<td class="buttons-action">
-					<a class="waves-effect orange darken-1 btn">Editar</a>
-					<a class="waves-effect red darken-1 btn">Excluir</a>
-				</td>
-			</tr>
-			<tr>
-				<td>Uva</td>
-				<td class="buttons-action">
-					<a class="waves-effect orange darken-1 btn">Editar</a>
-					<a class="waves-effect red darken-1 btn">Excluir</a>
-				</td>
-			</tr>
-			<tr>
-				<td>Pao</td>
-				<td class="buttons-action">
-					<a class="waves-effect orange darken-1 btn">Editar</a>
-					<a class="waves-effect red darken-1 btn">Excluir</a>
-				</td>
-			</tr>
+			@if(isset($alimentos) && count($alimentos) > 0)
+				@foreach($alimentos as $alimento)
+					<tr id="line{{$alimento->id}}">
+						<td>{{$alimento->nome}}</td>
+						<td class="buttons-action">
+							<button class="waves-effect orange darken-1 btn">Editar</button>
+							<button class="waves-effect red darken-1 btn btn-excluir" id="{{$alimento->id}}">Excluir</button>
+						</td>
+					</tr>
+				@endforeach
+			@endif
 		</tbody>
 	</table>
 	</div>
@@ -152,6 +121,44 @@
   					}
 				});
       		});
+			$(".btn-excluir").click( function () {
+      			Swal.fire({
+  					title: 'Você tem certeza que quer excluir este alimento?',
+  					text: "",
+  					type: 'warning',
+  					showCancelButton: true,
+  					confirmButtonColor: '#3085d6',
+  					cancelButtonColor: '#d33',
+  					confirmButtonText: 'Sim',
+  					cancelButtonText : 'Cancelar'
+				}).then((result) => {
+  					if (result.value) {
+  						$.ajax({
+		    				method: 'POST', // Type of response and matches what we said in the route
+		    				url: 'alimento/excluir', // This is the url we gave in the route
+		    				data: {'_method': 'delete', '_token': '{{csrf_token()}}', 'id': $(this).attr("id")}, // a JSON object to send back
+					    	success: function(response){ // What to do if we succeed
+								var resposta = JSON.parse(response);
+								if (!resposta.error) {
+									Swal.fire({
+		  								title: 'Sucesso!',
+		  								text: "Exclusão realizada com sucesso",
+		  								type: 'success',
+		  								confirmButtonText: 'Ok'
+									});
+									$("#line"+$(this).attr("id")).remove();
+								}
+					    	},
+					    	error: function(jqXHR, textStatus, errorThrown) { // What to do if we fail
+					        	//console.log(JSON.stringify(jqXHR));
+								Swal.fire('Erro!', "Não foi possivel realizar a exclusão, tente novamente",'error');
+					        	//console.log("AJAX error: " + textStatus + ' : ' + errorThrown);
+					    	}
+						});	
+  					}
+				});
+      		});
+
 		});
 	</script>
 	

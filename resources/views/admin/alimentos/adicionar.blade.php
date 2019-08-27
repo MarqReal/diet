@@ -92,15 +92,21 @@
 	  				return false;
 				}
 
-				return false;
       			var data = {
       				'_token': '{{csrf_token()}}',
-      				'email' : $("#email").val(),
-      				'senha' : $("#senha").val()
+      				'nome' : $("#nome").val(),
+      				'unidade_medida' : parseFloat($("#unidade_medida").val()),
+      				'tipo_medida' : $("#tipo_medida option:selected").val(),
+      				'mes' : $("#mes option:selected").val(),
+      				'carboidrato' : parseFloat($("#carboidrato").val()),
+      				'proteina' : parseFloat($("#proteina").val()),
+      				'lipideos' : parseFloat($("#lipideos").val()),
+      				'fibra_alimentar' : parseFloat($("#fibra_alimentar").val()),
+      				'calorias' : parseFloat($("#calorias").val())
       			};
 				$.ajax({
     				method: 'POST', // Type of response and matches what we said in the route
-    				url: '/alimento/salvar', // This is the url we gave in the route
+    				url: '/alimento/cadastrar', // This is the url we gave in the route
     				data: data, // a JSON object to send back
 			    	success: function(response){ // What to do if we succeed
 						var resposta = JSON.parse(response);
