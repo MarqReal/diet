@@ -14,29 +14,13 @@
 
 	@section('conteudo')
 		<div class="container">
-			<nav>
-		<div class="nav-wrapper darken-4" style="margin-top: 147% !important;">
-			<div class="row">
-				<div class="col s3"><a href="/feed" id="perfil" data-activates="mobile" class="button-collapse"><i class="material-icons icons-top">comment</i></a></div>
-				<div class="col s3"><a href="/alimentos" id="perfil" data-activates="mobile" class="button-collapse"><i class="material-icons icons-top">local_dining</i></a></div>
-				<div class="col s3"><a href="/dieta" id="perfil" data-activates="mobile" class="button-collapse"><i class="material-icons icons-top">receipt</i></a></div>
-				<div class="col s3"><a href="/grafico" id="perfil" data-activates="mobile" class="button-collapse"><i class="material-icons icons-top">pie_chart_outlined</i></a></div>
-			</div>
-		</div>
-	</nav>
+			@include('menu_bottom')			
 		</div>	
 	@endsection
 
 	<style type="text/css">
 		body {
 			overflow:hidden !important;
-		}
-		#menuBottom {
-			position: fixed;
-  			width: 70%;
-  			bottom: 15px;
-  			border: 3px solid #000;
-  			height: 60px;
 		}
 		.nav-wrapper {
 			background: #212121;
