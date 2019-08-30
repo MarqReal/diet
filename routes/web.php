@@ -37,6 +37,15 @@ Route::group(['middleware' => "auth"], function () {
 	Route::delete('/alimento/excluir', ['as' => 'site.alimento.excluir', 'uses' => 'Site\AlimentoController@excluir']);
 	/*FIM ALIMENTO*/
 	
+	/*DIETA*/
+	Route::get('/dieta', ['as' => 'site.dieta', 'uses' => 'Site\DietaController@index']);	
+	Route::get('/dieta/adicionar', ['as' => 'site.dieta.adicionar', 'uses' => 'Site\DietaController@adicionar']);
+	Route::post('/dieta/cadastrar', ['as' => 'site.dieta.cadastrar', 'uses' => 'Site\DietaController@cadastrar']);
+	Route::get('/dieta/atualizar/{id}', ['as' => 'site.dieta.atualizar', 'uses' => 'Site\DietaController@atualizar']);	
+	Route::put('/dieta/editar', ['as' => 'site.dieta.editar', 'uses' => 'Site\DietaController@editar']);
+	Route::delete('/dieta/excluir', ['as' => 'site.dieta.excluir', 'uses' => 'Site\DietaController@excluir']);
+	/*FIM DIETA*/
+	
 	Route::delete('login/excluir', ['as' => 'excluir', 'uses' => 'Site\LoginController@excluir']);
 	Route::put('login/editar', ['as' => 'editar', 'uses' => 'Site\LoginController@editar']);
 

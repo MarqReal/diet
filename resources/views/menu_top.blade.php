@@ -3,7 +3,7 @@
 		<a href="#!" class="brand-logo"></a>
 		<a href="/registro" id="perfil" data-activates="mobile" class="button-collapse"><i class="material-icons icons-top">person</i></a>
 		<a href="#" id="sair" data-activates="mobile" class="button-collapse"><i class="material-icons icons-top">exit_to_app</i></a>
-		@yield('title_page')
+		@yield('titlePage')
 	</div>
 </nav>
 
