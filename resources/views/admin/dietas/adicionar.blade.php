@@ -45,13 +45,44 @@
 			var startDateYear = new Date().getFullYear();
 			var DateMonth = new Date().getMonth();
 			var DateDay = new Date().getDate();
+			var arrCafeManha = [];
+			var arrCafeTarde = [];
+			var arrAlmoco = [];
+			var arrJantar = [];
+
 			Materialize.updateTextFields();
       		$('select').material_select();
       		$('.select-wrapper li').each( function() {
       			$(this).attr("nome", $(this).text());
       		});
-      		$('.select-wrapper li').click( function() {
-
+      		$('#spaceCafeManha li').click( function() {
+      			var li = $(this);
+      			if ($(this).hasClass("active") == true) {
+      				Swal.fire({
+  						text: 'Digite a quantidade',
+  						input: 'number'
+					}).then(function(result) {
+  						arrCafeManha[li.attr("nome")] = parseInt(result.value);
+  						//console.log(arrCafeManha);
+					});
+      				console.log(arrCafeManha);
+      			} else {
+      				//arrCafeManha = arrCafeManha.filter(e => e !== 'Banana');
+      				delete arrCafeManha[$(this).attr("nome")];
+      				console.log(arrCafeManha);
+      			}
+      		});
+      		$('#spaceAlmoco li').click( function() {
+      			alert("opcoes almoco");
+      			
+      		});
+      		$('#spaceCafeTarde li').click( function() {
+      			alert("opcoes cafe da tarde");
+      			
+      		});
+      		$('#spaceJantar li').click( function() {
+      			alert("opcoes jantar");
+      			
       		});
 			$(".button-collapse").sideNav();
 			$('.datepicker').pickadate({
@@ -83,11 +114,11 @@
 	  				$("#nome").focus();
 	  				return false;
 				}
-      			if($("#dt_inicio").val()== "") {
-      				Swal.fire('Preenchimento incorreto!', "Preencha a data de inicio corretamente",'error');
-	  				//$("#dt_inicio").focus();
-	  				return false;
-				}
+    //   			if($("#dt_inicio").val()== "") {
+    //   				Swal.fire('Preenchimento incorreto!', "Preencha a data de inicio corretamente",'error');
+	  	// 			//$("#dt_inicio").focus();
+	  	// 			return false;
+				// }
       			if($("#semanas").val() == "" || isNaN($("#semanas").val())) {
       				Swal.fire('Preenchimento incorreto!', "Preencha o periodo em semanas corretamente",'error');
 	  				$("#semanas").focus();
