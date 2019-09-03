@@ -35,6 +35,10 @@
 		#btnSalvar {
 			margin-left: 30%;
 		}
+		.swal2-input {
+			margin-top: 5% !important;
+    		margin-left: 25% !important;
+		}
 	</style>
 	<script type="application/javascript" src="/js/jquery-3.4.1.min.js"></script>
 	<script type="application/javascript" src="/js/materialize.min.js"></script>
@@ -59,14 +63,16 @@
       			var li = $(this);
       			if ($(this).hasClass("active") == true) {
       				Swal.fire({
-  						text: 'Digite a quantidade',
-  						input: 'number'
-					}).then(function(result) {
+  						//text: 'Quantidade',
+  						input: 'number',
+  						inputPlaceholder: 'Digite a quantidade'
+					}).then(function(result) { 
   						arrCafeManha[li.attr("nome")] = parseInt(result.value);
-  						//console.log(arrCafeManha);
+  						li.append("<span id='qtd"+li.attr('nome')+"'>"+parseInt(result.value)+"(x)<span>");
 					});
       				console.log(arrCafeManha);
       			} else {
+      				li.find("#qtd"+li.attr("nome")).remove();
       				//arrCafeManha = arrCafeManha.filter(e => e !== 'Banana');
       				delete arrCafeManha[$(this).attr("nome")];
       				console.log(arrCafeManha);
