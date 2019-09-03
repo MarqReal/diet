@@ -1,6 +1,6 @@
 <div class="row">
   <div class="input-field col s9 row-inputs">
-    <input id="nome" name="nome" type="text" class="validate">
+    <input id="nome" name="nome" type="text" value="{{(isset($dieta)) ? $dieta->nome : ''}}">
     <label for="nome">Nome da dieta (ex: Dieta Low Carb) </label>
   </div>
 </div>
@@ -23,9 +23,9 @@
     <div class="input-field col s9 row-inputs">
       <select id="objetivo">
         <option value="" disabled selected>Objetivo</option>
-        <option value="perder" {{(isset(Auth::user()->relacao->situacao) && Auth::user()->relacao->situacao == "perder") ? "selected" : ""}}>Perder peso</option>
-        <option value="manter" {{(isset(Auth::user()->relacao->situacao) && Auth::user()->relacao->situacao == "manter") ? "selected" : ""}}>Manter peso</option>
-        <option value="ganhar" {{( isset(Auth::user()->relacao->situacao) && Auth::user()->relacao->situacao == "ganhar") ? "selected" : ""}}>Ganhar peso</option>
+        <option value="perder" {{(isset($dieta->objetivo) && $dieta->objetivo == "perder") ? "selected" : ""}}>Perder peso</option>
+        <option value="manter" {{(isset($dieta->objetivo) && $dieta->objetivo == "manter") ? "selected" : ""}}>Manter peso</option>
+        <option value="ganhar" {{( isset($dieta->objetivo) && $dieta->objetivo == "ganhar") ? "selected" : ""}}>Ganhar peso</option>
       </select>
       <label>Objetivo</label>
     </div> 

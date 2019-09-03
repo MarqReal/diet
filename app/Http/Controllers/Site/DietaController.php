@@ -5,11 +5,12 @@ namespace App\Http\Controllers\Site;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Alimento;
+use App\Dieta;
 class DietaController extends Controller
 {
     public function index ()
     {
-    	$dietas = [];
+    	$dietas = Dieta::all();
     	return view("admin.dietas.index", compact("dietas"));
     }
     public function adicionar ()
@@ -19,15 +20,15 @@ class DietaController extends Controller
     }
     public function atualizar ($id)
     {
-    	$alimento = Alimento::consultar($id);
-    	return view("admin.alimentos.atualizar", compact("alimento"));
+    	$alimentos = Alimento::exibirTodos();
+    	$dieta = Dieta::consultar($id);
+    	return view("admin.dietas.atualizar", compact("dieta", "alimentos"));
     }
     public function cadastrar (Request $req)
     {
-    	dd($req->all());
     	try {
-    		$alimento = new Alimento();
-    		$alimento->cadastrar($req->all());
+    		$dieta = new Dieta();
+    		$dieta->cadastrar($req->all());
             return json_encode(['error' => false, 'message' => "Cadastrado com sucesso", 'code' => 1]);
     	}catch(\Exception $e) {
             return json_encode(['error' => true, 'message' => "Cadastro sem sucesso", 'code' => 0]);
@@ -38,8 +39,8 @@ class DietaController extends Controller
     {
     	try {
     		$requisicao = $req->all();
-    		$alimento = Alimento::find($requisicao["id"]);
-    		$alimento->editar($requisicao);
+    		$dieta = Dieta::find($requisicao["id"]);
+    		$dieta->editar($requisicao);
             return json_encode(['error' => false, 'message' => "Atualização com sucesso", 'code' => 1]);
     	}catch(\Exception $e) {
             return json_encode(['error' => true, 'message' => "Atualização sem sucesso", 'code' => 0]);

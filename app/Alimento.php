@@ -50,6 +50,10 @@ class Alimento extends Model
     {
         return self::where("mes", date('m'))->get();
     }
+    public function dietas()
+    {
+     return $this->belongsToMany(Dieta::class);
+    }
     public static function exibirTodos()
     {
         return self::all();

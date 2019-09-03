@@ -88,9 +88,15 @@
       			var li = $(this);
       			if ($(this).hasClass("active") == true) {
       				Swal.fire({
-  						//text: 'Quantidade',
+  						text: 'Quantidade',
+  						allowOutsideClick: false,
   						input: 'number',
-  						inputPlaceholder: 'Digite a quantidade'
+  						inputValue: 1,
+  						inputPlaceholder: 'Digite a quantidade',
+  						inputAttributes: {
+    						min: 1,
+    						step: 1
+  						}
 					}).then(function(result) { 
   						arrAlmoco[li.attr("nome")] = parseInt(result.value);
   						li.append("<span id='qtd"+li.attr('nome')+"'>"+parseInt(result.value)+"(x)<span>");
@@ -107,9 +113,15 @@
       			var li = $(this);
       			if ($(this).hasClass("active") == true) {
       				Swal.fire({
-  						//text: 'Quantidade',
+  						text: 'Quantidade',
+  						allowOutsideClick: false,
   						input: 'number',
-  						inputPlaceholder: 'Digite a quantidade'
+  						inputValue: 1,
+  						inputPlaceholder: 'Digite a quantidade',
+  						inputAttributes: {
+    						min: 1,
+    						step: 1
+  						}
 					}).then(function(result) { 
   						arrCafeTarde[li.attr("nome")] = parseInt(result.value);
   						li.append("<span id='qtd"+li.attr('nome')+"'>"+parseInt(result.value)+"(x)<span>");
@@ -126,9 +138,15 @@
       			var li = $(this);
       			if ($(this).hasClass("active") == true) {
       				Swal.fire({
-  						//text: 'Quantidade',
+  						text: 'Quantidade',
+  						allowOutsideClick: false,
   						input: 'number',
-  						inputPlaceholder: 'Digite a quantidade'
+  						inputValue: 1,
+  						inputPlaceholder: 'Digite a quantidade',
+  						inputAttributes: {
+    						min: 1,
+    						step: 1
+  						}
 					}).then(function(result) { 
   						arrJantar[li.attr("nome")] = parseInt(result.value);
   						li.append("<span id='qtd"+li.attr('nome')+"'>"+parseInt(result.value)+"(x)<span>");
@@ -176,11 +194,11 @@
 	  	// 			//$("#dt_inicio").focus();
 	  	// 			return false;
 				// }
-      			if($("#semanas").val() == "" || isNaN($("#semanas").val())) {
-      				Swal.fire('Preenchimento incorreto!', "Preencha o periodo em semanas corretamente",'error');
-	  				$("#semanas").focus();
-	  				return false;
-				}
+    //   			if($("#semanas").val() == "" || isNaN($("#semanas").val())) {
+    //   				Swal.fire('Preenchimento incorreto!', "Preencha o periodo em semanas corretamente",'error');
+	  	// 			$("#semanas").focus();
+	  	// 			return false;
+				// }
       			if($("#objetivo option:selected").val()== "") {
       				Swal.fire('Preenchimento incorreto!', "Preencha o objetivo da dieta corretamente",'error');
 	  				$("#objetivo").focus();
@@ -206,7 +224,6 @@
 					$("#jantar").focus();
 					return false;
 				}
-				return false;
       			var data = {
       				'_token': '{{csrf_token()}}',
       				'nome' : $("#nome").val(),
