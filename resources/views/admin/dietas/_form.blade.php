@@ -13,12 +13,12 @@
     </div>
   </div>
 </div> -->
-<div class="row">
+<!-- <div class="row">
   <div class="input-field col s9 row-inputs">
     <input id="semanas" name="semanas" type="number" class="validate" min="1">
     <label for="semanas">Periodo em semanas (ex: 3) </label>
   </div>
-</div>
+</div> -->
 <div class="row">
     <div class="input-field col s9 row-inputs">
       <select id="objetivo">
@@ -34,11 +34,9 @@
 <div class="row">
     <div class="input-field col s9 row-inputs" id="spaceCafeManha">
     <select multiple id="cafeManha">
-      <option value="" disabled selected>Selecione a(s) opção(ões)</option>
-      <option prefixo="cafeManha" value="1">Maça</option>
-      <option prefixo="cafeManha" value="2">Banana</option>
-      <option prefixo="cafeManha" value="3">Uva</option>
-      <option prefixo="cafeManha" value="3">Pessego</option>  
+      @foreach($alimentos as $alimento)
+        <option value="{{$alimento->id}}">{{$alimento->nome}}</option>
+      @endforeach  
     </select>
     <label>Alimentos para o café da manhã</label>
   </div>
@@ -47,11 +45,9 @@
 <div class="row">
     <div class="input-field col s9 row-inputs" id="spaceAlmoco">
     <select multiple id="almoco">
-      <option value="" disabled selected>Selecione a(s) opção(ões)</option>
-      <option prefixo="Almoco" value="1">Maça</option>
-      <option prefixo="Almoco" value="2">Banana</option>
-      <option prefixo="Almoco" value="3">Uva</option>
-      <option prefixo="Almoco"value="3">Pessego</option>  
+      @foreach($alimentos as $alimento)
+        <option value="{{$alimento->id}}">{{$alimento->nome}}</option>
+      @endforeach  
     </select>
     <label>Alimentos para o almoço</label>
   </div>
@@ -60,11 +56,9 @@
 <div class="row">
     <div class="input-field col s9 row-inputs" id="spaceCafeTarde">
     <select multiple id="cafeTarde">
-      <option value="" disabled selected>Selecione a(s) opção(ões)</option>
-      <option prefixo="cafeTarde" value="1">Maça</option>
-      <option prefixo="cafeTarde" value="2">Banana</option>
-      <option prefixo="cafeTarde" value="3">Uva</option>
-      <option prefixo="cafeTarde" value="3">Pessego</option>  
+      @foreach($alimentos as $alimento)
+        <option value="{{$alimento->id}}">{{$alimento->nome}}</option>
+      @endforeach  
     </select>
     <label>Alimentos para o café da tarde</label>
   </div>
@@ -73,11 +67,9 @@
 <div class="row">
     <div class="input-field col s9 row-inputs" id="spaceJantar">
     <select multiple id="jantar">
-      <option prefixo="jantar" value="" disabled selected>Selecione a(s) opção(ões)</option>
-      <option prefixo="jantar" value="1">Maça</option>
-      <option prefixo="jantar" value="2">Banana</option>
-      <option prefixo="jantar" value="3">Uva</option>
-      <option prefixo="jantar" value="3">Pessego</option>  
+      @foreach($alimentos as $alimento)
+        <option value="{{$alimento->id}}">{{$alimento->nome}}</option>
+      @endforeach  
     </select>
     <label>Alimentos para o jantar</label>
   </div>

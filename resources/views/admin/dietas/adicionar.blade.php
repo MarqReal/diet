@@ -63,12 +63,18 @@
       			var li = $(this);
       			if ($(this).hasClass("active") == true) {
       				Swal.fire({
-  						//text: 'Quantidade',
+  						text: 'Quantidade',
+  						allowOutsideClick: false,
   						input: 'number',
-  						inputPlaceholder: 'Digite a quantidade'
+  						inputValue: 1,
+  						inputPlaceholder: 'Digite a quantidade',
+  						inputAttributes: {
+    						min: 1,
+    						step: 1
+  						}
 					}).then(function(result) { 
   						arrCafeManha[li.attr("nome")] = parseInt(result.value);
-  						li.append("<span id='qtd"+li.attr('nome')+"'>"+parseInt(result.value)+"(x)<span>");
+  						li.append("<span id='qtd"+li.attr('nome')+"'>"+parseInt(result.value)+" (x)<span>");
 					});
       				console.log(arrCafeManha);
       			} else {
@@ -79,16 +85,61 @@
       			}
       		});
       		$('#spaceAlmoco li').click( function() {
-      			alert("opcoes almoco");
-      			
+      			var li = $(this);
+      			if ($(this).hasClass("active") == true) {
+      				Swal.fire({
+  						//text: 'Quantidade',
+  						input: 'number',
+  						inputPlaceholder: 'Digite a quantidade'
+					}).then(function(result) { 
+  						arrAlmoco[li.attr("nome")] = parseInt(result.value);
+  						li.append("<span id='qtd"+li.attr('nome')+"'>"+parseInt(result.value)+"(x)<span>");
+					});
+      				console.log(arrAlmoco);
+      			} else {
+      				li.find("#qtd"+li.attr("nome")).remove();
+      				//arrCafeManha = arrCafeManha.filter(e => e !== 'Banana');
+      				delete arrAlmoco[$(this).attr("nome")];
+      				console.log(arrAlmoco);
+      			}
       		});
       		$('#spaceCafeTarde li').click( function() {
-      			alert("opcoes cafe da tarde");
-      			
+      			var li = $(this);
+      			if ($(this).hasClass("active") == true) {
+      				Swal.fire({
+  						//text: 'Quantidade',
+  						input: 'number',
+  						inputPlaceholder: 'Digite a quantidade'
+					}).then(function(result) { 
+  						arrCafeTarde[li.attr("nome")] = parseInt(result.value);
+  						li.append("<span id='qtd"+li.attr('nome')+"'>"+parseInt(result.value)+"(x)<span>");
+					});
+      				console.log(arrCafeTarde);
+      			} else {
+      				li.find("#qtd"+li.attr("nome")).remove();
+      				//arrCafeManha = arrCafeManha.filter(e => e !== 'Banana');
+      				delete arrCafeTarde[$(this).attr("nome")];
+      				console.log(arrCafeTarde);
+      			}
       		});
       		$('#spaceJantar li').click( function() {
-      			alert("opcoes jantar");
-      			
+      			var li = $(this);
+      			if ($(this).hasClass("active") == true) {
+      				Swal.fire({
+  						//text: 'Quantidade',
+  						input: 'number',
+  						inputPlaceholder: 'Digite a quantidade'
+					}).then(function(result) { 
+  						arrJantar[li.attr("nome")] = parseInt(result.value);
+  						li.append("<span id='qtd"+li.attr('nome')+"'>"+parseInt(result.value)+"(x)<span>");
+					});
+      				console.log(arrJantar);
+      			} else {
+      				li.find("#qtd"+li.attr("nome")).remove();
+      				//arrCafeManha = arrCafeManha.filter(e => e !== 'Banana');
+      				delete arrJantar[$(this).attr("nome")];
+      				console.log(arrJantar);
+      			}
       		});
 			$(".button-collapse").sideNav();
 			$('.datepicker').pickadate({
@@ -159,16 +210,18 @@
       			var data = {
       				'_token': '{{csrf_token()}}',
       				'nome' : $("#nome").val(),
-      				'dt_inicio' : $("#dt_inicio").val(),
-      				'semanas' : $("#semanas").val(),
+      				//'dt_inicio' : $("#dt_inicio").val(),
+      				//'semanas' : $("#semanas").val(),
       				'objetivo' : $("#objetivo option:selected").val(),
       				'cafeManha' : $("#cafeManha").val(),
+      				'qtdCafeManha' : arrCafeManha,
       				'cafeTarde' : $("#cafeTarde").val(),
+      				'qtdCafeTarde' : arrCafeTarde,
       				'almoco' : $("#almoco").val(),
-      				'jantar' : $("#jantar").val()
+      				'qtdAlmoco' : arrAlmoco,
+      				'jantar' : $("#jantar").val(),
+      				'qtdJantar' : arrJantar
       			};
-      			console.log(data);
-      			return false;
 				$.ajax({
     				method: 'POST', // Type of response and matches what we said in the route
     				url: '/dieta/cadastrar', // This is the url we gave in the route

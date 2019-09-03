@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Site;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
+use App\Alimento;
 class DietaController extends Controller
 {
     public function index ()
@@ -14,7 +14,8 @@ class DietaController extends Controller
     }
     public function adicionar ()
     {
-    	return view("admin.dietas.adicionar");
+    	$alimentos = Alimento::exibirTodos();
+    	return view("admin.dietas.adicionar", compact("alimentos"));
     }
     public function atualizar ($id)
     {
@@ -23,6 +24,7 @@ class DietaController extends Controller
     }
     public function cadastrar (Request $req)
     {
+    	dd($req->all());
     	try {
     		$alimento = new Alimento();
     		$alimento->cadastrar($req->all());
