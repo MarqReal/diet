@@ -231,14 +231,16 @@
       				//'semanas' : $("#semanas").val(),
       				'objetivo' : $("#objetivo option:selected").val(),
       				'cafeManha' : $("#cafeManha").val(),
-      				'qtdCafeManha' : arrCafeManha,
+      				'qtdCafeManha' : Object.assign({}, arrCafeManha),
       				'cafeTarde' : $("#cafeTarde").val(),
-      				'qtdCafeTarde' : arrCafeTarde,
+      				'qtdCafeTarde' : Object.assign({}, arrCafeTarde),
       				'almoco' : $("#almoco").val(),
-      				'qtdAlmoco' : arrAlmoco,
+      				'qtdAlmoco' : Object.assign({}, arrAlmoco),
       				'jantar' : $("#jantar").val(),
-      				'qtdJantar' : arrJantar
+      				'qtdJantar' : Object.assign({}, arrJantar) 
       			};
+            //console.log(data);
+            //return false;
 				$.ajax({
     				method: 'POST', // Type of response and matches what we said in the route
     				url: '/dieta/cadastrar', // This is the url we gave in the route

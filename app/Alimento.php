@@ -52,7 +52,7 @@ class Alimento extends Model
     }
     public function dietas()
     {
-     return $this->belongsToMany(Dieta::class);
+     return $this->belongsToMany(Dieta::class, "dieta_alimento");
     }
     public static function exibirTodos()
     {

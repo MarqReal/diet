@@ -51,7 +51,7 @@ class DietaController extends Controller
     {
     	try {
     		$requisicao = $req->all();
-    		$alimento = Alimento::find($requisicao["id"]);
+    		$alimento = Dieta::find($requisicao["id"]);
     		$alimento->excluir();
             return json_encode(['error' => false, 'message' => "Exclusão com sucesso", 'code' => 1]);
     	}catch(\Exception $e) {

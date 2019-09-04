@@ -3,7 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-
+use App\Alimento;
 class Dieta extends Model
 {
 	public function cadastrar ($dados)
@@ -11,6 +11,11 @@ class Dieta extends Model
     	$this->nome = $dados["nome"];
     	$this->objetivo = $dados["objetivo"];
     	$this->save();
+    	foreach ($dados['cafeManha'] as $key => $alimento_id) {
+    		$alimento = Alimento::find($alimento_id);
+    		$this->alimentos()->save($alimento, ["refeicao" => "cafeManha", "quantidade" => $dados['qtdCafeManha'][$alimento->nome]]);
+    	}
+    	
     }
 
     public function editar ($dados)
@@ -32,7 +37,7 @@ class Dieta extends Model
 
     public function alimentos()
 	{
-    	return $this->belongsToMany(Alimento::class);
+    	return $this->belongsToMany(Alimento::class, "dieta_alimento");
 	}
 
     public static function exibirTodos()
