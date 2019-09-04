@@ -59,10 +59,16 @@ class DietaController extends Controller
     	}
     }
 
-    public function alimentos ()
+    public function dietas ()
     {
-        $destaques = Alimento::exibirDestaqueMes();
-        $todos = Alimento::exibirTodos(); 
-        return view("pages.alimentos", compact("destaques", "todos"));
+        $todos = Dieta::exibirTodos(); 
+        return view("pages.dietas.dietas", compact("todos"));
+    }
+    public function participacao ()
+    {
+        //$dieta = Dieta::find(11);
+        //dd($dieta->cafeManha[0]->pivot->quantidade);
+        $dietas = Dieta::exibirTodos(); 
+        return view("pages.dietas.participacao", compact("dietas"));
     }
 }

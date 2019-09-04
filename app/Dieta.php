@@ -52,7 +52,22 @@ class Dieta extends Model
 	{
     	return $this->belongsToMany(Alimento::class, "dieta_alimento");
 	}
-
+    public function cafeManha ()
+    {
+        return $this->alimentos()->wherePivot('refeicao', 'cafeManha')->withPivot('refeicao', 'quantidade');
+    }
+    public function cafeTarde ()
+    {
+        return $this->alimentos()->wherePivot('refeicao', 'cafeTarde')->withPivot('refeicao', 'quantidade');
+    }
+    public function almoco ()
+    {
+        return $this->alimentos()->wherePivot('refeicao', 'almoco')->withPivot('refeicao', 'quantidade');
+    }
+    public function jantar ()
+    {
+        return $this->alimentos()->wherePivot('refeicao', 'jantar')->withPivot('refeicao', 'quantidade');
+    }
     public static function exibirTodos()
     {
         return self::all();
