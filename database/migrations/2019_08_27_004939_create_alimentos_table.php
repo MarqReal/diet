@@ -18,13 +18,14 @@ class CreateAlimentosTable extends Migration
             $table->string('nome');
             $table->string('descricao', 200); 
             $table->decimal('unidade_medida', 5, 2);
-            $table->string('tipo_medida', 10); 
+            $table->string('tipo_medida', 10);
+            $table->string('porcao');  
             $table->string('mes', 10); 
             $table->decimal('carboidrato', 4,2);
             $table->decimal('proteina', 4,2);
             $table->decimal('lipideos', 4,2);
             $table->decimal('fibra_alimentar', 4,2);
-            $table->decimal('calorias', 4,2);
+            $table->decimal('calorias', 5,2);
             $table->timestamps();
         });
     }

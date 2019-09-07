@@ -27,7 +27,7 @@
 				<ul class="collapsible" data-collapsible="accordion">
 				    @foreach($destaques as $alimento)
 				    <li>
-				      <div class="collapsible-header"><i class="material-icons">room_service</i>{{$alimento->nome}}</div>
+				      <div class="collapsible-header"><i class="material-icons">star_border</i>{{$alimento->nome}}</div>
 				      <div class="collapsible-body">
 				      	<span>
 				      		<br>Descrição: {{$alimento->descricao}}</br>

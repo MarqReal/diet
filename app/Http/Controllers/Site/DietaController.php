@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Site;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Auth;
 use App\Alimento;
 use App\Dieta;
+
 class DietaController extends Controller
 {
     public function index ()
@@ -68,7 +70,7 @@ class DietaController extends Controller
     {
         //$dieta = Dieta::find(11);
         //dd($dieta->cafeManha[0]->pivot->quantidade);
-        $dietas = Dieta::exibirTodos(); 
+        $dietas = Dieta::where('objetivo', Auth::user()->relacao->situacao)->get(); 
         return view("pages.dietas.participacao", compact("dietas"));
     }
 }

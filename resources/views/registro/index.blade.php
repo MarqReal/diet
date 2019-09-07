@@ -66,9 +66,9 @@
 							<div class="input-field">
 					    		<select id="objetivo">0
 					      			<option value="" disabled selected>Objetivo</option>
-					      			<option value="perder" {{(isset(Auth::user()->relacao->situacao) && Auth::user()->relacao->situacao == "perder") ? "selected" : ""}}>Perder peso</option>
-					      			<option value="manter" {{(isset(Auth::user()->relacao->situacao) && Auth::user()->relacao->situacao == "manter") ? "selected" : ""}}>Manter peso</option>
-					      			<option value="ganhar" {{( isset(Auth::user()->relacao->situacao) && Auth::user()->relacao->situacao == "ganhar") ? "selected" : ""}}>Ganhar peso</option>
+					      			<option value="Perder peso" {{(isset(Auth::user()->relacao->situacao) && Auth::user()->relacao->situacao == "Perder peso") ? "selected" : ""}}>Perder peso</option>
+					      			<option value="Manter peso" {{(isset(Auth::user()->relacao->situacao) && Auth::user()->relacao->situacao == "Manter peso") ? "selected" : ""}}>Manter peso</option>
+					      			<option value="Ganhar peso" {{( isset(Auth::user()->relacao->situacao) && Auth::user()->relacao->situacao == "Ganhar peso") ? "selected" : ""}}>Ganhar peso</option>
 					    		</select>
 					    		<label>Objetivo</label>
 					    	</div>

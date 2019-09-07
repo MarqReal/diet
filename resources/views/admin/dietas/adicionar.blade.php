@@ -53,17 +53,23 @@
 			var arrCafeTarde = [];
 			var arrAlmoco = [];
 			var arrJantar = [];
-
+      var contLi = 0;
 			Materialize.updateTextFields();
       		$('select').material_select();
       		$('.select-wrapper li').each( function() {
-      			$(this).attr("nome", $(this).text());
+      			contLi++;
+            $(this).attr("nome", $(this).text());
       		});
       		$('#spaceCafeManha li').click( function() {
       			var li = $(this);
+            var $results = $('#spaceCafeManha option:contains("'+li.attr("nome")+'")').filter(function() {
+              return $(this).text() === li.attr("nome");
+            });
+            var id = li.attr('nome');
       			if ($(this).hasClass("active") == true) {
+              //$("#spaceCafeManha option:contains('"+$(this).("nome")+"')")
       				Swal.fire({
-  						text: 'Quantidade',
+  						text: 'Tipo de porção : ' + $results.attr("porcao"),
   						allowOutsideClick: false,
   						input: 'number',
   						inputValue: 1,
@@ -74,11 +80,11 @@
   						}
 					}).then(function(result) { 
   						arrCafeManha[li.attr("nome")] = parseInt(result.value);
-  						li.append("<span id='qtd"+li.attr('nome')+"'>"+parseInt(result.value)+" (x)<span>");
+  						li.append("<span id='qtd"+id.replace(/\s/g, '')+"'>"+parseInt(result.value)+" "+$results.attr("porcao")+" <span>");
 					});
       				console.log(arrCafeManha);
       			} else {
-      				li.find("#qtd"+li.attr("nome")).remove();
+      				li.find("#qtd"+id.replace(/\s/g, '')).remove();
       				//arrCafeManha = arrCafeManha.filter(e => e !== 'Banana');
       				delete arrCafeManha[$(this).attr("nome")];
       				console.log(arrCafeManha);
@@ -86,9 +92,13 @@
       		});
       		$('#spaceAlmoco li').click( function() {
       			var li = $(this);
+            var $results = $('#spaceAlmoco option:contains("'+li.attr("nome")+'")').filter(function() {
+              return $(this).text() === li.attr("nome");
+            });
+            var id = li.attr('nome');
       			if ($(this).hasClass("active") == true) {
       				Swal.fire({
-  						text: 'Quantidade',
+  						text: 'Tipo de porção : ' + $results.attr("porcao"),
   						allowOutsideClick: false,
   						input: 'number',
   						inputValue: 1,
@@ -99,11 +109,11 @@
   						}
 					}).then(function(result) { 
   						arrAlmoco[li.attr("nome")] = parseInt(result.value);
-  						li.append("<span id='qtd"+li.attr('nome')+"'>"+parseInt(result.value)+"(x)<span>");
+  						li.append("<span id='qtd"+id.replace(/\s/g, '')+"'>"+parseInt(result.value)+" "+$results.attr("porcao")+" <span>");
 					});
       				console.log(arrAlmoco);
       			} else {
-      				li.find("#qtd"+li.attr("nome")).remove();
+      				li.find("#qtd"+id.replace(/\s/g, '')).remove();
       				//arrCafeManha = arrCafeManha.filter(e => e !== 'Banana');
       				delete arrAlmoco[$(this).attr("nome")];
       				console.log(arrAlmoco);
@@ -111,9 +121,13 @@
       		});
       		$('#spaceCafeTarde li').click( function() {
       			var li = $(this);
+            var $results = $('#spaceCafeTarde option:contains("'+li.attr("nome")+'")').filter(function() {
+              return $(this).text() === li.attr("nome");
+            });
+            var id = li.attr('nome');
       			if ($(this).hasClass("active") == true) {
       				Swal.fire({
-  						text: 'Quantidade',
+  						text: 'Tipo de porção : ' + $results.attr("porcao"),
   						allowOutsideClick: false,
   						input: 'number',
   						inputValue: 1,
@@ -124,11 +138,11 @@
   						}
 					}).then(function(result) { 
   						arrCafeTarde[li.attr("nome")] = parseInt(result.value);
-  						li.append("<span id='qtd"+li.attr('nome')+"'>"+parseInt(result.value)+"(x)<span>");
+  						li.append("<span id='qtd"+id.replace(/\s/g, '')+"'>"+parseInt(result.value)+" "+$results.attr("porcao")+" <span>");
 					});
       				console.log(arrCafeTarde);
       			} else {
-      				li.find("#qtd"+li.attr("nome")).remove();
+      				li.find("#qtd"+id.replace(/\s/g, '')).remove();
       				//arrCafeManha = arrCafeManha.filter(e => e !== 'Banana');
       				delete arrCafeTarde[$(this).attr("nome")];
       				console.log(arrCafeTarde);
@@ -136,9 +150,13 @@
       		});
       		$('#spaceJantar li').click( function() {
       			var li = $(this);
+            var $results = $('#spaceJantar option:contains("'+li.attr("nome")+'")').filter(function() {
+              return $(this).text() === li.attr("nome");
+            });
+            var id = li.attr('nome');
       			if ($(this).hasClass("active") == true) {
       				Swal.fire({
-  						text: 'Quantidade',
+  						text: 'Tipo de porção : ' + $results.attr("porcao"),
   						allowOutsideClick: false,
   						input: 'number',
   						inputValue: 1,
@@ -149,11 +167,11 @@
   						}
 					}).then(function(result) { 
   						arrJantar[li.attr("nome")] = parseInt(result.value);
-  						li.append("<span id='qtd"+li.attr('nome')+"'>"+parseInt(result.value)+"(x)<span>");
+  						li.append("<span id='qtd"+id.replace(/\s/g, '')+"'>"+parseInt(result.value)+" "+$results.attr("porcao")+" <span>");
 					});
       				console.log(arrJantar);
       			} else {
-      				li.find("#qtd"+li.attr("nome")).remove();
+      				li.find("#qtd"+id.replace(/\s/g, '')).remove();
       				//arrCafeManha = arrCafeManha.filter(e => e !== 'Banana');
       				delete arrJantar[$(this).attr("nome")];
       				console.log(arrJantar);

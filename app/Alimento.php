@@ -11,6 +11,7 @@ class Alimento extends Model
     	$this->nome = $dados["nome"];
     	$this->descricao = $dados["descricao"];
     	$this->unidade_medida = $dados["unidade_medida"];
+        $this->porcao = $dados["porcao"];
     	$this->tipo_medida = $dados["tipo_medida"];
     	$this->mes = $dados["mes"];
     	$this->carboidrato = $dados["carboidrato"];
@@ -26,6 +27,7 @@ class Alimento extends Model
     	$this->nome = $dados["nome"];
     	$this->descricao = $dados["descricao"];
     	$this->unidade_medida = $dados["unidade_medida"];
+        $this->porcao = $dados["porcao"];
     	$this->tipo_medida = $dados["tipo_medida"];
     	$this->mes = $dados["mes"];
     	$this->carboidrato = $dados["carboidrato"];

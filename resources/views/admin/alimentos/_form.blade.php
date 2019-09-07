@@ -13,8 +13,8 @@
 
 <div class="row">
   <div class="input-field col s9 row-inputs">
-    <input id="unidade_medida" name="unidade_medida" type="number" step="any" class="validate" value="{{(isset($alimento->unidade_medida)) ? $alimento->unidade_medida : ''}}">
-    <label for="unidade_medida">Unidade de medida (ex: 200)</label>
+    <input id="unidade_medida" name="unidade_medida" type="number" min="1" step="any"  value="{{(isset($alimento->unidade_medida)) ? $alimento->unidade_medida : ''}}">
+    <label for="unidade_medida">Unidade de medida (ex: 100)</label>
   </div>
 </div>
 
@@ -22,11 +22,26 @@
   <div class="input-field col s9 row-inputs">
     <select id="tipo_medida">
       <option value="" disabled selected>Escolha o tipo de medida</option>
-      <option {{(isset($alimento) && $alimento->tipo_medida == "Unidade") ? "selected" : ''}} value="Unidade">Unidade</option>
-      <option {{(isset($alimento) && $alimento->tipo_medida == "kg") ? "selected" : ''}} value="kg">Kg</option>
+      <option {{(isset($alimento) && $alimento->tipo_medida == "kg") ? "selected" : ''}} value="kg">Quilogramas</option>
       <option {{(isset($alimento) && $alimento->tipo_medida == "g") ? "selected" : ''}} value="g">Gramas</option>
-      <option {{(isset($alimento) && $alimento->tipo_medida == "ml") ? "selected" : ''}} value="ml">Ml</option>
-      <option {{(isset($alimento) && $alimento->tipo_medida == "l") ? "selected" : ''}} value="l">L</option>
+      <option {{(isset($alimento) && $alimento->tipo_medida == "ml") ? "selected" : ''}} value="ml">Mililitro</option>
+      <option {{(isset($alimento) && $alimento->tipo_medida == "l") ? "selected" : ''}} value="l">Litros</option>
+    </select>
+    <label>Escolha o tipo de medida</label>
+  </div>
+</div>
+
+<div class="row">
+  <div class="input-field col s9 row-inputs">
+    <select id="porcao">
+      <option value="" disabled selected>Escolha o tipo de porção</option>
+      <option {{(isset($alimento) && $alimento->porcao == "Unidade(s)") ? "selected" : ''}} value="Unidade(s)">Unidade</option>
+      <option {{(isset($alimento) && $alimento->porcao == "Xicara(s)") ? "selected" : ''}} value="Xicara(s)">Xicara </option>
+      <option {{(isset($alimento) && $alimento->porcao == "Colher(es) de Sopa") ? "selected" : ''}} value="Colher(es) de Sopa">Colher de Sopa</option>
+      <option {{(isset($alimento) && $alimento->porcao == "Concha(s)") ? "selected" : ''}} value="Concha(s)">Concha</option>
+      <option {{(isset($alimento) && $alimento->porcao == "Fatia(s)") ? "selected" : ''}} value="Fatia(s)">Fatia</option>
+      <option {{(isset($alimento) && $alimento->porcao == "Copo(s) 250ml") ? "selected" : ''}} value="Copo(s) 250ml">Copo 250ml</option>
+      <option {{(isset($alimento) && $alimento->porcao == "Copo(s) 400ml") ? "selected" : ''}} value="Copo(s) 400ml">Copo 400ml</option>
     </select>
     <label>Escolha o tipo de medida</label>
   </div>
@@ -54,31 +69,31 @@
 </div>
 <div class="row">
   <div class="input-field col s9 row-inputs">
-    <input id="carboidrato" name="carboidrato" type="number" step='any'  class="validate" value="{{(isset($alimento->carboidrato)) ? $alimento->carboidrato : ''}}">
+    <input id="carboidrato" name="carboidrato" type="number" step='any'  value="{{(isset($alimento->carboidrato)) ? $alimento->carboidrato : ''}}">
     <label for="carboidrato">Qtde de carboidrato (ex: 12,67)</label>
   </div>
 </div>
 <div class="row"> 
   <div class="input-field col s9 row-inputs">
-    <input id="proteina" name="proteina" type="number"  step='any'  class="validate" value="{{(isset($alimento->proteina)) ? $alimento->proteina : ''}}">
+    <input id="proteina" name="proteina" type="number"  step='any'  value="{{(isset($alimento->proteina)) ? $alimento->proteina : ''}}">
     <label for="proteina">Qtde de proteina (ex: 14,47)</label>
   </div>
 </div>
 <div class="row">
   <div class="input-field col s9 row-inputs">
-    <input id="lipideos" name="lipideos" type="number"  step='any' class="validate" value="{{(isset($alimento->lipideos)) ? $alimento->lipideos : ''}}">
+    <input id="lipideos" name="lipideos" type="number"  step='any' value="{{(isset($alimento->lipideos)) ? $alimento->lipideos : ''}}">
     <label for="lipideos">Qtde de lipídeos (ex: 25,65)</label>
   </div>
 </div>
 <div class="row">
   <div class="input-field col s9 row-inputs">
-    <input id="fibra_alimentar" name="fibra_alimentar" type="number" class="validate" value="{{(isset($alimento->fibra_alimentar)) ? $alimento->fibra_alimentar : ''}}">
+    <input id="fibra_alimentar" name="fibra_alimentar" type="number"  value="{{(isset($alimento->fibra_alimentar)) ? $alimento->fibra_alimentar : ''}}">
     <label for="fibra_alimentar">Qtde Fibra alimentar (ex: 12,31)</label>
   </div>
 </div>
 <div class="row">
   <div class="input-field col s9 row-inputs">
-    <input id="calorias" name="calorias" type="number" class="validate" value="{{(isset($alimento->calorias)) ? $alimento->calorias : ''}}">
+    <input id="calorias" name="calorias" type="number" value="{{(isset($alimento->calorias)) ? $alimento->calorias : ''}}">
     <label for="calorias">Qtde Calorias (ex: 12,07)</label>
   </div>
 </div>

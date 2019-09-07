@@ -28,6 +28,7 @@ class AlimentoController extends Controller
     		$alimento->cadastrar($req->all());
             return json_encode(['error' => false, 'message' => "Cadastrado com sucesso", 'code' => 1]);
     	}catch(\Exception $e) {
+            dd($e);
             return json_encode(['error' => true, 'message' => "Cadastro sem sucesso", 'code' => 0]);
     	}
     }

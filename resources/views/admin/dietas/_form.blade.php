@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="input-field col s9 row-inputs">
+  <div class="input-field col s10 row-inputs">
     <input id="nome" name="nome" type="text" value="{{(isset($dieta)) ? $dieta->nome : ''}}">
     <label for="nome">Nome da dieta (ex: Dieta Low Carb) </label>
   </div>
@@ -20,57 +20,61 @@
   </div>
 </div> -->
 <div class="row">
-    <div class="input-field col s9 row-inputs">
+    <div class="input-field col s10 row-inputs">
       <select id="objetivo">
         <option value="" disabled selected>Objetivo</option>
-        <option value="perder" {{(isset($dieta->objetivo) && $dieta->objetivo == "perder") ? "selected" : ""}}>Perder peso</option>
-        <option value="manter" {{(isset($dieta->objetivo) && $dieta->objetivo == "manter") ? "selected" : ""}}>Manter peso</option>
-        <option value="ganhar" {{( isset($dieta->objetivo) && $dieta->objetivo == "ganhar") ? "selected" : ""}}>Ganhar peso</option>
+        <option value="Perder peso" {{(isset($dieta->objetivo) && $dieta->objetivo == "Perder peso") ? "selected" : ""}}>Perder peso</option>
+        <option value="Manter peso" {{(isset($dieta->objetivo) && $dieta->objetivo == "Manter peso") ? "selected" : ""}}>Manter peso</option>
+        <option value="Ganhar peso" {{( isset($dieta->objetivo) && $dieta->objetivo == "Ganhar peso") ? "selected" : ""}}>Ganhar peso</option>
       </select>
       <label>Objetivo</label>
     </div> 
 </div>
 
 <div class="row">
-    <div class="input-field col s9 row-inputs" id="spaceCafeManha">
+    <div class="input-field col s10 row-inputs" id="spaceCafeManha">
     <select multiple id="cafeManha">
+      <option value="" disabled selected>Alimentos p/ o café da manhã</option>
       @foreach($alimentos as $alimento)
-        <option value="{{$alimento->id}}">{{$alimento->nome}}</option>
+        <option value="{{$alimento->id}}" porcao="{{$alimento->porcao}}">{{$alimento->nome}}</option>
       @endforeach  
     </select>
-    <label>Alimentos para o café da manhã</label>
+    <label>Café da manhã</label>
   </div>
 </div>
 
 <div class="row">
-    <div class="input-field col s9 row-inputs" id="spaceAlmoco">
+    <div class="input-field col s10 row-inputs" id="spaceAlmoco">
     <select multiple id="almoco">
+      <option value="" disabled selected>Alimentos p/ o almoço</option>
       @foreach($alimentos as $alimento)
-        <option value="{{$alimento->id}}">{{$alimento->nome}}</option>
+        <option value="{{$alimento->id}}" porcao="{{$alimento->porcao}}">{{$alimento->nome}}</option>
       @endforeach  
     </select>
-    <label>Alimentos para o almoço</label>
+    <label>Almoço</label>
   </div>
 </div>
 
 <div class="row">
-    <div class="input-field col s9 row-inputs" id="spaceCafeTarde">
+    <div class="input-field col s10 row-inputs" id="spaceCafeTarde">
     <select multiple id="cafeTarde">
+      <option value="" disabled selected>Alimentos p/ o café da tarde</option>
       @foreach($alimentos as $alimento)
-        <option value="{{$alimento->id}}">{{$alimento->nome}}</option>
+        <option value="{{$alimento->id}}" porcao="{{$alimento->porcao}}">{{$alimento->nome}}</option>
       @endforeach  
     </select>
-    <label>Alimentos para o café da tarde</label>
+    <label>Café da tarde</label>
   </div>
 </div>
 
 <div class="row">
-    <div class="input-field col s9 row-inputs" id="spaceJantar">
+    <div class="input-field col s10 row-inputs" id="spaceJantar">
     <select multiple id="jantar">
+      <option value="" disabled selected>Alimentos p/ o jantar</option>
       @foreach($alimentos as $alimento)
-        <option value="{{$alimento->id}}">{{$alimento->nome}}</option>
+        <option value="{{$alimento->id}}" porcao="{{$alimento->porcao}}">{{$alimento->nome}}</option>
       @endforeach  
     </select>
-    <label>Alimentos para o jantar</label>
+    <label>Jantar</label>
   </div>
 </div>

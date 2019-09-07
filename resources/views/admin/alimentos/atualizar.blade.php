@@ -66,6 +66,11 @@
 	  				$("#tipo_medida").focus();
 	  				return false;
 				}
+      			if($("#porcao option:selected").val()== "") {
+      				Swal.fire('Preenchimento incorreto!', "Preencha o tipo de porção corretamente",'error');
+	  				$("#porcao").focus();
+	  				return false;
+				}
       			if($("#mes option:selected").val()== "") {
       				Swal.fire('Preenchimento incorreto!', "Preencha o mês corretamente",'error');
 	  				$("#mes").focus();
@@ -105,6 +110,7 @@
       				'descricao' : $("#descricao").val(),
       				'unidade_medida' : parseFloat($("#unidade_medida").val()),
       				'tipo_medida' : $("#tipo_medida option:selected").val(),
+      				'porcao' : $("#porcao option:selected").val(),
       				'mes' : $("#mes option:selected").val(),
       				'carboidrato' : parseFloat($("#carboidrato").val()),
       				'proteina' : parseFloat($("#proteina").val()),
