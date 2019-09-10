@@ -5,14 +5,7 @@
   </div>
 </div>
 
-<!-- <div class="row">
-  <div class="col s9 row-inputs"> 
-    <div class="input-field container-dataNascimento">
-      <input type="text" class="datepicker" id="dt_inicio" name="dt_inicio" value="{{ isset(Auth::user()->dt_dieta) ? date('d/m/Y', strtotime(str_replace('/', '-', Auth::user()->dt_dieta))) : ''}}">
-      <label>Data de inicio (Ex: 10/09/2019)</label>
-    </div>
-  </div>
-</div> -->
+
 <!-- <div class="row">
   <div class="input-field col s9 row-inputs">
     <input id="semanas" name="semanas" type="number" class="validate" min="1">

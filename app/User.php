@@ -6,6 +6,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Participante;
+use App\Dieta;
 class User extends Authenticatable
 {
     use Notifiable;
@@ -80,5 +81,11 @@ class User extends Authenticatable
     public function relacao()
     {
         return $this->morphTo();
+    }
+
+    public function participarDieta($data)
+    {
+        $dieta = Dieta::find($data['dieta_id']);
+        $this->dietas()->save($dieta, ["refeicao" => "cafeManha", "quantidade" => $dados['qtdCafeManha'][$alimento->nome]]);
     } 
 }

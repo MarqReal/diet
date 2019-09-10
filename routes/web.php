@@ -30,6 +30,9 @@ Route::group(['middleware' => "auth"], function () {
 	Route::get('/dietas', ['as' => 'site.dietas', 'uses' => 'Site\DietaController@dietas']);	
 	Route::get('/dietas/adicionar', ['as' => 'site.dietas.participacao', 'uses' => 'Site\DietaController@participacao']);	
 	
+	Route::post('/dietas/participar', ['as' => 'site.dietas.participar', 'uses' => 'Site\LoginController@participarDieta']);	
+	
+
 	/*ALIMENTO*/
 	Route::get('/alimento', ['as' => 'site.alimento', 'uses' => 'Site\AlimentoController@index']);	
 	Route::get('/alimento/adicionar', ['as' => 'site.alimento.adicionar', 'uses' => 'Site\AlimentoController@adicionar']);
