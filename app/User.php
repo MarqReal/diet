@@ -82,10 +82,19 @@ class User extends Authenticatable
     {
         return $this->morphTo();
     }
+    public function dietas()
+    {
+        return $this->belongsToMany(Dieta::class, "user_dieta");
+    }
 
     public function participarDieta($data)
     {
         $dieta = Dieta::find($data['dieta_id']);
-        $this->dietas()->save($dieta, ["refeicao" => "cafeManha", "quantidade" => $dados['qtdCafeManha'][$alimento->nome]]);
+        $quantidade_participacao = $this->dietas()->wherePivot('dieta_id', $data['dieta_id'])->count() + 1;
+        $dateinicio = str_replace("/", "-", $data['dt_inicio']);
+        $dateinicio = date("Y/m/d", strtotime($dateinicio));
+        $datefinal = str_replace("/", "-", $data['dt_final']);
+        $datefinal = date("Y/m/d", strtotime($datefinal)); 
+        $this->dietas()->save($dieta, ["quantidade_participacao" => $quantidade_participacao, "ativo" => 1, "dt_inicio" => $dateinicio, "dt_termino" => $datefinal]);
     } 
 }

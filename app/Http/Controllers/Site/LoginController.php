@@ -81,7 +81,7 @@ class LoginController extends Controller
     {
         try {    
             Auth::user()->participarDieta($request->all());
-            return json_encode(['error' => false, 'message' => "Remoção com sucesso", "code" => 1]);
+            return json_encode(['error' => false, 'message' => "Participação com sucesso", "code" => 1]);
         } catch(\Exception $e) {
             return json_encode(['error' => true, 'message' =>    $e->getMessage(), 'code' => $e->getCode()]);
         }

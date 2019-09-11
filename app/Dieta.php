@@ -4,6 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Alimento;
+use App\User;
+
 class Dieta extends Model
 {
 	public function cadastrar ($dados)
@@ -71,5 +73,13 @@ class Dieta extends Model
     public static function exibirTodos()
     {
         return self::all();
+    }
+    public function users()
+    {
+        return $this->belongsToMany(User::class, "user_dieta");
+    }
+    public static function exibirBibliotecaDietas($user)
+    {
+        return $user->dietas()->withPivot('ativo', 'quantidade_participacao', 'dt_inicio', 'dt_termino')->get(); 
     }
 }

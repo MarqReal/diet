@@ -27,11 +27,13 @@ Route::post('/registrar', ['as' => 'registrar', 'uses' => 'Site\LoginController@
 Route::group(['middleware' => "auth"], function () {
 	Route::get('/feed', ['as' => 'site.feed', 'uses' => 'Site\DicaController@index']);	
 	Route::get('/alimentos', ['as' => 'site.alimentos', 'uses' => 'Site\AlimentoController@alimentos']);	
+	
+	/* DIETA PARA O USUARIO*/
 	Route::get('/dietas', ['as' => 'site.dietas', 'uses' => 'Site\DietaController@dietas']);	
 	Route::get('/dietas/adicionar', ['as' => 'site.dietas.participacao', 'uses' => 'Site\DietaController@participacao']);	
-	
-	Route::post('/dietas/participar', ['as' => 'site.dietas.participar', 'uses' => 'Site\LoginController@participarDieta']);	
-	
+	Route::post('/dietas/participar', ['as' => 'site.dietas.participar', 'uses' => 'Site\LoginController@participarDieta']);
+	Route::get('/dietas/consultar/{id}', ['as' => 'site.dietas.consultar', 'uses' => 'Site\DietaController@consultar']);	
+	/* FIM DIETA PARA O USUARIO*/
 
 	/*ALIMENTO*/
 	Route::get('/alimento', ['as' => 'site.alimento', 'uses' => 'Site\AlimentoController@index']);	

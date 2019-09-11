@@ -18,13 +18,25 @@
 			<div class="row">
 		    	<a href="/dietas/adicionar" class="waves-effect waves-light btn" id="btnAdicionar">Adicionar dieta</a>
 		    </div>
+		  	@if(isset($todos) && count($todos) > 0)
+			  	@foreach($todos as $dieta)
+				  	<div class="row custom-cards">
+				    	<div class="col s12 m5">
+				      		<div class="card-panel  blue">
+				        		<div class="row no-margin-bottom title-diet">
+				        			<span><i>{{$dieta->nome}}</i></span>
+				        			<i class="material-icons icon-eye" id="{{$dieta->id}}">remove_red_eye</i>
+				        		</div>
+				        		<div class="row no-margin-bottom">
+				        			<div class="col s6"> Inicio: {{  date('d/m/Y', strtotime(str_replace('/', '-', $dieta->pivot->dt_inicio))) }}</div>
+				        			<div class="col s6"> Término: {{  date('d/m/Y', strtotime(str_replace('/', '-', $dieta->pivot->dt_termino))) }}</div>
+				        		</div>
+				      		</div>
+				    	</div>
+				  	</div>
+				@endforeach
+		  	@endif
 		</div>
-		<!-- <div class="row bottom-bar">
-				<div class="col s3"><a href="/feed" id="perfil" data-activates="mobile" class="button-collapse"><i class="material-icons icons-top icons-bottom">comment</i></a></div>
-				<div class="col s3"><a href="/alimentos" id="perfil" data-activates="mobile" class="button-collapse"><i class="material-icons icons-top icons-bottom">local_dining</i></a></div>
-				<div class="col s3"><a href="/dieta" id="perfil" data-activates="mobile" class="button-collapse"><i class="material-icons icons-top icons-bottom">receipt</i></a></div>
-				<div class="col s3"><a href="/grafico" id="perfil" data-activates="mobile" class="button-collapse"><i class="material-icons icons-top icons-bottom">pie_chart_outlined</i></a></div>
-		</div> -->
 		@include('menu_bottom')
 		</div>	
 	@endsection
@@ -72,6 +84,24 @@
 			margin-left: 25% !important;
     		margin-top: 5% !important;
 		}
+		.no-margin-bottom {
+			margin-bottom: 0px !important;
+		}
+		.title-diet {
+			padding-left: 40%;
+		}
+		.card-panel {
+			padding: 9px !important;
+		}
+		.icon-eye {
+			padding-left: 40% !important;
+		}
+		.custom-cards {
+			color: white !important;
+			font-size: larger;
+			width: 100% !important;
+    		margin-left: 1px !important;
+		}
 	</style>
 	<script type="application/javascript" src="/js/jquery-3.4.1.min.js"></script>
 	<script type="application/javascript" src="/js/materialize.min.js"></script>
@@ -82,6 +112,9 @@
       		$('ul.tabs').tabs('select_tab', 'tab_id');
 			$('.collapsible').collapsible();
 			$('select').material_select();
+			$(".icon-eye").click( function() {
+				window.location = "/dietas/consultar/"+$(this).attr("id");
+			});
 			$("#selectFood").change( function() {
 				if ($("#selectFood option:selected").val() != "") {
 					var descricao = $("#selectFood option:selected").attr("descricao");

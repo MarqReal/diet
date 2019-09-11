@@ -275,29 +275,27 @@
 		    				data: data, // a JSON object to send back
 					    	success: function(response){ // What to do if we succeed
 								var resposta = JSON.parse(response);
-								if (resposta.code == 1) {
+								if (!resposta.error) {
 									Swal.fire({
 		  								title: 'Sucesso!',
-		  								text: "Cadastro realizado com sucesso",
+		  								text: "Inicio da dieta realizada com sucesso",
 		  								type: 'success',
 		  								confirmButtonText: 'Ok'
 									}).then((result) => {
-										window.location.href = "/";
+										window.location.href = "/dietas";
 									});
-								}
-
-								if (resposta.code == 23000) {
+								} else {
 									Swal.fire({
 		  								title: 'Erro!',
-		  								text: "Já existe uma conta com este E-mail",
+		  								text: "Não foi possível iniciar a dieta",
 		  								type: 'error',
 		  								confirmButtonText: 'Ok'
-									});	
-								}
+									});
+								}	
 					    	},
 					    	error: function(jqXHR, textStatus, errorThrown) { // What to do if we fail
 					        	console.log(JSON.stringify(textStatus));
-								Swal.fire('Erro!', "Não foi possivel realizar o cadastro, tente novamente",'error');
+								Swal.fire('Erro!', "Não foi possível iniciar a dieta, tente novamente",'error');
 					        	//console.log("AJAX error: " + textStatus + ' : ' + errorThrown);
 					    	}
 						});

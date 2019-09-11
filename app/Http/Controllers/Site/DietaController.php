@@ -61,9 +61,17 @@ class DietaController extends Controller
     	}
     }
 
+    public function consultar ($id)
+    {
+        $dieta = Dieta::consultar($id);   
+        return view("pages.dietas.consultar", compact("dieta"));
+    }
+
     public function dietas ()
     {
-        $todos = Dieta::exibirTodos(); 
+        $todos = Dieta::exibirBibliotecaDietas(Auth::user());
+        //dd($todos[0]->pivot->dt_inicio);
+        //dd($todos); 
         return view("pages.dietas.dietas", compact("todos"));
     }
     public function participacao ()
