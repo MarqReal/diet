@@ -16,6 +16,9 @@
 	@section('conteudo')
 		<div class="container">
 		    <div class="row">
+		    	<a href="/dietas/adicionar" class="waves-effect red darken-1 btn" id="btnEncerrar">Encerrar dieta</a>
+		    </div>
+		    <div class="row">
 		    	<span class="title-diet">{{$dieta->nome}}</span>
 		    </div>
 		    <div class="row" id="dieta-infos">
@@ -128,7 +131,12 @@
 		#dieta-infos {
 			width: 100% !important;
     		margin-left: 2px !important;
-    		margin-top: 22% !important;
+    		margin-top: 0% !important;
+		}
+		#btnEncerrar {
+			margin-left: 26% !important;
+    		margin-top: 2% !important;
+    		margin-bottom: -10px !important;
 		}
 	</style>
 	<script type="application/javascript" src="/js/jquery-3.4.1.min.js"></script>
