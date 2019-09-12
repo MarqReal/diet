@@ -43,9 +43,19 @@ Route::group(['middleware' => "auth"], function () {
 	Route::put('/alimento/editar', ['as' => 'site.alimento.editar', 'uses' => 'Site\AlimentoController@editar']);
 	Route::delete('/alimento/excluir', ['as' => 'site.alimento.excluir', 'uses' => 'Site\AlimentoController@excluir']);
 	/*FIM ALIMENTO*/
+
+		/*NUTRICIONISTA*/
+	//Route::get('/nutricionista', ['as' => 'site.nutricionista', 'uses' => 'Site\NutricionistaController@index']);	
+	Route::get('/nutricionista/adicionar', ['as' => 'site.nutricionista.adicionar', 'uses' => 'Site\NutricionistaController@adicionar']);
+	Route::post('/nutricionista/cadastrar', ['as' => 'site.nutricionista.cadastrar', 'uses' => 'Site\NutricionistaController@cadastrar']);
+	Route::get('/nutricionista/atualizar/{id}', ['as' => 'site.nutricionista.atualizar', 'uses' => 'Site\NutricionistaController@atualizar']);	
+	Route::put('/nutricionista/editar', ['as' => 'site.nutricionista.editar', 'uses' => 'Site\NutricionistaController@editar']);
+	Route::delete('/nutricionista/excluir', ['as' => 'site.nutricionista.excluir', 'uses' => 'Site\NutricionistaController@excluir']);
+	/*FIM NUTRICIONISTA*/
+
 	
 	/*DIETA*/
-	Route::get('/dieta', ['as' => 'site.dieta', 'uses' => 'Site\DietaController@index']);	
+	//Route::get('/dieta', ['as' => 'site.dieta', 'uses' => 'Site\DietaController@index']);	
 	Route::get('/dieta/adicionar', ['as' => 'site.dieta.adicionar', 'uses' => 'Site\DietaController@adicionar']);
 	Route::post('/dieta/cadastrar', ['as' => 'site.dieta.cadastrar', 'uses' => 'Site\DietaController@cadastrar']);
 	Route::get('/dieta/atualizar/{id}', ['as' => 'site.dieta.atualizar', 'uses' => 'Site\DietaController@atualizar']);	
@@ -63,17 +73,11 @@ Route::get('/cms/login', ['as' => 'cms.login', 'uses' => 'Site\AdminController@i
 Route::group(['middleware' => "authAdmin"], function () {
 	Route::get('/cms/home', ['as' => 'cms.home', 'uses' => 'Site\AdminController@home']);
 	Route::get('/cms/alimentos', ['as' => 'cms.alimentos', 'uses' => 'Site\AlimentoController@index']);
-	Route::get('/cms/nutricionistas', ['as' => 'cms.nutricionistas', 'uses' => 'Site\AdminController@home']);	
+	Route::get('/cms/nutricionistas', ['as' => 'cms.nutricionistas', 'uses' => 'Site\NutricionistaController@index']);
+	Route::get('/cms/dietas', ['as' => 'cms.dietas', 'uses' => 'Site\DietaController@index']);		
 });
 
 /* Fim Administrativo */
-
-
-Route::get('/contato/{id?}', ['uses' => 'ContatoController@index']);
-
-Route::post('/contato', ['uses' => 'ContatoController@criar']);
-
-Route::put('/contato', ['uses' => 'ContatoController@editar']);
 
 Route::group(['middleware' => "auth"], function () {
 	Route::get('/admin/cursos', ['as' => 'admin.cursos', 'uses' => 'Admin\CursoController@index']);

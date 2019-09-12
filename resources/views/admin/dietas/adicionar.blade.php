@@ -272,7 +272,7 @@
   								type: 'success',
   								confirmButtonText: 'Ok'
 							}).then((result) => {
-								window.location.href = "/dieta";
+								window.location.href = "/cms/dietas";
 							});
 						} else {
 							Swal.fire('Erro!', "Não foi possivel realizar o cadastro, tente novamente",'error');

@@ -135,7 +135,7 @@
   					if (result.value) {
   						$.ajax({
 		    				method: 'POST', // Type of response and matches what we said in the route
-		    				url: 'dieta/excluir', // This is the url we gave in the route
+		    				url: '/dieta/excluir', // This is the url we gave in the route
 		    				data: {'_method': 'DELETE', '_token': '{{csrf_token()}}', 'id': $(this).attr("id")}, // a JSON object to send back
 					    	success: function(response){ // What to do if we succeed
 								var resposta = JSON.parse(response);

@@ -1,15 +1,15 @@
 @extends('admin.layout.site')
 
-	@section('titulo', 'Alimentos')
-	@section('painel', 'Alimentos')
+	@section('titulo', 'Nutricionistas')
+	@section('painel', 'Nutricionistas')
 
 
 	@section('conteudo')
 	<div class="row">
-		<a href="/alimento/adicionar" class="waves-effect waves-light btn" id="btnAdicionar">Adicionar alimento</a>
+		<a href="/nutricionista/adicionar" class="waves-effect waves-light btn" id="btnAdicionar">Adicionar nutricionista</a>
 	</div>
 	<div class="row">
-	<table id="tableAlimentos" class="striped">
+	<table id="tableNutricionistas" class="striped">
 		<thead>
 			<tr>
 				<th>Nome</th>
@@ -17,13 +17,13 @@
 			</tr>
 		</thead>
 		<tbody>
-			@if(isset($alimentos) && count($alimentos) > 0)
-				@foreach($alimentos as $alimento)
-					<tr id="line{{$alimento->id}}">
-						<td>{{$alimento->nome}}</td>
+			@if(isset($nutricionistas) && count($nutricionistas) > 0)
+				@foreach($nutricionistas as $nutricionista)
+					<tr id="line{{$nutricionista->id}}">
+						<td>{{$nutricionista->nome}}</td>
 						<td class="buttons-action">
-							<a  href="/alimento/atualizar/{{$alimento->id}}" class="waves-effect orange darken-1 btn">Editar</a>
-							<button class="waves-effect red darken-1 btn btn-excluir" id="{{$alimento->id}}">Excluir</button>
+							<a  href="/nutricionista/atualizar/{{$nutricionista->id}}" class="waves-effect orange darken-1 btn">Editar</a>
+							<button class="waves-effect red darken-1 btn btn-excluir" id="{{$nutricionista->id}}">Excluir</button>
 						</td>
 					</tr>
 				@endforeach
@@ -42,7 +42,7 @@
 			margin: 0 274px;
     		position: absolute;
 		}
-		#tableAlimentos_length {
+		#tableNutricionistas_length {
 			display: none;
 		}
 		#btnAdicionar {
@@ -63,7 +63,7 @@
 	<script type="text/javascript">
 		$(document).ready(function () {
 			$(".button-collapse").sideNav();
-			$('#tableAlimentos').DataTable({
+			$('#tableNutricionistas').DataTable({
 				"language": {
     				"sEmptyTable": "Nenhum registro encontrado",
 				    "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
@@ -123,7 +123,7 @@
       		});
 			$(".btn-excluir").click( function () {
       			Swal.fire({
-  					title: 'Você tem certeza que quer excluir este alimento?',
+  					title: 'Você tem certeza que quer excluir este nutricionista?',
   					text: "",
   					type: 'warning',
   					showCancelButton: true,
@@ -135,7 +135,7 @@
   					if (result.value) {
   						$.ajax({
 		    				method: 'POST', // Type of response and matches what we said in the route
-		    				url: '/alimento/excluir', // This is the url we gave in the route
+		    				url: '/nutricionista/excluir', // This is the url we gave in the route
 		    				data: {'_method': 'DELETE', '_token': '{{csrf_token()}}', 'id': $(this).attr("id")}, // a JSON object to send back
 					    	success: function(response){ // What to do if we succeed
 								var resposta = JSON.parse(response);

@@ -28,10 +28,14 @@ class CreateDietaAlimentoTable extends Migration
      *
      * @return void
      */
+    // public function down()
+    // {
+    //     Schema::table('dieta_alimento', function (Blueprint $table) {
+    //         //
+    //     });
+    // }
     public function down()
     {
-        Schema::table('dieta_alimento', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('dieta_alimento');
     }
 }
