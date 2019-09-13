@@ -90,9 +90,11 @@
 							<div class="input-field">
 					    		<select multiple id="nutricionistas">
 					      			<option value="" disabled selected>Nutricionistas</option>
-					      			<option value="1">Weber Lucas</option>
-					      			<option value="2">Leandro Thomas</option>
-					      			<option value="3">Carlos Alberto</option>
+					      			@if(isset($nutricionistas) && count($nutricionistas) > 0)
+					      				@foreach($nutricionistas as $nutricionista)
+					      					<option {{(isset($participante_nutricionista[$nutricionista->id]) ? 'selected' : '')}} value="{{$nutricionista->id}}">{{$nutricionista->nome}}</option>
+					      				@endforeach
+					      			@endif
 					    		</select>
 					    		<label>Nutricionistas</label>
 					    	</div>

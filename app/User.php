@@ -48,6 +48,7 @@ class User extends Authenticatable
             $participante->nivel_atividade = $req['nivel_atividade'];
             $participante->save();
             $participante->user()->save($this);
+            $participante->nutricionistas()->sync($req['nutricionistas']);
         //dd($participante->user);
         // $this->save();
         // $this->relacao()->associate($participante);
@@ -67,6 +68,7 @@ class User extends Authenticatable
             $this->relacao->nivel_atividade = $req['nivel_atividade'];
             $this->relacao->update();
             $this->update();
+            $this->relacao->nutricionistas()->sync($req['nutricionistas']);
             //$participante->user()->save($this);
         //dd($participante->user);
         // $this->save();

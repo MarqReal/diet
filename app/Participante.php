@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Nutricionista;
 
 class Participante extends Model
 {
@@ -22,5 +23,10 @@ class Participante extends Model
     public function user()
     {
         return $this->morphOne('App\User', 'relacao');
+    }
+
+    public function nutricionistas()
+    {
+        return $this->belongsToMany(Nutricionista::class, "participante_nutricionista");
     }
 }

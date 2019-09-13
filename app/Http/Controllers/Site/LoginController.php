@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Auth;
 use App\User;
+use App\Nutricionista;
 
 class LoginController extends Controller
 {
@@ -38,7 +39,14 @@ class LoginController extends Controller
     
     public function registro() 
     {
-        return view("registro.index");
+        $nutricionistas = Nutricionista::exibirTodos();
+        $participante_nutricionista = [];
+        if (Auth::user()) {
+            foreach (Auth::user()->relacao->nutricionistas()->get() as $key => $nutricionista) {
+                $participante_nutricionista[$nutricionista->id] = $nutricionista->nome;
+            }
+        }
+        return view("registro.index", compact('nutricionistas', 'participante_nutricionista'));
     }
 
     public function registrarLogin(Request $req) 

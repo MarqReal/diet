@@ -3,7 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-
+use App\User;
 class Nutricionista extends Model
 {
     public function cadastrar ($dados)
@@ -30,6 +30,11 @@ class Nutricionista extends Model
     public static function consultar ($id)
     {
     	return self::find($id);
+    }
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class, "participante_nutricionista");
     }
 
     public static function exibirTodos()
