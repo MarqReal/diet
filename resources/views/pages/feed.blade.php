@@ -13,13 +13,54 @@
 					<div class="icon-holder"><div class="icon"></div></div>
 					<div class="text-holder col s6">
 						<div class="feed-title">Blog Item</div>
-							<div class="feed-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia natus obcaecati consequuntur quis molestias! Minima impedit ad omnis. Libero quibusdam facere dignissimos ut mollitia unde sunt nobis quia, nam quasi!
+							<div class="feed-description">
+								Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia natus obcaecati consequuntur quis molestias! Minima impedit ad omnis
 							</div>
 					</div>
-					<div class="post-options-holder">
-						<div class="tools">
-							<i class="fa fa-ellipsis-v" id="postsettings"></i>
-						</div>
+				</div>
+				<div class="feed-item blog">
+					<div class="icon-holder"><div class="icon"></div></div>
+					<div class="text-holder col s6">
+						<div class="feed-title">Blog Item</div>
+							<div class="feed-description">
+								Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia natus obcaecati consequuntur quis molestias! Minima impedit ad omnis
+							</div>
+					</div>
+				</div>
+				<div class="feed-item blog">
+					<div class="icon-holder"><div class="icon"></div></div>
+					<div class="text-holder col s6">
+						<div class="feed-title">Blog Item</div>
+							<div class="feed-description">
+								Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia natus obcaecati consequuntur quis molestias! Minima impedit ad omnis
+							</div>
+					</div>
+				</div>
+				<div class="feed-item blog">
+					<div class="icon-holder"><div class="icon"></div></div>
+					<div class="text-holder col s6">
+						<div class="feed-title">Blog Item</div>
+							<div class="feed-description">
+								Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia natus obcaecati consequuntur quis molestias! Minima impedit ad omnis
+							</div>
+					</div>
+				</div>
+				<div class="feed-item blog">
+					<div class="icon-holder"><div class="icon"></div></div>
+					<div class="text-holder col s6">
+						<div class="feed-title">Blog Item</div>
+							<div class="feed-description">
+								Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia natus obcaecati consequuntur quis molestias! Minima impedit ad omnis
+							</div>
+					</div>
+				</div>
+				<div class="feed-item blog">
+					<div class="icon-holder"><div class="icon"></div></div>
+					<div class="text-holder col s6">
+						<div class="feed-title">Blog Item</div>
+							<div class="feed-description">
+								Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia natus obcaecati consequuntur quis molestias! Minima impedit ad omnis
+							</div>
 					</div>
 				</div>
 			</div>
@@ -32,11 +73,12 @@
 			overflow:hidden !important;
 		}
 		.feed {
-			border: solid black 2px;
+			/*border: solid black 2px;*/
 			margin-top: 2% !important;
     		height: 84% !important;
     		width: 96% !important;
     		margin-left: 2% !important;
+    		overflow-y: scroll !important;
 		}
 		.nav-wrapper {
 			background: #212121;
@@ -74,11 +116,12 @@
 		.feed-item{
   display: block;
   width: 100%;
-  height: 100px;
-  margin-bottom: 10px;
+      height: 113px !important;
+      margin-bottom: 9px !important;
   background: white;
   padding-left: -100px;
-  box-shadow: 0px 1px 2px rgba(0,0,0,0.2);
+
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23) !important;
   transition:  0.7s;
   
 }
@@ -119,7 +162,8 @@
   font-size: .9em;
   font-weight: 300;
   color: #888;
-  height: 2.4em;
+      width: 156% !important;
+    height: 100px !important;
   overflow: hidden;
   text-overflow: ellipsis;
 }
