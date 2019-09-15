@@ -26,6 +26,7 @@ Route::post('/registrar', ['as' => 'registrar', 'uses' => 'Site\LoginController@
 
 Route::group(['middleware' => "auth"], function () {
 	Route::get('/feed', ['as' => 'site.feed', 'uses' => 'Site\DicaController@index']);	
+	Route::get('/dicas', ['as' => 'site.dicas', 'uses' => 'Site\DicaController@exibirDicas']);	
 	Route::get('/alimentos', ['as' => 'site.alimentos', 'uses' => 'Site\AlimentoController@alimentos']);	
 	
 	/* DIETA PARA O USUARIO*/
