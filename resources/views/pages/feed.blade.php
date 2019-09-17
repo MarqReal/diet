@@ -1,6 +1,7 @@
 @extends('layout.site')
-<body>
+<body background="{{$img}}">
 <header>
+	@section('titleNavbar', 'Dicas')
 	@include('menu_top')
 </header>
 	@section('titlePage', 'Dicas nutricionais')
@@ -8,62 +9,30 @@
 
 	@section('conteudo')
 			<div class="row feed" id="app-feed">
-				@{{this.message}}
-				<div class="feed-item blog">
-					<div class="icon-holder"><div class="icon"></div></div>
+				<div class="feed-item blog" v-for="tweet in tweets">
+					<div class="icon-holder"><div class="icon" v-bind:style="{ 'background-image': 'url(' + tweet.imagem + ')' }"></div></div>
 					<div class="text-holder col s6">
-						<div class="feed-title">Blog Item</div>
+						<div class="feed-title"><b>@{{tweet.nome}}</b></div>
 							<div class="feed-description">
-								Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia natus obcaecati consequuntur quis molestias! Minima impedit ad omnis
+								@{{tweet.mensagem}}
 							</div>
 					</div>
-				</div>
-				<div class="feed-item blog">
-					<div class="icon-holder"><div class="icon"></div></div>
-					<div class="text-holder col s6">
-						<div class="feed-title">Blog Item</div>
-							<div class="feed-description">
-								Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia natus obcaecati consequuntur quis molestias! Minima impedit ad omnis
+					<div class="feed-date">
+								@{{tweet.data}}
 							</div>
-					</div>
-				</div>
-				<div class="feed-item blog">
-					<div class="icon-holder"><div class="icon"></div></div>
-					<div class="text-holder col s6">
-						<div class="feed-title">Blog Item</div>
-							<div class="feed-description">
-								Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia natus obcaecati consequuntur quis molestias! Minima impedit ad omnis
-							</div>
-					</div>
-				</div>
-				<div class="feed-item blog">
-					<div class="icon-holder"><div class="icon"></div></div>
-					<div class="text-holder col s6">
-						<div class="feed-title">Blog Item</div>
-							<div class="feed-description">
-								Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia natus obcaecati consequuntur quis molestias! Minima impedit ad omnis
-							</div>
-					</div>
-				</div>
-				<div class="feed-item blog">
-					<div class="icon-holder"><div class="icon"></div></div>
-					<div class="text-holder col s6">
-						<div class="feed-title">Blog Item</div>
-							<div class="feed-description">
-								Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia natus obcaecati consequuntur quis molestias! Minima impedit ad omnis
-							</div>
-					</div>
-				</div>
-				<div class="feed-item blog">
-					<div class="icon-holder"><div class="icon"></div></div>
-					<div class="text-holder col s6">
-						<div class="feed-title">Blog Item</div>
-							<div class="feed-description">
-								Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia natus obcaecati consequuntur quis molestias! Minima impedit ad omnis
-							</div>
-					</div>
 				</div>
 			</div>
+			  <div class="preloader-wrapper big active custom-preloader">
+			    <div class="spinner-layer spinner-blue-only">
+			      <div class="circle-clipper left">
+			       	<div class="circle"></div>
+			      	</div><div class="gap-patch">
+			        	<div class="circle"></div>
+			      	</div><div class="circle-clipper right">
+			        	<div class="circle"></div>
+			      	</div>
+			    </div>
+  				</div>
 			@include('menu_bottom')			
 		</div>	
 	@endsection
@@ -71,6 +40,17 @@
 	<style type="text/css">
 		body {
 			overflow:hidden !important;
+		}
+		.custom-preloader {
+    		margin-top: -97% !important;
+    		margin-left: 41% !important;
+    		display: none;
+		}
+		.feed-description {
+			color: black !important;
+		}
+		.feed-date {
+			color: grey !important;
 		}
 		.feed {
 			/*border: solid black 2px;*/
@@ -132,7 +112,7 @@
 		  height: 55px;
 		  border-radius: 100%;
 		  float: left;
-		  background-image: url('https://lh3.googleusercontent.com/-Az9OhFIaxEY/AAAAAAAAAAI/AAAAAAAAAAA/iHtDLHxQMFc/photo.jpg');
+		  /*background-image: url('https://lh3.googleusercontent.com/-Az9OhFIaxEY/AAAAAAAAAAI/AAAAAAAAAAA/iHtDLHxQMFc/photo.jpg');*/
 		  background-size: 55px 55px;
 		  box-shadow: 0 1px 2px rgba(0,0,0,0.3);
 		}
@@ -151,11 +131,12 @@
 		}
 
 		.feed-title{
-		  font-size: .9em;
+		  font-size: 15px;
 		  font-weight: 500;
 		}
 
 		.feed-description{
+		  font-family: Helvetica, sans-serif !important; 
 		  font-size: .9em;
 		  font-weight: 300;
 		  color: #888;
@@ -213,10 +194,12 @@
 	<script type="application/javascript" src="/js/vue.js"></script>
 	<script type="text/javascript">
 		$(document).ready(function () {
+			var oneTime = true;
       		var $vm = new Vue({
   				el: '#app-feed',
   				data: {
-    				message: 'You loaded this page on ' + new Date().toLocaleString()
+  					tweets : []
+    				//message: 'You loaded this page on ' + new Date().toLocaleString()
   				}
 			});
 			var getDicas = function(){
@@ -224,9 +207,14 @@
     				method: 'GET', // Type of response and matches what we said in the route
     				url: '/dicas', // This is the url we gave in the route
     				data: {}, // a JSON object to send back
+			    	beforeSend: function() {
+			    		if (oneTime) {
+			    			$(".custom-preloader").show();
+			    		}
+			    	},
 			    	success: function(response){ // What to do if we succeed
-						var resposta = JSON.parse(response);
-						 
+						$vm.tweets = JSON.parse(response);
+			    		$(".custom-preloader").hide();
 			    	},
 			    	error: function(jqXHR, textStatus, errorThrown) { // What to do if we fail
 			        	//console.log(JSON.stringify(jqXHR));
@@ -270,6 +258,7 @@
 				});
       		});
       		getDicas();
+			oneTime = false;
 			setInterval(getDicas, 60000);
 
       	});

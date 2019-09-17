@@ -9,6 +9,7 @@
 			{{Auth::user()->nome_usuario}}
 		</div>
 	</nav> -->
+	@section('titleNavbar', 'Dietas')
 	@include('menu_top')
 </header>
 	@section('titulo', 'Dietas')

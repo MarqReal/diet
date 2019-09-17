@@ -9,15 +9,16 @@ class DicaController extends Controller
 {
     public function index () 
     {
-    	return view("pages.feed");
+    	$img = "/img/feed/background-feed.jpg";
+    	return view("pages.feed", compact('img'));
     }
 
     public function exibirDicas()
     {
     	try {
-    		dd(Dica::exibirDicas());
+    		 return Dica::exibirDicas();
     	}catch(\Exception $e) {
-
+    		return json_encode(['error' => true, 'message' => "Não foi possivel buscar os Tweets", "code" => 1, "msg" => $e->getMessage()]);
     	}
 
     }

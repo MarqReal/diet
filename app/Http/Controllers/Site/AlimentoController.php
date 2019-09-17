@@ -58,6 +58,7 @@ class AlimentoController extends Controller
 
     public function alimentos ()
     {
+        $img = "/img/alimentos/background-alimentos.jpg";
         $destaques = Alimento::exibirDestaqueMes();
         $todos = Alimento::exibirTodos(); 
         return view("pages.alimentos", compact("destaques", "todos"));

@@ -1,5 +1,5 @@
 @extends('layout.site')
-<body>
+<body background="{{$img}}">
 <header>
 	<!-- <nav>
 		<div class="nav-wrapper darken-4">
@@ -9,6 +9,7 @@
 			{{Auth::user()->nome_usuario}}
 		</div>
 	</nav> -->
+	@section('titleNavbar', 'Dietas')
 	@include('menu_top')
 </header>
 	@section('titulo', 'Dietas')
@@ -19,8 +20,11 @@
 		    	<a href="/dietas/adicionar" class="waves-effect red darken-1 btn" id="btnEncerrar">Encerrar dieta</a>
 		    </div>
 		    <div class="row">
-		    	<span class="title-diet">{{$dieta->nome}}</span>
+		    	<a href="#" class="waves-effect white darken-1 btn title-diet">{{$dieta->nome}}</a>
 		    </div>
+		    <!-- <div class="row">
+		    	<span class="title-diet">{{$dieta->nome}}</span>
+		    </div> -->
 		    <div class="row" id="dieta-infos">
 				<div id="dietas" class="col s12">
 				   	<ul id="dieta{{$dieta->id}}" class="collapsible" data-collapsible="accordion">
@@ -65,6 +69,9 @@
 	<style type="text/css">
 		body,html{
 		  overflow:hidden !important;
+		}
+		.collapsible-body{
+			background-color: white !important;
 		}
 		.style-objetivo {
 			color: #ffd54f; 
@@ -126,7 +133,11 @@
 		    word-wrap: break-word;
 		}
 		.title-diet {
-			padding-left: 38% !important;
+			color: black;
+			font-size: 22px !important;
+			margin-left: 26% !important;
+    		margin-top: 2% !important;
+    		margin-bottom: -10px !important;
 		}
 		#dieta-infos {
 			width: 100% !important;

@@ -63,8 +63,10 @@ class DietaController extends Controller
 
     public function consultar ($id)
     {
+        $img = "/img/alimentos/background-alimentos.jpg";
+
         $dieta = Dieta::consultar($id);   
-        return view("pages.dietas.consultar", compact("dieta"));
+        return view("pages.dietas.consultar", compact("dieta", "img"));
     }
 
     public function dietas ()
