@@ -80,6 +80,6 @@ class Dieta extends Model
     }
     public static function exibirBibliotecaDietas($user)
     {
-        return $user->dietas()->withPivot('ativo', 'quantidade_participacao', 'dt_inicio', 'dt_termino')->get(); 
+        return $user->dietas()->withPivot('ativo', 'quantidade_participacao', 'dt_inicio', 'dt_termino')->orderBy('dt_termino', 'desc')->get(); 
     }
 }

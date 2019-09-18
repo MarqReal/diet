@@ -1,14 +1,6 @@
 @extends('layout.site')
 <body background="{{$img}}">
 <header>
-	<!-- <nav>
-		<div class="nav-wrapper darken-4">
-			<a href="#!" class="brand-logo"></a>
-			<a href="/registro" id="perfil" data-activates="mobile" class="button-collapse"><i class="material-icons icons-top">person</i></a>
-			<a href="#" id="sair" data-activates="mobile" class="button-collapse"><i class="material-icons icons-top">exit_to_app</i></a>
-			{{Auth::user()->nome_usuario}}
-		</div>
-	</nav> -->
 	@section('titleNavbar', 'Dietas')
 	@include('menu_top')
 </header>
@@ -17,11 +9,12 @@
 	@section('conteudo')
 		<div class="container">
 		    <div class="row">
-		    	<a href="/dietas/adicionar" class="waves-effect red darken-1 btn" id="btnEncerrar">Encerrar dieta</a>
+		    	<a href="#" dieta="{{$id}}" participacao="{{$participacao}}" class="waves-effect red darken-1 btn" id="btnEncerrar">Encerrar dieta</a>
 		    </div>
-		    <div class="row">
+<!-- 		    <div class="row">
 		    	<a href="#" class="waves-effect white darken-1 btn title-diet">{{$dieta->nome}}</a>
-		    </div>
+		    </div> -->
+		    <div class="msg msg-info z-depth-3">{{$dieta->nome}}</div>
 		    <!-- <div class="row">
 		    	<span class="title-diet">{{$dieta->nome}}</span>
 		    </div> -->
@@ -133,8 +126,8 @@
 		    word-wrap: break-word;
 		}
 		.title-diet {
-			color: black;
-			font-size: 22px !important;
+			color: black !important;
+			font-size: 14px !important;
 			margin-left: 26% !important;
     		margin-top: 2% !important;
     		margin-bottom: -10px !important;
@@ -145,9 +138,24 @@
     		margin-top: 0% !important;
 		}
 		#btnEncerrar {
-			margin-left: 26% !important;
-    		margin-top: 2% !important;
+			margin-left: 29% !important;
+    		margin-top: 3% !important;
     		margin-bottom: -10px !important;
+		}
+		.msg {
+  			width: 90%;
+  			border: 1px solid;
+  			padding:10px;
+  			margin: 20px;
+  			color: grey;
+  			text-align: center;
+    		font-size: 16px;
+    		margin-top: 26% !important;
+		}
+		.msg-info {
+  			border-color: black;
+  			background-color: black;
+  			color: white;
 		}
 	</style>
 	<script type="application/javascript" src="/js/jquery-3.4.1.min.js"></script>
@@ -157,6 +165,46 @@
 		$(document).ready(function () {
       		Materialize.updateTextFields();
 			$('.collapsible').collapsible();
+      		$("#btnEncerrar").click(function () {
+      			Swal.fire({
+  					title: 'Atenção!',
+  					text: "Deseja encerrar a dieta?",
+  					type: 'warning',
+  					showCancelButton: true,
+  					confirmButtonColor: '#3085d6',
+  					cancelButtonColor: '#d33',
+  					confirmButtonText: 'Sim',
+  					cancelButtonText : 'Cancelar'
+				}).then((result) => {
+  					if (result.value) {
+  						$.ajax({
+    						method: 'POST', // Type of response and matches what we said in the route
+    						url: '/dietas/removerParticipacao', // This is the url we gave in the route
+    						data: {'_method': 'DELETE', '_token': '{{csrf_token()}}', 'participacao': $("#btnEncerrar").attr("participacao"), 'dieta' : $("#btnEncerrar").attr("dieta")}, // a JSON object to send back
+			    			success: function(response){ // What to do if we succeed
+								var resposta = JSON.parse(response);
+								if (!resposta.error) {
+									Swal.fire({
+		  								title: 'Sucesso!',
+		  								text: "Encerramento da dieta realizada com sucesso",
+		  								type: 'success',
+		  								confirmButtonText: 'Ok'
+									}).then((result) => {
+										window.location.href = "/dietas";
+									});
+								} else {
+									Swal.fire('Erro!', "Não foi possivel encerrar a dieta, tente novamente",'error');
+								} 
+			    			},
+			    			error: function(jqXHR, textStatus, errorThrown) { // What to do if we fail
+			        		//console.log(JSON.stringify(jqXHR));
+							Swal.fire('Erro!', "Não foi possivel encerrar a dieta, tente novamente",'error');
+			        	//console.log("AJAX error: " + textStatus + ' : ' + errorThrown);
+			    			}
+				});
+  					}
+				});
+      		});
       		$("#sair").click(function () {
       			Swal.fire({
   					title: 'Você tem certeza que quer sair?',

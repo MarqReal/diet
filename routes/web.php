@@ -33,7 +33,8 @@ Route::group(['middleware' => "auth"], function () {
 	Route::get('/dietas', ['as' => 'site.dietas', 'uses' => 'Site\DietaController@dietas']);	
 	Route::get('/dietas/adicionar', ['as' => 'site.dietas.participacao', 'uses' => 'Site\DietaController@participacao']);	
 	Route::post('/dietas/participar', ['as' => 'site.dietas.participar', 'uses' => 'Site\LoginController@participarDieta']);
-	Route::get('/dietas/consultar/{id}', ['as' => 'site.dietas.consultar', 'uses' => 'Site\DietaController@consultar']);	
+		Route::delete('/dietas/removerParticipacao', ['as' => 'site.dietas.remover.participacao', 'uses' => 'Site\LoginController@removerParticipacao']);
+	Route::get('/dietas/consultar/{id}/{participacao}', ['as' => 'site.dietas.consultar', 'uses' => 'Site\DietaController@consultar']);	
 	/* FIM DIETA PARA O USUARIO*/
 
 	/*ALIMENTO*/

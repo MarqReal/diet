@@ -61,20 +61,21 @@ class DietaController extends Controller
     	}
     }
 
-    public function consultar ($id)
+    public function consultar ($id, $participacao)
     {
         $img = "/img/alimentos/background-alimentos.jpg";
-
         $dieta = Dieta::consultar($id);   
-        return view("pages.dietas.consultar", compact("dieta", "img"));
+        return view("pages.dietas.consultar", compact("dieta", "img", "participacao", "id"));
     }
 
     public function dietas ()
     {
         $todos = Dieta::exibirBibliotecaDietas(Auth::user());
+        $disabledAddDieta = (isset($todos[0]) && $todos[0]->pivot->ativo) ? "disabled" : ""; 
+        
         //dd($todos[0]->pivot->dt_inicio);
         //dd($todos); 
-        return view("pages.dietas.dietas", compact("todos"));
+        return view("pages.dietas.dietas", compact("todos", "disabledAddDieta"));
     }
     public function participacao ()
     {

@@ -94,4 +94,15 @@ class LoginController extends Controller
             return json_encode(['error' => true, 'message' =>    $e->getMessage(), 'code' => $e->getCode()]);
         }
     }
+    public function removerParticipacao (Request $request)
+    {
+        try {    
+
+            //dd($request->all());
+            Auth::user()->removerParticipacao($request->all());
+            return json_encode(['error' => false, 'message' => "Participação removida com sucesso", "code" => 1]);
+        } catch(\Exception $e) {
+            return json_encode(['error' => true, 'message' =>    $e->getMessage(), 'code' => $e->getCode()]);
+        }
+    }
 }

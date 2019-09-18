@@ -1,5 +1,5 @@
 @extends('layout.site')
-<body>
+<body background="img/dietas/background-dietas.jpg">
 <header>
 	<!-- <nav>
 		<div class="nav-wrapper darken-4">
@@ -17,26 +17,28 @@
 	@section('conteudo')
 		<div class="container">
 			<div class="row">
-		    	<a href="/dietas/adicionar" class="waves-effect waves-light btn" id="btnAdicionar">Adicionar dieta</a>
+		    	<a href="/dietas/adicionar" class=" {{$disabledAddDieta}} waves-effect light-green darken-1 btn" id="btnAdicionar">Adicionar dieta</a>
 		    </div>
-		  	@if(isset($todos) && count($todos) > 0)
-			  	@foreach($todos as $dieta)
-				  	<div class="row custom-cards">
-				    	<div class="col s12 m5">
-				      		<div class="card-panel  blue">
-				        		<div class="row no-margin-bottom title-diet">
-				        			<span><i>{{$dieta->nome}}</i></span>
-				        			<i class="material-icons icon-eye" id="{{$dieta->id}}">remove_red_eye</i>
-				        		</div>
-				        		<div class="row no-margin-bottom">
-				        			<div class="col s6"> Inicio: {{  date('d/m/Y', strtotime(str_replace('/', '-', $dieta->pivot->dt_inicio))) }}</div>
-				        			<div class="col s6"> Término: {{  date('d/m/Y', strtotime(str_replace('/', '-', $dieta->pivot->dt_termino))) }}</div>
-				        		</div>
-				      		</div>
-				    	</div>
-				  	</div>
-				@endforeach
-		  	@endif
+		    <div class="row feed-dietas">
+			  	@if(isset($todos) && count($todos) > 0)
+				  	@foreach($todos as $dieta)
+					  	<div class="row custom-cards">
+					    	<div class="col s12 m5">
+					      		<div class="card-panel {{($dieta->pivot->ativo) ? 'blue' : 'grey' }}">
+					        		<div class="row no-margin-bottom title-diet">
+					        			<span><i>{{$dieta->nome}}</i></span>
+					        			<i class="material-icons icon-eye" id="{{$dieta->id}}" data-qtdParticipacao="{{$dieta->pivot->quantidade_participacao}}">remove_red_eye</i>
+					        		</div>
+					        		<div class="row no-margin-bottom">
+					        			<div class="col s6"> Inicio: {{  date('d/m/Y', strtotime(str_replace('/', '-', $dieta->pivot->dt_inicio))) }}</div>
+					        			<div class="col s6"> Término: {{  date('d/m/Y', strtotime(str_replace('/', '-', $dieta->pivot->dt_termino))) }}</div>
+					        		</div>
+					      		</div>
+					    	</div>
+					  	</div>
+					@endforeach
+			  	@endif
+		    </div>
 		</div>
 		@include('menu_bottom')
 		</div>	
@@ -63,6 +65,9 @@
 
 		#sair {
 			left: 68%;
+		}
+		.feed-dietas {
+			overflow-y: scroll !important;
 		}
 		.tabs .tab a.active {
             background-color:#fb8c00 !important;
@@ -102,6 +107,7 @@
 			font-size: larger;
 			width: 100% !important;
     		margin-left: 1px !important;
+    		margin-bottom: 0px !important;
 		}
 	</style>
 	<script type="application/javascript" src="/js/jquery-3.4.1.min.js"></script>
@@ -114,7 +120,7 @@
 			$('.collapsible').collapsible();
 			$('select').material_select();
 			$(".icon-eye").click( function() {
-				window.location = "/dietas/consultar/"+$(this).attr("id");
+				window.location = "/dietas/consultar/"+$(this).attr("id")+"/"+$(this).attr("data-qtdparticipacao");
 			});
 			$("#selectFood").change( function() {
 				if ($("#selectFood option:selected").val() != "") {
