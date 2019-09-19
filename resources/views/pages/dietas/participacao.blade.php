@@ -244,9 +244,10 @@
 				}
 				var dataFinal = $("#dt_inicio").val();
 				dataFinal = dataFinal.split("/");
-				dataFinal = new Date(dataFinal[2], dataFinal[1], dataFinal[0]);
+				dataFinal = new Date(dataFinal[2], (dataFinal[1]-1), dataFinal[0]);
 				dataFinal.setDate(dataFinal.getDate() + (parseInt($("#qtdSemanas option:selected").val()) * 7));
-				var mesFinal =  (dataFinal.getMonth()<10) ? "0"+dataFinal.getMonth() : dataFinal.getMonth();
+				var auxmes = dataFinal.getMonth() + 1;
+				var mesFinal =  (auxmes<10) ? "0"+auxmes : auxmes;
 				var diaFinal =  (dataFinal.getDate()<10) ? "0"+dataFinal.getDate() : dataFinal.getDate();
 				var dataFinal = diaFinal + "/" + mesFinal + "/" + dataFinal.getFullYear(); 
 				Swal.fire({
