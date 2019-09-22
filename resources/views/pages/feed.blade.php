@@ -259,8 +259,8 @@
       		});
       		getDicas();
 			oneTime = false;
-			//setInterval(getDicas, 60000);
-			setInterval(getDicas, 10000);
+			setInterval(getDicas, 60000);
+			//setInterval(getDicas, 10000);
 
       	});
 
