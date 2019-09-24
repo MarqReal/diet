@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use Auth;
 use App\User;
 use App\Nutricionista;
-
+use App\Dieta;
 class LoginController extends Controller
 {
     public function index() 
@@ -21,7 +21,20 @@ class LoginController extends Controller
     	$dados = $req->all();
     	if(Auth::attempt(['email' => $dados['email'], 'password' => $dados["senha"]])) {
             $usuario = User::where("email", $dados['email'])->first();
-    		return json_encode(['error' => false, 'message' => "Login com sucesso", "code" => 1, "typeUser" => $usuario->relacao_type]);
+
+            $todos = Dieta::exibirBibliotecaDietas(Auth::user());
+            $hasDietActivated = (isset($todos[0]) && $todos[0]->pivot->ativo) ? true : false;
+            $diff = date_diff(date_create(date("Y-m-d")), date_create($todos[0]->pivot->dt_termino));
+            $diferencaDias =  $diff->format("%a%");
+            if ($hasDietActivated && $diferencaDias >= 0) {
+                $keys = [
+                    "dieta_id" => $todos[0]->pivot->dieta_id,
+                    "user_id" => $todos[0]->pivot->user_id,
+                    "quantidade_participacao" => $todos[0]->pivot->quantidade_participacao
+                ];
+                 Auth::user()->dietas()->updateExistingPivot($keys, ["ativo" => 0]);
+             } 
+            return json_encode(['error' => false, 'message' => "Login com sucesso", "code" => 1, "typeUser" => $usuario->relacao_type]);
     	} else {
             return json_encode(['error' => true, 'message' => "Login sem sucesso", 'code' => 0]);
         }

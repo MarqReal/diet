@@ -92,7 +92,9 @@ class User extends Authenticatable
     public function participarDieta($data)
     {
         $dieta = Dieta::find($data['dieta_id']);
-        $quantidade_participacao = $this->dietas()->wherePivot('dieta_id', $data['dieta_id'])->count() + 1;
+        //$quantidade_participacao = $this->dietas()->wherePivot('dieta_id', $data['dieta_id'])->count() + 1;
+        $quantidade_participacao = $this->dietas()->wherePivot('dieta_id', $data['dieta_id'])->orderBy('quantidade_participacao', 'desc')->withPivot('quantidade_participacao')->first();
+        $quantidade_participacao = ($quantidade_participacao) ? $quantidade_participacao->pivot->quantidade_participacao + 1 : 1;
         $dateinicio = str_replace("/", "-", $data['dt_inicio']);
         $dateinicio = date("Y/m/d", strtotime($dateinicio));
         $datefinal = str_replace("/", "-", $data['dt_final']);
