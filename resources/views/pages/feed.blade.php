@@ -8,7 +8,7 @@
 	@section('titulo', 'Feed de dicas')
 
 	@section('conteudo')
-			<div class="row feed" id="app-feed">
+			<div class="row feed" id="app-feed" v-cloak>
 				<div class="feed-item blog" v-for="tweet in tweets">
 					<div class="icon-holder"><div class="icon" v-bind:style="{ 'background-image': 'url(' + tweet.imagem + ')' }"></div></div>
 					<div class="text-holder col s6">
@@ -51,6 +51,9 @@
 		}
 		.feed-date {
 			color: grey !important;
+		}
+		[v-cloak] {
+			display: none
 		}
 		.feed {
 			/*border: solid black 2px;*/
@@ -217,6 +220,7 @@
 			    		$(".custom-preloader").hide();
 			    	},
 			    	error: function(jqXHR, textStatus, errorThrown) { // What to do if we fail
+			    		$(".custom-preloader").show();
 			        	//console.log(JSON.stringify(jqXHR));
 						//Swal.fire('Erro!', "Não foi possivel realizar o logout, tente novamente",'error');
 			        	//console.log("AJAX error: " + textStatus + ' : ' + errorThrown);
