@@ -104,5 +104,13 @@ class User extends Authenticatable
     public function removerParticipacao($data)
     {
         $this->dietas()->wherePivot('dieta_id', '=' ,$data['dieta'])->wherePivot('quantidade_participacao', '=' ,$data['participacao'])->detach();
+    }
+    public function adicionarPeso($data) 
+    {
+        dd($data);
+    }
+    public function pesos()
+    {
+        return $this->hasMany('App\Peso');
     } 
 }

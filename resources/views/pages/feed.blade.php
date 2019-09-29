@@ -8,6 +8,7 @@
 	@section('titulo', 'Feed de dicas')
 
 	@section('conteudo')
+			<input type="hidden" name="devePesar" id="devePesar" value="{{$devePesar}}">
 			<div class="row feed" id="app-feed" v-cloak>
 				<div class="feed-item blog" v-for="tweet in tweets">
 					<div class="icon-holder"><div class="icon" v-bind:style="{ 'background-image': 'url(' + tweet.imagem + ')' }"></div></div>
@@ -190,6 +191,10 @@
 		@media all and (max-width: 560px){.feed-item .text-holder{width: 70%}}
 		@media all and (max-width: 470px){.feed-item .text-holder{width: 60%}}
 		@media all and (max-width: 360px){.feed-item .text-holder{width: 50%}}
+		.swal2-input {
+			margin-top: 5% !important;
+    		margin-left: 25% !important;
+		}
 	</style>
 	<script type="application/javascript" src="/js/jquery-3.4.1.min.js"></script>
 	<script type="application/javascript" src="/js/materialize.min.js"></script>
@@ -227,6 +232,31 @@
 			    	}
 						});
 			};
+			var adicionarPeso = function(){
+				Swal.fire({
+  					text: 'Olá {{Auth::user()->nome_usuario}}, hoje é dia de pesagem! Insira seu peso atual.',
+  					allowOutsideClick: false,
+  					input: 'number',
+  					inputValue: 1,
+  					inputPlaceholder: 'Digite o peso',
+  					inputAttributes: {
+    					min: 1,
+    					step: 1
+  					}
+				}).then(function(result) { 
+					$.ajax({
+	    				method: 'POST', // Type of response and matches what we said in the route
+	    				url: '/adicionarPeso', // This is the url we gave in the route
+	    				data: {'peso':result.value, '_token': '{{csrf_token()}}'}, // a JSON object to send back
+				    	success: function(response){ // What to do if we succeed
+      						Swal.fire('Sucesso!', "Peso adicionado com sucesso.",'success');
+				    	},
+				    	error: function(jqXHR, textStatus, errorThrown) { // What to do if we fail
+      						Swal.fire('Erro!', "Não foi possível adicionar o peso corretamente.",'error');
+				    	}
+					});  						
+				});
+			};
       		Materialize.updateTextFields();
       		$("#sair").click(function () {
       			Swal.fire({
@@ -261,11 +291,14 @@
   					}
 				});
       		});
+      		if ($("#devePesar").val() == true) {
+      			console.log($("#devePesar").val());
+      			adicionarPeso();
+      		}
       		getDicas();
 			oneTime = false;
 			setInterval(getDicas, 60000);
-			//setInterval(getDicas, 10000);
-
+			//setInterval(getDicas, 10000)
       	});
 
 	</script>

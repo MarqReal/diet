@@ -15,7 +15,7 @@ class CreateParticipantesTable extends Migration
     {
         Schema::create('participantes', function (Blueprint $table) {
             $table->increments('id');
-            $table->decimal('peso', 4, 2);
+            $table->decimal('peso', 5, 2);
             $table->decimal('altura', 3, 2);
             $table->string('situacao', 30); 
             $table->string('nivel_atividade', 30);                

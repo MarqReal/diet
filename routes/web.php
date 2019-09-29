@@ -29,6 +29,8 @@ Route::group(['middleware' => "auth"], function () {
 	Route::get('/dicas', ['as' => 'site.dicas', 'uses' => 'Site\DicaController@exibirDicas']);	
 	Route::get('/alimentos', ['as' => 'site.alimentos', 'uses' => 'Site\AlimentoController@alimentos']);	
 	
+	Route::post('/adicionarPeso', ['as' => 'site.adicionar.peso', 'uses' => 'Site\LoginController@adicionarPeso']);	
+
 	/* DIETA PARA O USUARIO*/
 	Route::get('/dietas', ['as' => 'site.dietas', 'uses' => 'Site\DietaController@dietas']);	
 	Route::get('/dietas/adicionar', ['as' => 'site.dietas.participacao', 'uses' => 'Site\DietaController@participacao']);	
