@@ -4,14 +4,6 @@
     <label for="nome">Nome da dieta (ex: Dieta Low Carb) </label>
   </div>
 </div>
-
-
-<!-- <div class="row">
-  <div class="input-field col s9 row-inputs">
-    <input id="semanas" name="semanas" type="number" class="validate" min="1">
-    <label for="semanas">Periodo em semanas (ex: 3) </label>
-  </div>
-</div> -->
 <div class="row">
     <div class="input-field col s10 row-inputs">
       <select id="objetivo">
@@ -23,7 +15,7 @@
       <label>Objetivo</label>
     </div> 
 </div>
-
+@if(!isset($dieta))
 <div class="row">
     <div class="input-field col s10 row-inputs" id="spaceCafeManha">
     <select multiple id="cafeManha">
@@ -35,7 +27,6 @@
     <label>Café da manhã</label>
   </div>
 </div>
-
 <div class="row">
     <div class="input-field col s10 row-inputs" id="spaceAlmoco">
     <select multiple id="almoco">
@@ -47,7 +38,6 @@
     <label>Almoço</label>
   </div>
 </div>
-
 <div class="row">
     <div class="input-field col s10 row-inputs" id="spaceCafeTarde">
     <select multiple id="cafeTarde">
@@ -59,7 +49,6 @@
     <label>Café da tarde</label>
   </div>
 </div>
-
 <div class="row">
     <div class="input-field col s10 row-inputs" id="spaceJantar">
     <select multiple id="jantar">
@@ -71,3 +60,41 @@
     <label>Jantar</label>
   </div>
 </div>
+@else
+  <div class="row" id="dieta-infos">
+    <div id="dietas" class="col s12">
+      <ul id="dieta{{$dieta->id}}" class="collapsible" data-collapsible="accordion">
+        <li>
+          <div class="collapsible-header"><i class="material-icons">free_breakfast</i>Café da Manhã</div>
+            <div class="collapsible-body">
+              @foreach($dieta->cafeManha as $item)
+                <span>{{$item->nome}} : {{$item->pivot->quantidade}} {{$item->porcao}} </span><br>
+              @endforeach
+            </div>
+        </li>
+        <li>
+          <div class="collapsible-header"><i class="material-icons">local_dining</i>Almoço</div>
+            <div class="collapsible-body">
+              @foreach($dieta->almoco as $item)
+                <span>{{$item->nome}} : {{$item->pivot->quantidade}} {{$item->porcao}} </span><br>
+              @endforeach
+        </li>
+        <li>
+          <div class="collapsible-header"><i class="material-icons">local_bar</i>Café da Tarde</div>
+            <div class="collapsible-body">
+              @foreach($dieta->cafeTarde as $item)
+                <span>{{$item->nome}} : {{$item->pivot->quantidade}} {{$item->porcao}} </span><br>
+              @endforeach
+        </li>
+        <li>
+          <div class="collapsible-header"><i class="material-icons">room_service</i>Jantar</div>
+            <div class="collapsible-body">
+              @foreach($dieta->jantar as $item)
+                <span>{{$item->nome}} : {{$item->pivot->quantidade}} {{$item->porcao}} </span><br>
+              @endforeach
+            </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+@endif

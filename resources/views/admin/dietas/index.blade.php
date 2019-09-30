@@ -46,7 +46,7 @@
 			display: none;
 		}
 		#btnAdicionar {
-			margin-left: 20%;
+			margin-left: 27%;
     		margin-top: 2%;
 		}
 		.buttons-action {

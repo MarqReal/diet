@@ -189,41 +189,31 @@
 	  				$("#nome").focus();
 	  				return false;
 				}
-    //   			if($("#dt_inicio").val()== "") {
-    //   				Swal.fire('Preenchimento incorreto!', "Preencha a data de inicio corretamente",'error');
-	  	// 			//$("#dt_inicio").focus();
-	  	// 			return false;
-				// }
-    //   			if($("#semanas").val() == "" || isNaN($("#semanas").val())) {
-    //   				Swal.fire('Preenchimento incorreto!', "Preencha o periodo em semanas corretamente",'error');
-	  	// 			$("#semanas").focus();
-	  	// 			return false;
-				// }
-      			if($("#objetivo option:selected").val()== "") {
+      	if($("#objetivo option:selected").val()== "") {
       				Swal.fire('Preenchimento incorreto!', "Preencha o objetivo da dieta corretamente",'error');
 	  				$("#objetivo").focus();
 	  				return false;
 				}
-				if(!$("#cafeManha").val().length > 0) {
-					Swal.fire('Preenchimento incorreto!', "Selecione o(s) alimento(s) para o Café da manhã",'error');
-					$("#cafeManha").focus();
-					return false;
-				}
-				if(!$("#almoco").val().length > 0) {
-					Swal.fire('Preenchimento incorreto!', "Selecione o(s) alimento(s) para o Almoço",'error');
-					$("#almoco").focus();
-					return false;
-				}
-				if(!$("#cafeTarde").val().length > 0) {
-					Swal.fire('Preenchimento incorreto!', "Selecione o(s) alimento(s) para o Café da Tarde",'error');
-					$("#cafeTarde").focus();
-					return false;
-				}
-				if(!$("#jantar").val().length > 0) {
-					Swal.fire('Preenchimento incorreto!', "Selecione o(s) alimento(s) para a Jantar",'error');
-					$("#jantar").focus();
-					return false;
-				}
+				// if(!$("#cafeManha").val().length > 0) {
+				// 	Swal.fire('Preenchimento incorreto!', "Selecione o(s) alimento(s) para o Café da manhã",'error');
+				// 	$("#cafeManha").focus();
+				// 	return false;
+				// }
+				// if(!$("#almoco").val().length > 0) {
+				// 	Swal.fire('Preenchimento incorreto!', "Selecione o(s) alimento(s) para o Almoço",'error');
+				// 	$("#almoco").focus();
+				// 	return false;
+				// }
+				// if(!$("#cafeTarde").val().length > 0) {
+				// 	Swal.fire('Preenchimento incorreto!', "Selecione o(s) alimento(s) para o Café da Tarde",'error');
+				// 	$("#cafeTarde").focus();
+				// 	return false;
+				// }
+				// if(!$("#jantar").val().length > 0) {
+				// 	Swal.fire('Preenchimento incorreto!', "Selecione o(s) alimento(s) para a Jantar",'error');
+				// 	$("#jantar").focus();
+				// 	return false;
+				// }
 
       			var data = {
       				'_token': '{{csrf_token()}}',
