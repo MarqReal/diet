@@ -23,7 +23,7 @@
 						<td>{{$dieta->nome}}</td>
 						<td class="buttons-action">
 							<a  href="/dieta/atualizar/{{$dieta->id}}" class="waves-effect orange darken-1 btn">Editar</a>
-							<button class="waves-effect red darken-1 btn btn-excluir" id="{{$dieta->id}}">Excluir</button>
+							<a class="waves-effect red darken-1 btn btn-excluir" id="{{$dieta->id}}">Excluir</a>
 						</td>
 					</tr>
 				@endforeach
