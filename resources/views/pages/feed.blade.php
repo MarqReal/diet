@@ -11,29 +11,43 @@
 			<input type="hidden" name="devePesar" id="devePesar" value="{{$devePesar}}">
 			<div class="row feed" id="app-feed" v-cloak>
 				<div class="feed-item blog" v-for="tweet in tweets">
-					<div class="icon-holder"><div class="icon" v-bind:style="{ 'background-image': 'url(' + tweet.imagem + ')' }"></div></div>
+					<div class="icon-holder">
+						<div class="icon" v-bind:style="{ 'background-image': 'url(' + tweet.imagem + ')' }"></div>
+					</div>
 					<div class="text-holder col s6">
 						<div class="feed-title"><b>@{{tweet.nome}}</b></div>
 							<div class="feed-description">
 								@{{tweet.mensagem}}
 							</div>
 					</div>
-					<div class="feed-date">
-								@{{tweet.data}}
+					<div class="feed-date">@{{tweet.data}}</div>
+				</div>
+				<div class="feed-item blog custom-feed-item-preloader" style="height: 87px !important;">
+					<div class="icon-holder">
+						<div class="icon">
+							<div class="preloader-wrapper big active custom-preloader">
+			    				<div class="spinner-layer spinner-blue-only">
+			      					<div class="circle-clipper left">
+			       						<div class="circle"></div>
+			      					</div>
+			      					<div class="gap-patch">
+			        					<div class="circle"></div>
+			      					</div>
+			      					<div class="circle-clipper right">
+			        					<div class="circle"></div>
+			      					</div>
+			    				</div>
+  							</div>
+						</div>
+					</div>
+					<div class="text-holder col s6">
+						<div class="feed-title"><b>Buscando por dicas...</b></div>
+							<div class="feed-description">
+								Nenhuma dica foi encontrada
 							</div>
+					</div>
 				</div>
 			</div>
-			  <div class="preloader-wrapper big active custom-preloader">
-			    <div class="spinner-layer spinner-blue-only">
-			      <div class="circle-clipper left">
-			       	<div class="circle"></div>
-			      	</div><div class="gap-patch">
-			        	<div class="circle"></div>
-			      	</div><div class="circle-clipper right">
-			        	<div class="circle"></div>
-			      	</div>
-			    </div>
-  				</div>
 			@include('menu_bottom')			
 		</div>	
 	@endsection
@@ -42,9 +56,15 @@
 		body {
 			overflow:hidden !important;
 		}
-		.custom-preloader {
+		.custom-feed-item-preloader {
+			margin-top: 50% !important;
+			height: 87px !important;
+		}
+		.custom-preloader {/*
     		margin-top: -97% !important;
-    		margin-left: 41% !important;
+    		margin-left: 41% !important;*/
+    		margin-top: -23% !important;
+    		margin-left: -6% !important;
     		display: none;
 		}
 		.feed-description {
@@ -118,7 +138,7 @@
 		  float: left;
 		  /*background-image: url('https://lh3.googleusercontent.com/-Az9OhFIaxEY/AAAAAAAAAAI/AAAAAAAAAAA/iHtDLHxQMFc/photo.jpg');*/
 		  background-size: 55px 55px;
-		  box-shadow: 0 1px 2px rgba(0,0,0,0.3);
+		  /*box-shadow: 0 1px 2px rgba(0,0,0,0.3);*/
 		}
 		.feed-item .text-holder{
 		  margin-top: 22px;
@@ -217,15 +237,18 @@
     				data: {}, // a JSON object to send back
 			    	beforeSend: function() {
 			    		if (oneTime) {
-			    			$(".custom-preloader").show();
+			    			$(".custom-feed-item-preloader").show();
 			    		}
 			    	},
 			    	success: function(response){ // What to do if we succeed
+			    		console.log(response);
 						$vm.tweets = JSON.parse(response);
-			    		$(".custom-preloader").hide();
+			    		if ($vm.tweets != null) {
+			    			$(".custom-feed-item-preloader").hide();
+			    		}
 			    	},
 			    	error: function(jqXHR, textStatus, errorThrown) { // What to do if we fail
-			    		$(".custom-preloader").show();
+			    		//$(".custom-feed-item-preloader").show();
 			        	//console.log(JSON.stringify(jqXHR));
 						//Swal.fire('Erro!', "Não foi possivel realizar o logout, tente novamente",'error');
 			        	//console.log("AJAX error: " + textStatus + ' : ' + errorThrown);
@@ -293,7 +316,7 @@
       		});
       		if ($("#devePesar").val() == true) {
       			console.log($("#devePesar").val());
-      			adicionarPeso();
+      			//adicionarPeso();
       		}
       		getDicas();
 			oneTime = false;

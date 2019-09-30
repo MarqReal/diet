@@ -8,7 +8,7 @@ class Dica extends Model
 {
     public static function exibirDicas()
     {
-
+        $retorno = null;
     	$nutricionistas = Auth::user()->relacao->nutricionistas()->get();
     	if (count($nutricionistas) > 0) {
     		foreach ($nutricionistas as $key => $nutricionista) {
