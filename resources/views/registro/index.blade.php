@@ -92,7 +92,7 @@
 					      			<option value="" disabled selected>Nutricionistas</option>
 					      			@if(isset($nutricionistas) && count($nutricionistas) > 0)
 					      				@foreach($nutricionistas as $nutricionista)
-					      					<option {{(isset($participante_nutricionista[$nutricionista->id]) ? 'selected' : '')}} value="{{$nutricionista->id}}">{{$nutricionista->nome}}</option>
+					      					<option {{(isset($participante_nutricionista[$nutricionista->id]) ? 'selected' : '')}} value="{{$nutricionista->id}}">{{$nutricionista->nome}} ({{$nutricionista->segmento}})</option>
 					      				@endforeach
 					      			@endif
 					    		</select>

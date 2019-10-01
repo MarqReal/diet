@@ -245,6 +245,8 @@
 						$vm.tweets = JSON.parse(response);
 			    		if ($vm.tweets != null) {
 			    			$(".custom-feed-item-preloader").hide();
+			    		} else {
+			    			$(".custom-feed-item-preloader").show();	
 			    		}
 			    	},
 			    	error: function(jqXHR, textStatus, errorThrown) { // What to do if we fail
