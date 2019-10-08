@@ -7,6 +7,8 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Participante;
 use App\Dieta;
+use App\Peso;
+use Auth;
 class User extends Authenticatable
 {
     use Notifiable;
@@ -107,7 +109,17 @@ class User extends Authenticatable
     }
     public function adicionarPeso($data) 
     {
-        dd($data);
+        $todos = Dieta::exibirBibliotecaDietas(Auth::user());
+        $dieta_active = $todos[0];
+        $peso = new Peso();
+        $peso->peso = $data['peso'];
+        $peso->dt_pesagem = date('Y-m-d');
+        $peso->dieta_id = $dieta_active->pivot->dieta_id;
+        $peso->user_id = $dieta_active->pivot->user_id;
+        $peso->quantidade_participacao = $dieta_active->pivot->quantidade_participacao;
+        $peso->save();
+        Auth::user()->relacao->peso = $data['peso']; 
+        Auth::user()->relacao->update(); 
     }
     public function pesos()
     {

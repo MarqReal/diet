@@ -61,6 +61,11 @@ class DietaController extends Controller
     	}
     }
 
+    public function graficos()
+    {
+        $dietas = Dieta::exibirBibliotecaDietas(Auth::user());
+        return view('pages.graficos', compact('dietas'));
+    }
     public function consultar ($id, $participacao)
     {
         $img = "/img/alimentos/background-alimentos.jpg";

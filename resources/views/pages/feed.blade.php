@@ -241,7 +241,6 @@
 			    		}
 			    	},
 			    	success: function(response){ // What to do if we succeed
-			    		console.log(response);
 						$vm.tweets = JSON.parse(response);
 			    		if ($vm.tweets != null) {
 			    			$(".custom-feed-item-preloader").hide();
@@ -274,10 +273,10 @@
 	    				url: '/adicionarPeso', // This is the url we gave in the route
 	    				data: {'peso':result.value, '_token': '{{csrf_token()}}'}, // a JSON object to send back
 				    	success: function(response){ // What to do if we succeed
-      						Swal.fire('Sucesso!', "Peso adicionado com sucesso.",'success');
+      						Swal.fire('Sucesso!', "Peso inserido com sucesso.",'success');
 				    	},
 				    	error: function(jqXHR, textStatus, errorThrown) { // What to do if we fail
-      						Swal.fire('Erro!', "Não foi possível adicionar o peso corretamente.",'error');
+      						Swal.fire('Erro!', "Não foi possível inserir o peso corretamente.",'error');
 				    	}
 					});  						
 				});
@@ -318,11 +317,12 @@
       		});
       		if ($("#devePesar").val() == true) {
       			console.log($("#devePesar").val());
-      			//adicionarPeso();
+      			adicionarPeso();
       		}
       		getDicas();
 			oneTime = false;
-			setInterval(getDicas, 60000);
+			//setInterval(getDicas, 60000);
+			setInterval(getDicas, 30000);
 			//setInterval(getDicas, 10000)
       	});
 
