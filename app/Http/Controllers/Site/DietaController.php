@@ -66,6 +66,15 @@ class DietaController extends Controller
         $dietas = Dieta::exibirBibliotecaDietas(Auth::user());
         return view('pages.graficos', compact('dietas'));
     }
+    public function consultarGraficoProgressao(Request $request)
+    {
+        try {
+                $data = Dieta::consultarGraficoProgressao($request->all());
+            return json_encode(['error' => false, 'message' => "Consulta de peso com sucesso", 'code' => 1, 'dados' => $data]);
+        }catch(\Exception $e) {
+            return json_encode(['error' => true, 'message' => "Consulta de peso sem sucesso", 'code' => 0, 'dados' => null]);
+        }
+    }
     public function consultar ($id, $participacao)
     {
         $img = "/img/alimentos/background-alimentos.jpg";

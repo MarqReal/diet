@@ -5,7 +5,8 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use App\Alimento;
 use App\User;
-
+use Auth;
+use App\Peso;
 class Dieta extends Model
 {
 	public function cadastrar ($dados)
@@ -82,4 +83,35 @@ class Dieta extends Model
     {
         return $user->dietas()->withPivot('ativo', 'quantidade_participacao', 'dt_inicio', 'dt_termino')->orderBy('dt_termino', 'desc')->get(); 
     }
+
+    public static function consultarGraficoProgressao($dados)
+    {
+        $retorno = null;
+        $meses["1"] = "Jan";
+        $meses["2"] = "Fev";
+        $meses["3"] = "Mar";
+        $meses["4"] = "Abr";
+        $meses["5"] = "Mai";
+        $meses["6"] = "Jun";
+        $meses["7"] = "Jul";
+        $meses["8"] = "Ago";
+        $meses["9"] = "Set";
+        $meses["10"] = "Out";
+        $meses["11"] = "Nov";
+        $meses["12"] = "Dez";
+        $pesos = Peso::where([ 
+                                ['user_id', '=', Auth::user()->id],
+                                ['dieta_id', '=', $dados['dieta_id']],
+                                ['quantidade_participacao', '=', $dados['quantidade_participacao']]
+                            ])->orderBy('dt_pesagem', 'asc')->get();
+        if (count($pesos) > 0) {
+            foreach ($pesos as $peso) {
+                $data = explode("-", $peso->dt_pesagem);
+                $retorno['data'][] = $data[2]."/".$meses[$data[1]]; 
+                $retorno['peso'][] = $peso->peso; 
+            }
+        }
+        return $retorno;
+    }
+
 }
