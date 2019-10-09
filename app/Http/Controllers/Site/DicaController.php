@@ -13,14 +13,14 @@ class DicaController extends Controller
     {
     	$img = "/img/feed/background-feed.jpg";
         $todos = Dieta::exibirBibliotecaDietas(Auth::user());
-        if ($todos[0]->pivot->ativo == true) {
+        $devePesar = false;
+        if ($todos[0]->pivot->ativo == true || ($todos[0]->pivot->ativo == false && $todos[0]->pivot->dt_termino == date("Y-m-d")) ) {
             $diff = date_diff(date_create(date("Y-m-d")), date_create($todos[0]->pivot->dt_inicio));
-            //dd($diff);
-
-
+            $diferancaDias = $diff->format("%a%");
+            if ($diferancaDias != 0 && $diferancaDias % 7 == 0) {
+                $devePesar = true;        
+            }
         }
-        $devePesar = (isset($todos[0]) && $todos[0]->pivot->ativo) ? true : false;
-
     	return view("pages.feed", compact('img', 'devePesar'));
     }
 
