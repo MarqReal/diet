@@ -1,18 +1,10 @@
 @extends('layout.site')
 <body>
 <header>
-	<!-- <nav>
-		<div class="nav-wrapper darken-4">
-			<a href="#!" class="brand-logo"></a>
-			<a href="/registro" id="perfil" data-activates="mobile" class="button-collapse"><i class="material-icons icons-top">person</i></a>
-			<a href="#" id="sair" data-activates="mobile" class="button-collapse"><i class="material-icons icons-top">exit_to_app</i></a>
-			{{Auth::user()->nome_usuario}}
-		</div>
-	</nav> -->
-	@section('titleNavbar', 'Graficos')
+	@section('titleNavbar', 'Progresso')
 	@include('menu_top')
 </header>
-	@section('titulo', 'Graficos')
+	@section('titulo', 'Progresso')
 
 	@section('conteudo')
 		<div class="container">
@@ -117,13 +109,28 @@
 					        			labels: resposta.dados.data,
 					        			datasets: [{
 					            			label: 'Pesos',
-					            			//backgroundColor: 'rgb(255, 99, 132)',
-					            			//borderColor: 'rgb(255, 99, 132)',
-					            			data: resposta.dados.peso
+					            			backgroundColor: 'rgb(0, 82, 204)',
+					            			borderColor: 'rgb(0, 82, 204)',
+					            			data: resposta.dados.peso,
+					            			fill: false
 					        			}]
 					    			},
 					    			// Configuration options go here
-					    			options: {}
+					    			options: {
+					    				scales: {
+										    yAxes: [{
+										      scaleLabel: {
+										        display: true,
+										        labelString: 'Peso (Kg)'
+										      }
+										    }]
+										},
+					    				elements: {
+            								line: {
+                								tension: 0 // disables bezier curves
+            								}
+        								}
+					    			}
 								});
 								$("#myChart").show();			
 							} else {
