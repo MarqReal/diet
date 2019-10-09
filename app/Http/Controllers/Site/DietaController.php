@@ -78,8 +78,29 @@ class DietaController extends Controller
     public function consultar ($id, $participacao)
     {
         $img = "/img/alimentos/background-alimentos.jpg";
-        $dieta = Dieta::consultar($id);   
-        return view("pages.dietas.consultar", compact("dieta", "img", "participacao", "id"));
+        $dieta = Dieta::consultar($id);
+        $calorias = 0;
+        if (count($dieta->cafeManha) > 0) {
+            foreach ($dieta->cafeManha as $item) {
+                $calorias = $calorias + ($item->pivot->quantidade * $item->calorias);
+            }
+        }
+        if (count($dieta->almoco) > 0) {
+            foreach ($dieta->almoco as $item) {
+                $calorias = $calorias + ($item->pivot->quantidade * $item->calorias);
+            }
+        }
+        if (count($dieta->cafeTarde) > 0) {
+            foreach ($dieta->cafeTarde as $item) {
+                $calorias = $calorias + ($item->pivot->quantidade * $item->calorias);
+            }
+        }
+        if (count($dieta->jantar) > 0) {
+            foreach ($dieta->jantar as $item) {
+                $calorias = $calorias + ($item->pivot->quantidade * $item->calorias);
+            }
+        }   
+        return view("pages.dietas.consultar", compact("dieta", "img", "participacao", "id", "calorias"));
     }
 
     public function dietas ()

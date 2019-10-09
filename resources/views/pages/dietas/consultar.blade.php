@@ -54,6 +54,7 @@
 		  			</ul>
 				</div>
   			</div>
+  			<div class="msg msg-cal z-depth-3 msg-custom-cal">Total de calorias: {{$calorias}} (kcal)</div>
 		</div>
 		@include('menu_bottom')
 		</div>	
@@ -152,10 +153,19 @@
     		font-size: 16px;
     		margin-top: 26% !important;
 		}
+		.msg-custom-cal {
+			/*text-align: left;*/
+			margin-top: 7% !important;
+		}
 		.msg-info {
   			border-color: black;
   			background-color: black;
   			color: white;
+		}
+		.msg-cal {
+  			border-color: white;
+  			background-color: white;
+  			color: black;
 		}
 	</style>
 	<script type="application/javascript" src="/js/jquery-3.4.1.min.js"></script>

@@ -26,10 +26,10 @@ class LoginController extends Controller
                 $todos = Dieta::exibirBibliotecaDietas(Auth::user());
                 $hasDietActivated = ($todos->count() > 0 && $todos[0]->pivot->ativo) ? true : false;
                 if ($hasDietActivated) {
-                    $diff = date_diff(date_create(date("Y-m-d")), date_create($todos[0]->pivot->dt_termino));
-                    $diferencaDias =  $diff->format("%a%");
+                    $diff = date_diff(date_create($todos[0]->pivot->dt_termino), date_create(date("Y-m-d")));
+                    $diferencaDias =  $diff->invert;
                 }
-                if ($hasDietActivated && $diferencaDias >= 0) {
+                if ($hasDietActivated && $diferencaDias == 0) {
                     $keys = [
                         "dieta_id" => $todos[0]->pivot->dieta_id,
                         "user_id" => $todos[0]->pivot->user_id,
