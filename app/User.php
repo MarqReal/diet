@@ -102,6 +102,7 @@ class User extends Authenticatable
         $datefinal = str_replace("/", "-", $data['dt_final']);
         $datefinal = date("Y/m/d", strtotime($datefinal)); 
         $this->dietas()->save($dieta, ["quantidade_participacao" => $quantidade_participacao, "ativo" => 1, "dt_inicio" => $dateinicio, "dt_termino" => $datefinal]);
+        $this->adicionarPeso(['peso' => Auth::user()->relacao->peso]);
     }
     public function removerParticipacao($data)
     {

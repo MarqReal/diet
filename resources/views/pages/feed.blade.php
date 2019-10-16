@@ -265,7 +265,7 @@
   					inputPlaceholder: 'Digite o peso',
   					inputAttributes: {
     					min: 1,
-    					step: 1
+    					step: 'any'
   					}
 				}).then(function(result) { 
 					$.ajax({
