@@ -27,6 +27,6 @@
     		padding-left: 20% !important;
 		}
 		.option-activated {
-			color: #eeff41 !important;
+			color: #1DA1F2 !important;
 		}
 </style>		

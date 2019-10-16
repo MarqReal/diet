@@ -97,14 +97,14 @@
 			left: 68%;
 		}
 		.tabs .tab a.active {
-            background-color:#fb8c00 !important;
+            background-color:#1DA1F2 !important;
             color:white !important;
         }
         .tabs .tab a {
-            color: #fb8c00 !important;
+            color: #1DA1F2 !important;
         } 
          .tabs .indicator {
-            background-color:#fb8c00 !important;
+            background-color:#1DA1F2 !important;
         }
 		
 		.container {

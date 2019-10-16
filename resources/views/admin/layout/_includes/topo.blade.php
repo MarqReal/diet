@@ -18,7 +18,7 @@
     
       <header>
 		    <nav>
-			    <div class="nav-wrapper deep-orange">
+			    <div class="nav-wrapper  indigo darken-2">
 			      <a href="#!" class="brand-logo">@yield('painel')</a>
 			      <a href="#" data-activates="mobile" class="button-collapse"><i class="material-icons">menu</i></a>
 			      <a href="#" id="sair" data-activates="mobile"><i class="material-icons icons-top">exit_to_app</i></a>

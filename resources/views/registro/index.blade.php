@@ -99,6 +99,9 @@
 					    		<label>Nutricionistas</label>
 					    	</div>
 					    </div>
+					    <div class="col s1">
+					    	<i class="material-icons icons-top icons-bottom info-icon">info</i>
+					    </div>
 					</div>
 					@if(Auth::guest())		
 					 <button class="btn light-green darken-1" id="btnCadastrar">Cadastrar</button>
@@ -169,6 +172,9 @@
 		#remove {
 			position: absolute;
     		margin-left: 70% !important;
+		}
+		.info-icon {
+			color: #29b6f6 !important;
 		}
 	</style>
 	<script type="application/javascript" src="/js/jquery-3.4.1.min.js"></script>
@@ -427,7 +433,14 @@
       				$(this).val(min);
       			}
       		});
+      		$(".info-icon").click( function() {
+				Swal.fire({
+					html:"Abaixo listamos os <b class='info-icon'>nutricionistas parceiros (e os seus segmentos)</b>, que ajudarão você em <b class='info-icon'>seus objetivos</b>, com dicas postadas no Twitter. Você poderá acompanhar tais dicas. <b class='info-icon'>Legal não é mesmo?</b>",
+  					title: 'Informação!',
+  					type: 'info',
+  					confirmButtonText: 'Ok'
+				});
+      		});
       	});
-	
 	
 	</script>

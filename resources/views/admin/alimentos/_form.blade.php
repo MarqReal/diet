@@ -43,7 +43,7 @@
       <option {{(isset($alimento) && $alimento->porcao == "Copo(s) 250ml") ? "selected" : ''}} value="Copo(s) 250ml">Copo 250ml</option>
       <option {{(isset($alimento) && $alimento->porcao == "Copo(s) 400ml") ? "selected" : ''}} value="Copo(s) 400ml">Copo 400ml</option>
     </select>
-    <label>Escolha o tipo de medida</label>
+    <label>Escolha o tipo de porção</label>
   </div>
 </div>
 
