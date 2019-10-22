@@ -25,6 +25,13 @@
 			</div>
 			<canvas id="myChart"></canvas>
 			<div id="txtNoGraphic">Dados insuficientes para o montar o gráfico</div>
+			<div class="row row-result" id="resultPeso">
+				<div class=" col s4">
+					<i class="material-icons icon-result">sentiment_very_satisfied</i></div>
+				<div class="col s7 text-result">
+					Parabéns! Você está perdendo peso, continue focado no seu objetivo!
+				</div>
+			</div>
 		@include('menu_bottom')
 		</div>	
 	@endsection
@@ -58,6 +65,17 @@
 			padding-left: 9%;
     		padding-top: 6%;
 		}
+		.icon-result {
+			font-size: 90px !important;
+			padding-left: 20% !important;
+		}
+		.text-result {
+			padding-top: 3% !important;
+		}
+		.row-result {
+			display: none;
+			padding-top: 10% !important;
+		}
 	</style>
 	<script type="application/javascript" src="/js/jquery-3.4.1.min.js"></script>
 	<script type="application/javascript" src="/js/materialize.min.js"></script>
@@ -65,29 +83,12 @@
 	<script type="application/javascript" src="/js/Chart.min.js"></script>
 	<script type="text/javascript">
 		$(document).ready(function () {
+			var textResult = "";
 			var ctx = document.getElementById('myChart').getContext('2d');
       		Materialize.updateTextFields();
       		$('ul.tabs').tabs('select_tab', 'tab_id');
 			$('.collapsible').collapsible();
 			$('select').material_select();
-			$("#selectFood").change( function() {
-				if ($("#selectFood option:selected").val() != "") {
-					var descricao = $("#selectFood option:selected").attr("descricao");
-					var carboidrato = $("#selectFood option:selected").attr("carboidrato");
-					var proteina = $("#selectFood option:selected").attr("proteina");
-					var lipideos = $("#selectFood option:selected").attr("lipideos");
-					var fibra_alimentar = $("#selectFood option:selected").attr("fibra_alimentar");
-					var calorias = $("#selectFood option:selected").attr("calorias");
-					var nome = $("#selectFood option:selected").attr("nome");
-					var corpo = "<span><br>Descrição: "+descricao+"</br><br>Carboidratos: "+carboidrato+" (g)</br><br>Proteínas: "+proteina+" (g)</br><br>Lipídios: "+lipideos+" (g)</br><br>Fibra alimentar: "+fibra_alimentar+" (g)</br><br>Calorias (valor energético): "+calorias+" (kcal)</br></span>";
-					$("#nomeAlimento").html(nome);
-					$("#collapsibleBodyEdit").html(corpo);
-					$("#collapseAll").show();
-				} else {
-					$("#collapseAll").hide();
-				}
-				
-			});
 			$("#dietas").change(function () {
 				var dadosDieta = $(this).val();
 				if (dadosDieta != "") {
@@ -132,9 +133,20 @@
         								}
 					    			}
 								});
-								$("#myChart").show();			
+								$("#myChart").show();
+								if (resposta.dados.resultado == "sucesso") {
+									textResult = "Parabéns! Você está "+resposta.dados.progresso+" peso, continue focado no seu objetivo!";
+									$(".icon-result").html('sentiment_very_satisfied').css("color", "#558b2f");
+									$(".text-result").html(textResult);
+								} else {
+									textResult = "Ops! Você está "+resposta.dados.progresso+" peso, o seu objetivo é <b>"+resposta.dados.esperado+"</b>, continue persistindo! Você consegue! ";
+									$(".icon-result").html('sentiment_very_dissatisfied').css("color", "#e53935");
+									$(".text-result").html(textResult);
+								}
+								$(".row-result").show();			
 							} else {
 								$("#myChart").hide();
+								$(".row-result").hide();
 								$("#txtNoGraphic").show();
 							} 
 				    	},

@@ -105,11 +105,34 @@ class Dieta extends Model
                                 ['quantidade_participacao', '=', $dados['quantidade_participacao']]
                             ])->orderBy('dt_pesagem', 'asc')->get();
         if (count($pesos) > 0) {
+            //dd(count($pesos));
             foreach ($pesos as $peso) {
                 $data = explode("-", $peso->dt_pesagem);
                 $retorno['data'][] = $data[2]."/".$meses[$data[1]]; 
                 $retorno['peso'][] = $peso->peso; 
             }
+            if (count($pesos) == 1) {
+                $retorno['progresso'] = 'mantendo';
+                $progresso = 'Manter';
+            } else {
+                if (end($retorno['peso']) < $retorno['peso'][0]) {
+                    $retorno['progresso'] = 'perdendo';
+                    $progresso = 'Perder';
+                } elseif (end($retorno['peso']) > $retorno['peso'][0]) {
+                    $retorno['progresso'] = 'ganhando';
+                    $progresso = 'Ganhar';
+                } else {
+                    $retorno['progresso'] = 'mantendo';
+                    $progresso = 'Manter';
+                }
+            }
+            $dieta = self::find($dados['dieta_id']);
+            if (strpos("***".$dieta->objetivo, $progresso)) {
+                $retorno['resultado'] = "sucesso";
+            } else {
+                $retorno['resultado'] = "insucesso";
+            }
+            $retorno['esperado'] = $dieta->objetivo;
         }
         return $retorno;
     }
