@@ -191,6 +191,16 @@
 		    text-transform: none;
 		    word-wrap: break-word;
 		}
+		.tabs .tab a.active {
+            background-color:#1DA1F2 !important;
+            color:white !important;
+        }
+        .tabs .tab a {
+            color: #1DA1F2 !important;
+        } 
+         .tabs .indicator {
+            background-color:#1DA1F2 !important;
+        }
 	</style>
 	<script type="application/javascript" src="/js/jquery-3.4.1.min.js"></script>
 	<script type="application/javascript" src="/js/materialize.min.js"></script>

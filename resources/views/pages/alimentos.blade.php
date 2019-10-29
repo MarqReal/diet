@@ -24,7 +24,7 @@
 		        
 		      </ul>
 		    </div>
-		    <div id="mes" class="col s12">
+		    <div id="mes" class="col s11">
 				<ul class="collapsible" data-collapsible="accordion">
 				    @foreach($destaques as $alimento)
 				    <li>
@@ -43,7 +43,7 @@
 				    @endforeach
 				</ul>
 		    </div>
-		    <div id="todos" class="col s12">
+		    <div id="todos" class="col s10">
 		    	<div class="row">
 		    		<div class="input-field col s12">
 					    <select class="select-food" id="selectFood">
@@ -112,6 +112,12 @@
 		}
 		#collapseAll {
 			display: none;
+		}
+		#mes {
+			margin-left: 4% !important;
+		}
+		#todos {
+			margin-left: 9% !important;
 		}
 	</style>
 	<script type="application/javascript" src="/js/jquery-3.4.1.min.js"></script>
