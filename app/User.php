@@ -107,6 +107,17 @@ class User extends Authenticatable
     public function removerParticipacao($data)
     {
         $this->dietas()->wherePivot('dieta_id', '=' ,$data['dieta'])->wherePivot('quantidade_participacao', '=' ,$data['participacao'])->detach();
+        
+        $pesos = Peso::where([ 
+                                ['user_id', '=', Auth::user()->id],
+                                ['dieta_id', '=', $data['dieta']],
+                                ['quantidade_participacao', '=', $data['participacao']]
+                            ])->orderBy('dt_pesagem', 'asc')->get();
+        if (count($pesos) > 0) {
+            foreach ($pesos as $peso) {
+                $peso->delete(); 
+            }
+        }
     }
     public function adicionarPeso($data) 
     {
