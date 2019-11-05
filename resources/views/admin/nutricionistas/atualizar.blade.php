@@ -5,8 +5,10 @@
 
 
 	@section('conteudo')
-	<div class="row">
-		<span class="title-page">Atualização de nutricionista</span>
+	<div class="row line-title">
+		<div class="row">
+			<span class="title-page">Atualização de nutricionista</span>
+		</div>
 		@include('admin.nutricionistas._form')
 	</div>
 	<div class="row">
@@ -23,7 +25,13 @@
     		position: absolute;
 		}
 		.title-page {
-			padding-left: 30%;
+			padding-left: 16%;
+			font-style: italic;
+		}
+		.line-title {
+			font-size: 20px;
+    		margin-bottom: 6px !important;
+    		margin-top: 18px !important;
 		}
 		.row-inputs {
 			margin-left: 5% !important;

@@ -33,7 +33,7 @@
 			        @endif
 			      </ul> -->
 			      <ul class="side-nav" id="mobile">
-			        <li><a href="/cms/home">Home</a></li>
+			        <li><a href="/cms/home">Inicio</a></li>
 			        <li><a href="/cms/nutricionistas">Nutricionistas</a></li>
 			        <li><a href="/cms/alimentos">Alimentos</a></li>
 			        <li><a href="/cms/dietas">Dietas</a></li>

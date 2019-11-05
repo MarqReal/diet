@@ -5,8 +5,10 @@
 
 
 	@section('conteudo')
-	<div class="row">
-		<span class="title-page">Cadastro de dietas</span>
+	<div class="row line-title">
+    <div class="row">
+      <span class="title-page">Cadastro de dieta</span>
+    </div>
 		@include('admin.dietas._form')
 	</div>
 	<div class="row">
@@ -22,9 +24,15 @@
 			margin: 0 274px;
     		position: absolute;
 		}
-		.title-page {
-			padding-left: 30%;
-		}
+    .title-page {
+      padding-left: 25%;
+      font-style: italic;
+    }
+    .line-title {
+      font-size: 20px;
+      margin-bottom: 6px !important;
+      margin-top: 18px !important;
+    }
 		.row-inputs {
 			margin-left: 5% !important;
 		}

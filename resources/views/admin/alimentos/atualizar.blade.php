@@ -5,8 +5,10 @@
 
 
 	@section('conteudo')
-	<div class="row">
-		<span class="title-page">Atualização de alimento</span>
+	<div class="row line-title">
+		<div class="row">
+      		<span class="title-page">Atualização de alimento</span>
+    	</div>
 		@include('admin.alimentos._form')
 	</div>
 	<div class="row">
@@ -22,9 +24,15 @@
 			margin: 0 274px;
     		position: absolute;
 		}
-		.title-page {
-			padding-left: 30%;
-		}
+	    .title-page {
+	      padding-left: 23% !important;
+	      font-style: italic;
+	    }
+	    .line-title {
+	      margin-bottom: 6px !important;
+	      margin-top: 18px !important;
+	      font-size: 20px;
+	    }
 		.row-inputs {
 			margin-left: 5% !important;
 		}
