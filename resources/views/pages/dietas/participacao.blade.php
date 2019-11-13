@@ -262,7 +262,7 @@
 				var dataFinal = diaFinal + "/" + mesFinal + "/" + dataFinal.getFullYear(); 
 				Swal.fire({
   					title: "Atenção!",
-  					text: 'Você participara da dieta "'+$("#select-diets option:selected").text()+'" no periodo de '+$("#dt_inicio").val() +' à '+ dataFinal+", confirma a participação?",
+  					html: 'Você participara da dieta <b>'+$("#select-diets option:selected").text()+'</b> no periodo de '+$("#dt_inicio").val() +' à '+ dataFinal+", <i><b>(A cada 7 dias o sistema solicitara o seu peso atual, para acompanhamento do progresso)</i></b> confirma a participação?",
   					type: 'warning',
   					showCancelButton: true,
   					confirmButtonColor: '#3085d6',

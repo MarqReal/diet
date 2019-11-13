@@ -28,7 +28,7 @@
 				<ul class="collapsible" data-collapsible="accordion">
 				    @foreach($destaques as $alimento)
 				    <li>
-				      <div class="collapsible-header"><i class="material-icons">star_border</i>{{$alimento->nome}}</div>
+				      <div class="collapsible-header"><i class="material-icons calendar-today">today</i>{{$alimento->nome}}</div>
 				      <div class="collapsible-body">
 				      	<span>
 				      		<br>Descrição: {{$alimento->descricao}}</br>
@@ -77,6 +77,9 @@
 	<style type="text/css">
 		body,html{
 		  overflow:hidden !important;
+		}
+		.calendar-today {
+			color: #ffa726 !important;
 		}
 		.select-food {
 			width: 80%;

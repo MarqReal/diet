@@ -5,6 +5,9 @@
 
 
 	@section('conteudo')
+	<div class="row background-cms">
+		
+	</div>
 	@endsection
 
 	<style type="text/css">
@@ -15,6 +18,12 @@
 		#sair {
 			margin: 0 274px;
     		position: absolute;
+		}
+		.background-cms {
+			margin-top: 2px !important;
+			background-image: url("/img/cms/background-cms-pyramide.jpg");
+			height: 610px;
+			width: 100%;
 		}
 	</style>
 	<script type="application/javascript" src="/js/jquery-3.4.1.min.js"></script>
